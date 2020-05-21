@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>76742601728-rvfllvj5olavb6h0oh3ts6ete3u79v4q.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.76742601728-rvfllvj5olavb6h0oh3ts6ete3u79v4q</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCebSA6ATjbwgFvJfwI5Vpk-WG8r2s12g8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>76742601728</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.buildit.fitnet</string>
+	<key>PROJECT_ID</key>
+	<string>fitnet-1d1d6</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fitnet-1d1d6.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:76742601728:ios:c552d334dcfe7bf328fce5</string>
+	<key>DATABASE_URL</key>
+	<string>https://fitnet-1d1d6.firebaseio.com</string>
+</dict>
+</plist>
