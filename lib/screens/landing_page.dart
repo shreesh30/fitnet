@@ -4,8 +4,7 @@ import 'package:fitnet/constants.dart';
 import 'package:fitnet/components/rounded_button.dart';
 
 class LandingPage extends StatefulWidget {
-
-  static const String id='landing_page';
+  static const String id = 'landing_page';
 
   @override
   _LandingPageState createState() => _LandingPageState();
@@ -15,15 +14,19 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          body: Column(
+      body: Column(
         children: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(top: 30),
+          SizedBox(height: 65),
+          Hero(
+            tag: 'logo',
+            child: Container(
               child: Image.asset(
                 'images/logo.png',
                 height: 200,
                 width: 200,
-              )),
+              ),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -46,6 +49,7 @@ class _LandingPageState extends State<LandingPage> {
                 style: TextStyle(
                     decoration: TextDecoration.none,
                     color: Colors.white,
+                    fontSize: 36.0,
                     fontFamily: 'Roboto',
                     fontWeight: FontWeight.normal),
               ),
@@ -61,11 +65,18 @@ class _LandingPageState extends State<LandingPage> {
                     decoration: TextDecoration.none,
                     color: Colors.white,
                     fontFamily: 'Roboto',
+                    fontSize: 36.0,
                     fontWeight: FontWeight.normal),
               ),
             ),
           ),
-          RoundButton(title: 'Create an account',),
+          SizedBox(
+            height: 200.0,
+          ),
+          RoundButton(title: 'Create an account'),
+          SizedBox(
+            height: 10.0,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -78,7 +89,7 @@ class _LandingPageState extends State<LandingPage> {
                     fontWeight: FontWeight.normal),
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   Navigator.pushNamed(context, LoginPage.id);
                 },
                 child: Text(
@@ -97,6 +108,3 @@ class _LandingPageState extends State<LandingPage> {
     );
   }
 }
-
-
-

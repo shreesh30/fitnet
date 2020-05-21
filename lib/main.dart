@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fitnet/screens/landing_page.dart';
 import 'package:fitnet/screens/login_screen.dart';
+import 'package:fitnet/screens/home.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,10 +15,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: Color(0xff0f0f0f),
       ),
-      initialRoute: LoginPage.id,
+      initialRoute:LandingPage.id,
       routes: {
         LandingPage.id: (context) => LandingPage(),
-        LoginPage.id: (context) => LoginPage()
+        LoginPage.id: (context) => LoginPage(),
+        HomePage.id:(context)=>HomePage()
       },
     );
   }
