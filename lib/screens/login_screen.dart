@@ -16,23 +16,26 @@ class _LoginPageState extends State<LoginPage> {
   String password;
   final _auth = FirebaseAuth.instance;
 
+
   @override
   Widget build(BuildContext context) {
+
+   
+
     return Scaffold(
+      resizeToAvoidBottomPadding: true,
       body: SingleChildScrollView(
-        child: Column(
+              child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             SizedBox(
               height: 65,
             ),
-            Hero(
-              tag: 'logo',
-              child: Container(
-                child: Image.asset(
-                  'images/logo.png',
-                  height: 200,
-                  width: 200,
-                ),
+            Container(
+              child: Image.asset(
+                'images/logo.png',
+                height: 200,
+                width: 200,
               ),
             ),
             Row(
@@ -111,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
             RoundButton(
               title: 'Sign In',
               onPressed: () async {
-                final user = _auth.createUserWithEmailAndPassword(
+                final user = await _auth.createUserWithEmailAndPassword(
                     email: email, password: password);
                 try {
                   if (user != null) {
@@ -122,6 +125,10 @@ class _LoginPageState extends State<LoginPage> {
                 }
               },
             ),
+            SizedBox(
+              height: 85,
+            ),
+           
           ],
         ),
       ),

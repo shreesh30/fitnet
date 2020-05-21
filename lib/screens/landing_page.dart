@@ -11,20 +11,21 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
+
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          SizedBox(height: 65),
-          Hero(
-            tag: 'logo',
-            child: Container(
-              child: Image.asset(
-                'images/logo.png',
-                height: 200,
-                width: 200,
-              ),
+          SizedBox(height: 30),
+          Container(
+            child: Image.asset(
+              'images/logo.png',
+              height: 200,
+              width: 200,
             ),
           ),
           Row(
@@ -71,12 +72,9 @@ class _LandingPageState extends State<LandingPage> {
             ),
           ),
           SizedBox(
-            height: 200.0,
+            height: 50.0,
           ),
           RoundButton(title: 'Create an account'),
-          SizedBox(
-            height: 10.0,
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -91,6 +89,7 @@ class _LandingPageState extends State<LandingPage> {
               GestureDetector(
                 onTap: () {
                   Navigator.pushNamed(context, LoginPage.id);
+                
                 },
                 child: Text(
                   'Log in',
@@ -103,8 +102,13 @@ class _LandingPageState extends State<LandingPage> {
               )
             ],
           ),
+         SizedBox(height:30)
         ],
       ),
     );
   }
 }
+
+
+
+
