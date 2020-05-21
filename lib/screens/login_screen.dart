@@ -23,113 +23,112 @@ class _LoginPageState extends State<LoginPage> {
    
 
     return Scaffold(
-      resizeToAvoidBottomPadding: true,
-      body: SingleChildScrollView(
-              child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            SizedBox(
-              height: 65,
-            ),
-            Container(
-              child: Image.asset(
+      resizeToAvoidBottomPadding: false,
+      body: SafeArea(
+              child: SingleChildScrollView(
+                child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              SizedBox(
+                height: 35,
+              ),
+              Image.asset(
                 'images/logo.png',
-                height: 200,
-                width: 200,
+                height: 125,
+              width: 180,
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                RichText(
-                    text: TextSpan(children: <TextSpan>[
-                  TextSpan(text: 'FIT', style: kLandingPageHeading),
-                  TextSpan(
-                      text: 'NET',
-                      style: kLandingPageHeading.copyWith(
-                          color: Color(0xFFFD5739)))
-                ]))
-              ],
-            ),
-            SizedBox(
-              height: 50.0,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'Fitness',
-                  style: TextStyle(
-                      fontSize: 36.0,
-                      decoration: TextDecoration.none,
-                      color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.normal),
+              SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  RichText(
+                      text: TextSpan(children: <TextSpan>[
+                    TextSpan(text: 'FIT', style: kLandingPageHeading),
+                    TextSpan(
+                        text: 'NET',
+                        style: kLandingPageHeading.copyWith(
+                            color: Color(0xFFFD5739)))
+                  ]))
+                ],
+              ),
+              SizedBox(
+                height: 50.0,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 25.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Fitness',
+                    style: TextStyle(
+                        fontSize: 36.0,
+                        decoration: TextDecoration.none,
+                        color: Colors.white,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.normal),
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 25.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  'First',
-                  style: TextStyle(
-                      fontSize: 36.0,
-                      decoration: TextDecoration.none,
-                      color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.normal),
+              SizedBox(height: 20,),
+              Padding(
+                padding: EdgeInsets.only(left: 25.0),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'First',
+                    style: TextStyle(
+                        fontSize: 36.0,
+                        decoration: TextDecoration.none,
+                        color: Colors.white,
+                        fontFamily: 'Roboto',
+                        fontWeight: FontWeight.normal),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 50.0),
-            Padding(
-              padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
-              child: TextField(
-                keyboardType: TextInputType.emailAddress,
-                onChanged: (value) {
-                  email = value;
-                },
-                decoration: kTextFieldInputDecoration.copyWith(
-                    hintText: 'Email Address'),
+              SizedBox(height: 50.0),
+              Padding(
+                padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+                child: TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: (value) {
+                    email = value;
+                  },
+                  decoration: kTextFieldInputDecoration.copyWith(
+                      hintText: 'Email Address'),
+                ),
               ),
-            ),
-            SizedBox(height: 20.0),
-            Padding(
-              padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
-              child: TextField(
-                obscureText: true,
-                onChanged: (value) {
-                  password = value;
-                },
-                decoration:
-                    kTextFieldInputDecoration.copyWith(hintText: 'Password'),
+              SizedBox(height: 20.0),
+              Padding(
+                padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+                child: TextField(
+                  obscureText: true,
+                  onChanged: (value) {
+                    password = value;
+                  },
+                  decoration:
+                      kTextFieldInputDecoration.copyWith(hintText: 'Password'),
+                ),
               ),
-            ),
-            SizedBox(
-              height: 45.0,
-            ),
-            RoundButton(
-              title: 'Sign In',
-              onPressed: () async {
-                final user = await _auth.createUserWithEmailAndPassword(
-                    email: email, password: password);
-                try {
-                  if (user != null) {
-                    Navigator.pushNamed(context, HomePage.id);
+              SizedBox(
+                height: 45.0,
+              ),
+              RoundButton(
+                title: 'Sign In',
+                onPressed: () async {
+                  final user = await _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+                  try {
+                    if (user != null) {
+                      Navigator.pushNamed(context, HomePage.id);
+                    }
+                  } catch (e) {
+                    print(e);
                   }
-                } catch (e) {
-                  print(e);
-                }
-              },
-            ),
-            SizedBox(
-              height: 85,
-            ),
-           
-          ],
+                },
+              ),
+             SizedBox(height: 30,)
+            ],
+          ),
         ),
       ),
     );
