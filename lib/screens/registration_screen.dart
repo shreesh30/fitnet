@@ -1,3 +1,4 @@
+import 'package:fitnet/screens/new_user.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitnet/constants.dart';
@@ -10,14 +11,18 @@ class RegistrationPage extends StatefulWidget {
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
+  String name;
+  String email;
+  String password;
+  final _auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      body: SafeArea(
-              child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Container(
+        child: Form(
+          child: ListView(
+            
             children: <Widget>[
               SizedBox(
                 height: 35,
@@ -66,7 +71,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
               ),
-             
               Padding(
                 padding: EdgeInsets.only(left: 25.0),
                 child: Align(
@@ -86,17 +90,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
               Padding(
                 padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
                 child: TextField(
-                  onChanged: (value) {},
-                  decoration: kTextFieldInputDecoration.copyWith(
-                      hintText: 'Name'),
+                  onChanged: (value) {
+                    name = value;
+                  },
+                  decoration:
+                      kTextFieldInputDecoration.copyWith(hintText: 'Name'),
                 ),
               ),
-               SizedBox(height: 20.0),
+              SizedBox(height: 20.0),
               Padding(
                 padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
                 child: TextField(
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    email = value;
+                  },
                   decoration: kTextFieldInputDecoration.copyWith(
                       hintText: 'Email Address'),
                 ),
@@ -106,7 +114,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
                 child: TextField(
                   obscureText: true,
-                  onChanged: (value) {},
+                  onChanged: (value) {
+                    password = value;
+                  },
                   decoration:
                       kTextFieldInputDecoration.copyWith(hintText: 'Password'),
                 ),
@@ -114,9 +124,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
               SizedBox(
                 height: 45.0,
               ),
-              RoundButton(
-                title: 'Sign Up',
-                onPressed: () async {},
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25,0,25,0),
+                child: RoundButton(
+    
+                  title: 'Sign Up',
+                  onPressed: () async {
+                    try {
+                      final newUser = _auth.createUserWithEmailAndPassword(
+                          email: email, password: password);
+                      if (newUser != null) {
+                        Navigator.pushNamed(context, NewUser.id);
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
+                  },
+                ),
               ),
               SizedBox(
                 height: 30,

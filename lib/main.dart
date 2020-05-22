@@ -1,3 +1,4 @@
+import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/screens/landing_page.dart';
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
         LandingPage.id: (context) => LandingPage(),
         LoginPage.id: (context) => LoginPage(),
         HomePage.id:(context)=>HomePage(),
-        RegistrationPage.id:(context)=>RegistrationPage()
+        RegistrationPage.id:(context)=>RegistrationPage(),
+        NewUser.id:(context)=>NewUser()
       },
     );
   }

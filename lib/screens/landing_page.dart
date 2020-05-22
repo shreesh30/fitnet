@@ -51,7 +51,7 @@ class _LandingPageState extends State<LandingPage> {
                   style: TextStyle(
                       decoration: TextDecoration.none,
                       color: Colors.white,
-                      fontSize: 36.0,
+                      fontSize: 40.0,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.normal),
                 ),
@@ -67,7 +67,7 @@ class _LandingPageState extends State<LandingPage> {
                       decoration: TextDecoration.none,
                       color: Colors.white,
                       fontFamily: 'Roboto',
-                      fontSize: 36.0,
+                      fontSize: 40.0,
                       fontWeight: FontWeight.normal),
                 ),
               ),
