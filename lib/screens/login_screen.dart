@@ -16,17 +16,13 @@ class _LoginPageState extends State<LoginPage> {
   String password;
   final _auth = FirebaseAuth.instance;
 
-
   @override
   Widget build(BuildContext context) {
-
-   
-
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
+        child: SingleChildScrollView(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               SizedBox(
@@ -35,20 +31,25 @@ class _LoginPageState extends State<LoginPage> {
               Image.asset(
                 'images/logo.png',
                 height: 125,
-              width: 180,
+                width: 180,
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   RichText(
-                      text: TextSpan(children: <TextSpan>[
-                    TextSpan(text: 'FIT', style: kLandingPageHeading),
-                    TextSpan(
-                        text: 'NET',
-                        style: kLandingPageHeading.copyWith(
-                            color: Color(0xFFFD5739)))
-                  ]))
+                    text: TextSpan(
+                      children: <TextSpan>[
+                        TextSpan(text: 'FIT', style: kPageHeading),
+                        TextSpan(
+                            text: 'NET',
+                            style:
+                                kPageHeading.copyWith(color: Color(0xFFFD5739)))
+                      ],
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -69,7 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Padding(
                 padding: EdgeInsets.only(left: 25.0),
                 child: Align(
@@ -126,7 +129,9 @@ class _LoginPageState extends State<LoginPage> {
                   }
                 },
               ),
-             SizedBox(height: 30,)
+              SizedBox(
+                height: 30,
+              )
             ],
           ),
         ),

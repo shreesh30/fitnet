@@ -2,6 +2,7 @@ import 'package:fitnet/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/constants.dart';
 import 'package:fitnet/components/rounded_button.dart';
+import 'package:fitnet/screens/registration_screen.dart';
 
 class LandingPage extends StatefulWidget {
   static const String id = 'landing_page';
@@ -11,14 +12,11 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
-              child: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
@@ -33,15 +31,17 @@ class _LandingPageState extends State<LandingPage> {
               children: <Widget>[
                 RichText(
                     text: TextSpan(children: <TextSpan>[
-                  TextSpan(text: 'FIT', style: kLandingPageHeading),
+                  TextSpan(text: 'FIT', style: kPageHeading),
                   TextSpan(
                       text: 'NET',
-                      style:
-                          kLandingPageHeading.copyWith(color: Color(0xFFFD5739)))
+                      style: kPageHeading.copyWith(
+                          color: Color(0xFFFD5739)))
                 ]))
               ],
             ),
-            SizedBox(height: 70,),
+            SizedBox(
+              height: 70,
+            ),
             Padding(
               padding: EdgeInsets.fromLTRB(30.0, 0.0, 0.0, 0.0),
               child: Align(
@@ -57,9 +57,8 @@ class _LandingPageState extends State<LandingPage> {
                 ),
               ),
             ),
-            
             Padding(
-              padding: EdgeInsets.only(left:30.0),
+              padding: EdgeInsets.only(left: 30.0),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -76,7 +75,12 @@ class _LandingPageState extends State<LandingPage> {
             SizedBox(
               height: 50.0,
             ),
-            RoundButton(title: 'Create an account'),
+            RoundButton(
+              title: 'Create an account',
+              onPressed: () {
+                Navigator.pushNamed(context, RegistrationPage.id);
+              },
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -91,7 +95,6 @@ class _LandingPageState extends State<LandingPage> {
                 GestureDetector(
                   onTap: () {
                     Navigator.pushNamed(context, LoginPage.id);
-                  
                   },
                   child: Text(
                     'Log in',
@@ -104,14 +107,10 @@ class _LandingPageState extends State<LandingPage> {
                 )
               ],
             ),
-           SizedBox(height:50)
+            SizedBox(height: 50)
           ],
         ),
       ),
     );
   }
 }
-
-
-
-

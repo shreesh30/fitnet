@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const kLandingPageHeading=TextStyle(
+const kPageHeading=TextStyle(
                 fontFamily: 'CopperPlate',
                 fontSize: 60,
                 letterSpacing: 5,
