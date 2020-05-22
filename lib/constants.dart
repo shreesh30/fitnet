@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const kPageHeading=TextStyle(
                 fontFamily: 'CopperPlate',
-                fontSize: 60,
+                fontSize: 40,
                 letterSpacing: 5,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

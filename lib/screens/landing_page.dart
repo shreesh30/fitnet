@@ -31,11 +31,11 @@ class _LandingPageState extends State<LandingPage> {
               children: <Widget>[
                 RichText(
                     text: TextSpan(children: <TextSpan>[
-                  TextSpan(text: 'FIT', style: kPageHeading),
+                  TextSpan(text: 'FIT', style: kPageHeading.copyWith(fontSize:55)),
                   TextSpan(
                       text: 'NET',
                       style: kPageHeading.copyWith(
-                          color: Color(0xFFFD5739)))
+                          color: Color(0xFFFD5739),fontSize: 55))
                 ]))
               ],
             ),
@@ -107,7 +107,7 @@ class _LandingPageState extends State<LandingPage> {
                 )
               ],
             ),
-            SizedBox(height: 50)
+            SizedBox(height: 70)
           ],
         ),
       ),

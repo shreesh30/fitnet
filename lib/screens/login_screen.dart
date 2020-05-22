@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
+              child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
@@ -29,8 +29,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
               Image.asset(
                 'images/logo.png',
-                height: 125,
-                width: 180,
+                height: 90,
+                width: 140,
               ),
               SizedBox(
                 height: 20,
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'Fitness',
                     style: TextStyle(
-                        fontSize: 36.0,
+                        fontSize: 35.0,
                         decoration: TextDecoration.none,
                         color: Colors.white,
                         fontFamily: 'Roboto',
@@ -69,9 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              // SizedBox(
+              //   height: 20,
+              // ),
               Padding(
                 padding: EdgeInsets.only(left: 25.0),
                 child: Align(
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     'First',
                     style: TextStyle(
-                        fontSize: 36.0,
+                        fontSize: 35.0,
                         decoration: TextDecoration.none,
                         color: Colors.white,
                         fontFamily: 'Roboto',
@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              SizedBox(height: 50.0),
+              SizedBox(height: 40.0),
               Padding(
                 padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
                 child: TextField(
