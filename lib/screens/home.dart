@@ -14,7 +14,7 @@ class _HomePageState extends State<HomePage> {
   final _firestore = Firestore.instance;
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
-  String userName;
+  String userName="";
   
 
   void getCurrentUser() async {
@@ -29,18 +29,23 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Future getUserInfo()async {
+  Future<void> getUserInfo()async {
   var firebaseUser=await FirebaseAuth.instance.currentUser();
-      _firestore.collection("users").document(firebaseUser.uid).get().then((value){
-        setState(() {
-          userName=value.data['userName'].split(' ')[0];
+     await  _firestore.collection("users").document(firebaseUser.uid).get().then((value){
+        setState(()  {
+        userName= value.data['userName'].split(' ')[0];
         });
-      
     });
   }
+
+@override
+  void initState() {
+    super.initState();
+    getUserInfo();
+  }
+
   @override
   Widget build(BuildContext context) {
-    getUserInfo();
     DateTime now = DateTime.now();
     String formattedDate = DateFormat('EEEE ,d MMM').format(now);
     return Scaffold(

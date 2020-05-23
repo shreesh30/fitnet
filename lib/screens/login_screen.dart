@@ -91,6 +91,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
             child: TextField(
+              style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
           keyboardType: TextInputType.emailAddress,
           onChanged: (value) {
             email = value;
@@ -103,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
             child: TextField(
+              style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
           obscureText: true,
           onChanged: (value) {
             password = value;
