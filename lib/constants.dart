@@ -1,3 +1,4 @@
+import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 
 const kPageHeading=TextStyle(
@@ -8,12 +9,13 @@ const kPageHeading=TextStyle(
                 color: Colors.white,
               );
 
-const kTextFieldInputDecoration=InputDecoration(
+var kTextFieldInputDecoration=InputDecoration(
+                hintStyle: TextStyle(fontSize: SizeConfig.textMultiplier*2),
                 hintText: 'enter value',
                 filled: true,
                 fillColor: Color(0xFF171717),
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+                    EdgeInsets.symmetric(vertical:SizeConfig.heightMultiplier*2, horizontal: SizeConfig.widthMultiplier*2),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                 ),

@@ -1,5 +1,8 @@
+
+
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/splash_screen.dart';
+import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/screens/landing_page.dart';
 import 'package:fitnet/screens/login_screen.dart';
@@ -12,24 +15,27 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Color(0xff0f0f0f),
-      ),
-      initialRoute:LandingPage.id,
-      routes: {
-        SplashScreen.id:(context)=> SplashScreen(),
-        LandingPage.id: (context) => LandingPage(),
-        LoginPage.id: (context) => LoginPage(),
-        HomePage.id:(context)=>HomePage(),
-        RegistrationPage.id:(context)=>RegistrationPage(),
-        NewUser.id:(context)=>NewUser()
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        SizeConfig().init(constraints);
+        return MaterialApp(
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: Color(0xff0f0f0f),
+          ),
+          initialRoute: LandingPage.id,
+          routes: {
+            SplashScreen.id: (context) => SplashScreen(),
+            LandingPage.id: (context) => LandingPage(),
+            LoginPage.id: (context) => LoginPage(),
+            HomePage.id: (context) => HomePage(),
+            RegistrationPage.id: (context) => RegistrationPage(),
+            NewUser.id: (context) => NewUser()
+          },
+        );
       },
     );
   }

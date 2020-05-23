@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnet/screens/new_user.dart';
+import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitnet/constants.dart';
@@ -50,15 +51,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: 35,
+                  height: SizeConfig.heightMultiplier*4,
                 ),
                 Image.asset(
                   'images/logo.png',
-                  height: 90,
-                  width: 140,
+                  height: SizeConfig.heightMultiplier*16,
+                  // width: SizeConfig.widthMultiplier*30,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: SizeConfig.heightMultiplier*2.5,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -66,11 +67,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     RichText(
                       text: TextSpan(
                         children: <TextSpan>[
-                          TextSpan(text: 'FIT', style: kPageHeading),
+                          TextSpan(text: 'FIT', style: kPageHeading.copyWith(fontSize: SizeConfig.textMultiplier*6)),
                           TextSpan(
                             text: 'NET',
                             style: kPageHeading.copyWith(
                               color: Color(0xFFFD5739),
+                              fontSize: SizeConfig.textMultiplier*6
                             ),
                           ),
                         ],
@@ -79,16 +81,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 40.0,
+                  height: SizeConfig.heightMultiplier*5,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 25.0),
+                  padding: EdgeInsets.only(left: SizeConfig.widthMultiplier*6),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Fitness',
                       style: TextStyle(
-                          fontSize: 35.0,
+                          fontSize: SizeConfig.textMultiplier*5.5,
                           decoration: TextDecoration.none,
                           color: Colors.white,
                           fontFamily: 'Roboto',
@@ -97,13 +99,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 25.0),
+                  padding: EdgeInsets.only(left: SizeConfig.widthMultiplier*6),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'First',
                       style: TextStyle(
-                          fontSize: 35.0,
+                          fontSize: SizeConfig.textMultiplier*5.5,
                           decoration: TextDecoration.none,
                           color: Colors.white,
                           fontFamily: 'Roboto',
@@ -111,9 +113,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: SizeConfig.heightMultiplier*3),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+                  padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
                   child: TextField(
                     onChanged: (value) {
                       name = value;
@@ -122,9 +124,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         kTextFieldInputDecoration.copyWith(hintText: 'Name'),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: SizeConfig.heightMultiplier*3),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+                  padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
                   child: TextField(
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {
@@ -134,9 +136,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         hintText: 'Email Address'),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: SizeConfig.heightMultiplier*3),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+                  padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
                   child: TextField(
                     obscureText: true,
                     onChanged: (value) {
@@ -147,10 +149,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 45.0,
+                  height:SizeConfig.heightMultiplier*5,
                 ),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  padding:  EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
                   child: RoundButton(
                     title: 'Sign Up',
                     onPressed: () async {
@@ -178,9 +180,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: 30,
-                )
               ],
             ),
           ),

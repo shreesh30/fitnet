@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fitnet/constants.dart';
 import 'package:fitnet/components/rounded_button.dart';
 import 'package:fitnet/screens/registration_screen.dart';
+import 'package:fitnet/size_config.dart';
 
 class LandingPage extends StatefulWidget {
   static const String id = 'landing_page';
@@ -17,30 +18,30 @@ class _LandingPageState extends State<LandingPage> {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Container(
-              child: Image.asset(
-                'images/logo.png',
-                height: 190,
-                width: 190,
-              ),
+            SizedBox(height: SizeConfig.heightMultiplier*3,),
+            Image.asset(
+              'images/logo.png',
+              height: SizeConfig.heightMultiplier*20,
+              width: SizeConfig.widthMultiplier*60,
             ),
+            SizedBox(height: SizeConfig.heightMultiplier*2,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 RichText(
                     text: TextSpan(children: <TextSpan>[
-                  TextSpan(text: 'FIT', style: kPageHeading.copyWith(fontSize:55)),
+                  TextSpan(text: 'FIT', style: kPageHeading.copyWith(fontSize:SizeConfig.textMultiplier*8)),
                   TextSpan(
                       text: 'NET',
                       style: kPageHeading.copyWith(
-                          color: Color(0xFFFD5739),fontSize: 55))
+                          color: Color(0xFFFD5739),fontSize: SizeConfig.textMultiplier*8))
                 ]))
               ],
             ),
             SizedBox(
-              height: 70,
+              height: SizeConfig.heightMultiplier*15,
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(30.0, 0.0, 0.0, 0.0),
@@ -51,7 +52,7 @@ class _LandingPageState extends State<LandingPage> {
                   style: TextStyle(
                       decoration: TextDecoration.none,
                       color: Colors.white,
-                      fontSize: 40.0,
+                      fontSize: SizeConfig.textMultiplier*6,
                       fontFamily: 'Roboto',
                       fontWeight: FontWeight.normal),
                 ),
@@ -67,13 +68,13 @@ class _LandingPageState extends State<LandingPage> {
                       decoration: TextDecoration.none,
                       color: Colors.white,
                       fontFamily: 'Roboto',
-                      fontSize: 40.0,
+                      fontSize: SizeConfig.textMultiplier*6,
                       fontWeight: FontWeight.normal),
                 ),
               ),
             ),
             SizedBox(
-              height: 50.0,
+              height:SizeConfig.heightMultiplier*20,
             ),
             RoundButton(
               title: 'Create an account',
@@ -81,6 +82,7 @@ class _LandingPageState extends State<LandingPage> {
                 Navigator.pushNamed(context, RegistrationPage.id);
               },
             ),
+            SizedBox(height: SizeConfig.heightMultiplier,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -88,7 +90,7 @@ class _LandingPageState extends State<LandingPage> {
                   'Already on fitnet?',
                   style: TextStyle(
                       decoration: TextDecoration.none,
-                      fontSize: 15.0,
+                      fontSize: SizeConfig.textMultiplier*1.5,
                       color: Colors.white,
                       fontWeight: FontWeight.normal),
                 ),
@@ -100,14 +102,14 @@ class _LandingPageState extends State<LandingPage> {
                     'Log in',
                     style: TextStyle(
                         decoration: TextDecoration.none,
-                        fontSize: 15.0,
+                        fontSize: SizeConfig.textMultiplier*1.5,
                         color: Colors.white,
                         fontWeight: FontWeight.normal),
                   ),
                 )
               ],
             ),
-            SizedBox(height: 70)
+
           ],
         ),
       ),

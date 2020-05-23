@@ -1,3 +1,4 @@
+import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 
 class RoundButton extends StatelessWidget {
@@ -12,15 +13,15 @@ class RoundButton extends StatelessWidget {
     return Material(
       elevation: 5.0,
       color: Color(0xFFFD5739),
-      borderRadius: BorderRadius.circular(30.0),
+      borderRadius: BorderRadius.circular(100.0),
       child: MaterialButton(
-        padding: EdgeInsets.all(22),
+        padding: EdgeInsets.symmetric(vertical:SizeConfig.heightMultiplier*2,horizontal: SizeConfig.widthMultiplier*15),
         onPressed: onPressed,
-        minWidth: 350,
-        height: 42.0,
+        minWidth: SizeConfig.widthMultiplier*40,
+        height: SizeConfig.heightMultiplier*2,
         child: Text(
           title,
-          style: TextStyle(color: Colors.white, fontSize: 15.0),
+          style: TextStyle(color: Colors.white, fontSize: SizeConfig.textMultiplier*2),
         ),
       ),
     );
