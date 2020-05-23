@@ -74,7 +74,7 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
             SizedBox(
-              height:SizeConfig.heightMultiplier*20,
+              height:SizeConfig.heightMultiplier*19,
             ),
             RoundButton(
               title: 'Create an account',
@@ -109,7 +109,6 @@ class _LandingPageState extends State<LandingPage> {
                 )
               ],
             ),
-
           ],
         ),
       ),

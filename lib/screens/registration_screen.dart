@@ -18,7 +18,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String name;
   String email;
   String password;
-  bool showSpinner=false;
+  bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
   final _firestore = Firestore.instance;
   FirebaseUser newLoggedUser;
@@ -46,20 +46,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return Scaffold(
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
-              child: Container(
+        child: Container(
           child: Form(
             child: ListView(
               children: <Widget>[
                 SizedBox(
-                  height: SizeConfig.heightMultiplier*4,
+                  height: SizeConfig.heightMultiplier * 4,
                 ),
                 Image.asset(
                   'images/logo.png',
-                  height: SizeConfig.heightMultiplier*16,
+                  height: SizeConfig.heightMultiplier * 16,
                   // width: SizeConfig.widthMultiplier*30,
                 ),
                 SizedBox(
-                  height: SizeConfig.heightMultiplier*2.5,
+                  height: SizeConfig.heightMultiplier * 2.5,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -67,13 +67,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     RichText(
                       text: TextSpan(
                         children: <TextSpan>[
-                          TextSpan(text: 'FIT', style: kPageHeading.copyWith(fontSize: SizeConfig.textMultiplier*6)),
+                          TextSpan(
+                              text: 'FIT',
+                              style: kPageHeading.copyWith(
+                                  fontSize: SizeConfig.textMultiplier * 6)),
                           TextSpan(
                             text: 'NET',
                             style: kPageHeading.copyWith(
-                              color: Color(0xFFFD5739),
-                              fontSize: SizeConfig.textMultiplier*6
-                            ),
+                                color: Color(0xFFFD5739),
+                                fontSize: SizeConfig.textMultiplier * 6),
                           ),
                         ],
                       ),
@@ -81,16 +83,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ],
                 ),
                 SizedBox(
-                  height: SizeConfig.heightMultiplier*5,
+                  height: SizeConfig.heightMultiplier * 5,
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: SizeConfig.widthMultiplier*6),
+                  padding:
+                      EdgeInsets.only(left: SizeConfig.widthMultiplier * 6),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'Fitness',
                       style: TextStyle(
-                          fontSize: SizeConfig.textMultiplier*5.5,
+                          fontSize: SizeConfig.textMultiplier * 5.5,
                           decoration: TextDecoration.none,
                           color: Colors.white,
                           fontFamily: 'Roboto',
@@ -99,13 +102,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: SizeConfig.widthMultiplier*6),
+                  padding:
+                      EdgeInsets.only(left: SizeConfig.widthMultiplier * 6),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
                       'First',
                       style: TextStyle(
-                          fontSize: SizeConfig.textMultiplier*5.5,
+                          fontSize: SizeConfig.textMultiplier * 5.5,
                           decoration: TextDecoration.none,
                           color: Colors.white,
                           fontFamily: 'Roboto',
@@ -113,10 +117,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: SizeConfig.heightMultiplier*3),
+                SizedBox(height: SizeConfig.heightMultiplier * 3),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: SizeConfig.widthMultiplier * 6),
                   child: TextField(
+                    style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
                     onChanged: (value) {
                       name = value;
                     },
@@ -124,10 +130,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         kTextFieldInputDecoration.copyWith(hintText: 'Name'),
                   ),
                 ),
-                SizedBox(height: SizeConfig.heightMultiplier*3),
+                SizedBox(height: SizeConfig.heightMultiplier * 3),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: SizeConfig.widthMultiplier * 6),
                   child: TextField(
+                    style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
                     keyboardType: TextInputType.emailAddress,
                     onChanged: (value) {
                       email = value;
@@ -136,46 +144,46 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         hintText: 'Email Address'),
                   ),
                 ),
-                SizedBox(height: SizeConfig.heightMultiplier*3),
+                SizedBox(height: SizeConfig.heightMultiplier * 3),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: SizeConfig.widthMultiplier * 6),
                   child: TextField(
+                    style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
                     obscureText: true,
                     onChanged: (value) {
                       password = value;
                     },
-                    decoration:
-                        kTextFieldInputDecoration.copyWith(hintText: 'Password'),
+                    decoration: kTextFieldInputDecoration.copyWith(
+                        hintText: 'Password'),
                   ),
                 ),
                 SizedBox(
-                  height:SizeConfig.heightMultiplier*5,
+                  height: SizeConfig.heightMultiplier * 5,
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical:0,horizontal: SizeConfig.widthMultiplier*6),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: SizeConfig.widthMultiplier * 6),
                   child: RoundButton(
                     title: 'Sign Up',
                     onPressed: () async {
                       setState(() {
-                        showSpinner=true;
+                        showSpinner = true;
                       });
                       try {
                         final newUser =
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
                         if (newUser != null) {
-                          _firestore.collection('users').add(
-                              {'userId': newLoggedUser.uid, 'userName': name});
-
-                          Navigator.pushNamed(context, NewUser.id);
+                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                            return NewUser(name: name,);
+                          }));
                         }
                         setState(() {
-                          showSpinner=false;
+                          showSpinner = false;
                         });
-                      } catch (signUpError)  {
-                          
-                       print('signUpError');
-                        
+                      } catch (signUpError) {
+                        print('signUpError');
                       }
                     },
                   ),
@@ -188,3 +196,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 }
+
+
+//  _firestore.collection('users').add(
+//                               {'userId': newLoggedUser.uid, 'userName': name,'email':email});

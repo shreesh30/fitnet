@@ -1,5 +1,3 @@
-
-
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/splash_screen.dart';
 import 'package:fitnet/size_config.dart';
@@ -26,7 +24,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: Color(0xff0f0f0f),
           ),
-          initialRoute: LandingPage.id,
+          initialRoute:LandingPage.id,
           routes: {
             SplashScreen.id: (context) => SplashScreen(),
             LandingPage.id: (context) => LandingPage(),
