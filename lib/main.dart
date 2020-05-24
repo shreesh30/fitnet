@@ -1,5 +1,6 @@
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/splash_screen.dart';
+import 'package:fitnet/screens/workout_list.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/screens/landing_page.dart';
@@ -24,14 +25,15 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: Color(0xff0f0f0f),
           ),
-          initialRoute:LandingPage.id,
+          initialRoute:HomePage.id,
           routes: {
             SplashScreen.id: (context) => SplashScreen(),
             LandingPage.id: (context) => LandingPage(),
             LoginPage.id: (context) => LoginPage(),
             HomePage.id: (context) => HomePage(),
             RegistrationPage.id: (context) => RegistrationPage(),
-            NewUser.id: (context) => NewUser()
+            NewUser.id: (context) => NewUser(),
+            WorkoutList.id:(context)=>WorkoutList()
           },
         );
       },

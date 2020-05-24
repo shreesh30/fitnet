@@ -74,7 +74,7 @@ class _LandingPageState extends State<LandingPage> {
               ),
             ),
             SizedBox(
-              height:SizeConfig.heightMultiplier*19,
+              height:SizeConfig.heightMultiplier*17,
             ),
             RoundButton(
               title: 'Create an account',
@@ -82,7 +82,7 @@ class _LandingPageState extends State<LandingPage> {
                 Navigator.pushNamed(context, RegistrationPage.id);
               },
             ),
-            SizedBox(height: SizeConfig.heightMultiplier,),
+            SizedBox(height: SizeConfig.heightMultiplier*1.5,),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
