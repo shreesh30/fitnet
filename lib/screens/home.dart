@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<String> getUserInfo() async {
     var firebaseUser = await FirebaseAuth.instance.currentUser();
-    await _firestore.collection("users").document(firebaseUser.uid).snapshots();
+     _firestore.collection("users").document(firebaseUser.uid).snapshots();
     Future userName =
         _firestore.collection('users').document(firebaseUser.uid).get();
     return userName.then((value) async {

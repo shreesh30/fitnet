@@ -36,7 +36,7 @@ class _LandingPageState extends State<LandingPage> {
                   TextSpan(
                       text: 'NET',
                       style: kPageHeading.copyWith(
-                          color: Color(0xFFFD5739),fontSize: SizeConfig.textMultiplier*8))
+                          color: Color(0xFFFD5739),fontSize: SizeConfig.textMultiplier*8),)
                 ]))
               ],
             ),
