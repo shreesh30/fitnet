@@ -112,8 +112,8 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'Foods',
                     style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: SizeConfig.textMultiplier * 3,
+                        fontFamily: 'CopperPlate',
+                        fontSize: SizeConfig.textMultiplier * 2.5,
                         fontWeight: FontWeight.bold),
                   ),
                   Text(
@@ -134,8 +134,8 @@ class _HomePageState extends State<HomePage> {
                   Text(
                     'Workout List',
                     style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: SizeConfig.textMultiplier * 3,
+                        fontFamily: 'CopperPlate',
+                        fontSize: SizeConfig.textMultiplier * 2.5,
                         fontWeight: FontWeight.bold),
                   ),
                   GestureDetector(
