@@ -5,7 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 
-
 class Workout extends StatefulWidget {
   Workout(
       {this.dayNumber,
@@ -25,6 +24,7 @@ class Workout extends StatefulWidget {
 class _WorkoutState extends State<Workout> {
   List finalWorkoutToPerform;
   String url = " ";
+  List finalUrlList;
 
   @override
   void initState() {
@@ -59,6 +59,29 @@ class _WorkoutState extends State<Workout> {
       }
     });
     return finalWorkoutToPerform;
+  }
+
+  List getVideo() {
+    List urlList = [];
+    FirebaseDatabase.instance
+        .reference()
+        .child('workout')
+        .child('workout list')
+        .child(widget.workoutProgramName)
+        .child(widget.workoutName)
+        .child(widget.weekNumber)
+        .child(widget.dayNumber)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, value) async {
+        url = value["video"];
+        urlList.add(url);
+      });
+      finalUrlList = urlList;
+      print(finalUrlList);
+    });
+    return finalUrlList;
   }
 
   // getWorkout2() {
@@ -133,6 +156,7 @@ class _WorkoutState extends State<Workout> {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
+                            List urlList = [];
                             FirebaseDatabase.instance
                                 .reference()
                                 .child('workout')
@@ -144,10 +168,15 @@ class _WorkoutState extends State<Workout> {
                                 .once()
                                 .then((DataSnapshot snapshot) {
                               Map<dynamic, dynamic> values = snapshot.value;
-                              values.forEach((key, values)async {
-                                url = values["video"];
-                                print(url);
+                              values.forEach((key, value) async {
+                                url = value["video"];
+                                urlList.add(url);
                               });
+                              setState(() {
+                                finalUrlList = urlList;
+                              });
+
+                              print(finalUrlList[index]);
                             });
                           },
                           child: Icon(
