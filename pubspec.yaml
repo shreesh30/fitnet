@@ -36,6 +36,8 @@ dependencies:
   dots_indicator: ^1.1.0
   modal_progress_hud: ^0.1.3
   intl: ^0.16.1
+  font_awesome_flutter: ^8.8.1
+  http: ^0.12.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +74,8 @@ flutter:
     - asset: fonts/Roboto-Medium.ttf
     - asset: fonts/Roboto-Regular.ttf
     - asset: fonts/Roboto-Thin.ttf
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

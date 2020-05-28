@@ -1,6 +1,10 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart' as http;
+
 
 class Workout extends StatefulWidget {
   Workout(
@@ -20,14 +24,15 @@ class Workout extends StatefulWidget {
 
 class _WorkoutState extends State<Workout> {
   List finalWorkoutToPerform;
+  String url = " ";
 
   @override
   void initState() {
     super.initState();
-    getWorkou();
+    getWorkout();
   }
 
-  List getWorkou() {
+  List getWorkout() {
     List items;
     List workoutToPerform = [];
     FirebaseDatabase.instance
@@ -56,18 +61,46 @@ class _WorkoutState extends State<Workout> {
     return finalWorkoutToPerform;
   }
 
+  // getWorkout2() {
+  //   FirebaseDatabase.instance
+  //       .reference()
+  //       .child('workout')
+  //       .child('workout list')
+  //       .child(widget.workoutProgramName)
+  //       .child(widget.workoutName)
+  //       .child(widget.weekNumber)
+  //       .child(widget.dayNumber)
+  //       .once()
+  //       .then((DataSnapshot snapshot) {
+  //     Map<dynamic, dynamic> values = snapshot.value;
+  //     values.forEach((key, values) {
+  //       url = values["video"];
+  //     });
+  //   });
+  // }
+
+  // printUrl() async {
+  //   StorageReference ref = FirebaseStorage.instance
+  //       .ref()
+  //       .child("workout video")
+  //       .child('chestPress.mp4');
+  //   String url = (await ref.getDownloadURL()).toString();
+  //   print(url);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           widget.dayNumber,
           style: TextStyle(
-              fontFamily: 'CopperPlate',
-              fontSize: SizeConfig.textMultiplier * 3,
-              fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
+            fontFamily: 'CopperPlate',
+            fontSize: SizeConfig.textMultiplier * 3,
+            fontWeight: FontWeight.bold,
+          ),
+          textAlign: TextAlign.center,
         ),
         iconTheme: IconThemeData(
             color: Color(0xFFFD5739), size: SizeConfig.widthMultiplier * 10),
@@ -92,31 +125,58 @@ class _WorkoutState extends State<Workout> {
                       SizeConfig.widthMultiplier * 4,
                       SizeConfig.widthMultiplier * 2.5),
                   child: Container(
-                    padding: EdgeInsets.fromLTRB(
-                        SizeConfig.widthMultiplier * 5,
-                        0,
-                        SizeConfig.widthMultiplier * 5,
-                        0),
+                    padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 5,
+                        0, SizeConfig.widthMultiplier * 5, 0),
                     height: 50,
                     color: Color(0xff0f0f0f),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Row(
-                          children: <Widget>[
-                            Icon(
-                              Icons.arrow_drop_down,
-                              color: Color(0xFFFD5739),
-                              size: SizeConfig.heightMultiplier * 4,
-                            ),
-                            Text(
-                              finalWorkoutToPerform[index].toString(),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: 'Roboto',
-                                  fontSize: SizeConfig.textMultiplier * 3),
-                            ),
-                          ],
-                        )),
+                    child: Row(
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            FirebaseDatabase.instance
+                                .reference()
+                                .child('workout')
+                                .child('workout list')
+                                .child(widget.workoutProgramName)
+                                .child(widget.workoutName)
+                                .child(widget.weekNumber)
+                                .child(widget.dayNumber)
+                                .once()
+                                .then((DataSnapshot snapshot) {
+                              Map<dynamic, dynamic> values = snapshot.value;
+                              values.forEach((key, values)async {
+                                url = values["video"];
+                                print(url);
+                              });
+                            });
+                          },
+                          child: Icon(
+                            Icons.play_circle_outline,
+                            color: Color(0xFFFD5739),
+                            size: SizeConfig.heightMultiplier * 4,
+                          ),
+                        ),
+                        SizedBox(
+                          width: SizeConfig.widthMultiplier * 5,
+                        ),
+                        Text(
+                          finalWorkoutToPerform[index].toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontFamily: 'Roboto',
+                              fontSize: SizeConfig.textMultiplier * 3),
+                          textAlign: TextAlign.left,
+                        ),
+                        Expanded(
+                            child: SizedBox(
+                                width: SizeConfig.widthMultiplier * 25)),
+                        Icon(
+                          FontAwesomeIcons.ellipsisV,
+                          color: Color(0xFFFD5739),
+                          size: SizeConfig.heightMultiplier * 2.5,
+                        )
+                      ],
+                    ),
                   ),
                 );
               } else {

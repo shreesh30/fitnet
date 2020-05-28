@@ -56,6 +56,7 @@ class _WorkoutProgramState extends State<WorkoutProgram> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           widget.workoutProgramName,
           style: TextStyle(

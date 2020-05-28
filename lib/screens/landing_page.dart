@@ -16,6 +16,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: SafeArea(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -55,13 +55,13 @@ class _WeeksListState extends State<WeeksList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           widget.workoutName,
           style: TextStyle(
               fontFamily: 'CopperPlate',
               fontSize: SizeConfig.textMultiplier * 3,
               fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
         ),
         iconTheme: IconThemeData(
             color: Color(0xFFFD5739), size: SizeConfig.widthMultiplier * 10),
