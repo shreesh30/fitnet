@@ -55,21 +55,21 @@ class _WorkoutListState extends State<WorkoutList> {
           centerTitle: true,
           automaticallyImplyLeading: false,
           title: Text(
-              'Workout List',
-              style: TextStyle(
-                  fontFamily: 'CopperPlate',
-                  fontSize: SizeConfig.textMultiplier * 3,
-                  fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
+            'Workout List',
+            style: TextStyle(
+                fontFamily: 'CopperPlate',
+                fontSize: SizeConfig.textMultiplier * 3,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
           backgroundColor: Color(0xFF0F0F0F),
         ),
         body: Padding(
-          padding: EdgeInsets.only(top:SizeConfig.heightMultiplier),
-                  child: ListView.separated(
+          padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
+          child: ListView.separated(
               separatorBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 7, 0,
-                      SizeConfig.widthMultiplier * 7, 0),
+                  padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 7,
+                      0, SizeConfig.widthMultiplier * 7, 0),
                   child: Divider(color: Color(0xFF8B8A8D))),
               itemCount: finalWorkoutList != null ? finalWorkoutList.length : 0,
               itemBuilder: (context, index) {
@@ -82,7 +82,13 @@ class _WorkoutListState extends State<WorkoutList> {
                         SizeConfig.widthMultiplier * 2.5),
                     child: GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(context, WorkoutProgram.id);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return WorkoutProgram(
+                            workoutProgramName:
+                                finalWorkoutList[index].toString(),
+                          );
+                        }));
                       },
                       child: Container(
                         padding: EdgeInsets.fromLTRB(

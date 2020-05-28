@@ -1,5 +1,8 @@
+import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/splash_screen.dart';
+import 'package:fitnet/screens/weeks_list.dart';
+import 'package:fitnet/screens/workout.dart';
 import 'package:fitnet/screens/workout_list.dart';
 import 'package:fitnet/screens/workout_program.dart';
 import 'package:fitnet/size_config.dart';
@@ -35,7 +38,10 @@ class MyApp extends StatelessWidget {
             RegistrationPage.id: (context) => RegistrationPage(),
             NewUser.id: (context) => NewUser(),
             WorkoutList.id:(context)=>WorkoutList(),
-            WorkoutProgram.id:(context)=>WorkoutProgram()
+            WorkoutProgram.id:(context)=>WorkoutProgram(),
+            WeeksList.id:(context)=>WeeksList(),
+            DaysList.id:(context)=>DaysList(),
+            Workout.id:(context)=>Workout()
           },
         );
       },

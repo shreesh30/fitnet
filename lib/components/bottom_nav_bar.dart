@@ -9,8 +9,12 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     return BottomNavigationBar(
       backgroundColor: Color(0xFF272727),
+      selectedItemColor: Color(0xFFFD5739),
+      unselectedItemColor: Colors.white,
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.home,size: SizeConfig.heightMultiplier*2.5,), title: Text('home')),
         BottomNavigationBarItem(
@@ -22,6 +26,7 @@ class BottomNavBar extends StatelessWidget {
         BottomNavigationBarItem(
             icon: Icon(Icons.person,size: SizeConfig.heightMultiplier*3), title: Text('Profile'))
       ],
+
     );
   }
 }
