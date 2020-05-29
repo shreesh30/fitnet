@@ -38,6 +38,8 @@ dependencies:
   intl: ^0.16.1
   font_awesome_flutter: ^8.8.1
   http: ^0.12.1
+  video_player: ^0.10.11+1
+  chewie: ^0.9.10
 
 dev_dependencies:
   flutter_test:

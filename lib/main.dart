@@ -1,6 +1,7 @@
 import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/splash_screen.dart';
+import 'package:fitnet/screens/video_screen.dart';
 import 'package:fitnet/screens/weeks_list.dart';
 import 'package:fitnet/screens/workout.dart';
 import 'package:fitnet/screens/workout_list.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: Color(0xff0f0f0f),
           ),
-          initialRoute:LandingPage.id,
+          initialRoute:HomePage.id,
           routes: {
             SplashScreen.id: (context) => SplashScreen(),
             LandingPage.id: (context) => LandingPage(),
@@ -41,7 +42,8 @@ class MyApp extends StatelessWidget {
             WorkoutProgram.id:(context)=>WorkoutProgram(),
             WeeksList.id:(context)=>WeeksList(),
             DaysList.id:(context)=>DaysList(),
-            Workout.id:(context)=>Workout()
+            Workout.id:(context)=>Workout(),
+            VideoScreen.id:(context)=>VideoScreen()
           },
         );
       },

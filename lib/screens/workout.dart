@@ -1,9 +1,11 @@
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:fitnet/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart' as http;
+// import 'package:http/http.dart' as http;
+import 'package:video_player/video_player.dart';
 
 class Workout extends StatefulWidget {
   Workout(
@@ -25,11 +27,17 @@ class _WorkoutState extends State<Workout> {
   List finalWorkoutToPerform;
   String url = " ";
   List finalUrlList;
+  // VideoPlayerController videoPlayerController;
+  // VoidCallback listner;
 
   @override
   void initState() {
     super.initState();
     getWorkout();
+    getVideo();
+    // listner = () {
+    //   setState(() {});
+    // };
   }
 
   List getWorkout() {
@@ -61,7 +69,7 @@ class _WorkoutState extends State<Workout> {
     return finalWorkoutToPerform;
   }
 
-  List getVideo() {
+  void getVideo() {
     List urlList = [];
     FirebaseDatabase.instance
         .reference()
@@ -78,11 +86,37 @@ class _WorkoutState extends State<Workout> {
         url = value["video"];
         urlList.add(url);
       });
-      finalUrlList = urlList;
-      print(finalUrlList);
+      // if (this.mounted) {
+        setState(() {
+          finalUrlList = urlList;
+        });
+      // }
     });
-    return finalUrlList;
   }
+
+  // void createVideo() {
+  //   if (videoPlayerController == null) {
+  //     videoPlayerController = VideoPlayerController.network(url)
+  //       ..addListener(listner)
+  //       ..setVolume(1.0)
+  //       ..initialize()
+  //       ..play();
+  //   } else {
+  //     if (videoPlayerController.value.isPlaying) {
+  //       videoPlayerController.pause();
+  //     } else {
+  //       videoPlayerController.initialize();
+  //       videoPlayerController.play();
+  //     }
+  //   }
+  // }
+
+  // @override
+  // void deactivate() {
+  //   videoPlayerController.setVolume(0.0);
+  //   videoPlayerController.removeListener(listner);
+  //   super.deactivate();
+  // }
 
   // getWorkout2() {
   //   FirebaseDatabase.instance
@@ -156,28 +190,25 @@ class _WorkoutState extends State<Workout> {
                       children: <Widget>[
                         GestureDetector(
                           onTap: () {
-                            List urlList = [];
-                            FirebaseDatabase.instance
-                                .reference()
-                                .child('workout')
-                                .child('workout list')
-                                .child(widget.workoutProgramName)
-                                .child(widget.workoutName)
-                                .child(widget.weekNumber)
-                                .child(widget.dayNumber)
-                                .once()
-                                .then((DataSnapshot snapshot) {
-                              Map<dynamic, dynamic> values = snapshot.value;
-                              values.forEach((key, value) async {
-                                url = value["video"];
-                                urlList.add(url);
-                              });
-                              setState(() {
-                                finalUrlList = urlList;
-                              });
-
-                              print(finalUrlList[index]);
+                            setState(() {
+                              url = finalUrlList[index];
                             });
+                            print(url);
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>VideoScreen(url: url,),),);
+                            // createVideo();
+                            // videoPlayerController.play();
+                            // Center(
+                            //   child: AspectRatio(
+                            //     aspectRatio: 16 / 9,
+                            //     child: Container(
+                            //       child: (videoPlayerController != null
+                            //           ? VideoPlayer(videoPlayerController)
+                            //           : Container()),
+                            //     ),
+                            //   ),
+                            // );
+                            // createVideo();
+                            // videoPlayerController.play();
                           },
                           child: Icon(
                             Icons.play_circle_outline,
