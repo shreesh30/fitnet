@@ -1,10 +1,9 @@
-
 import 'package:fitnet/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:fitnet/components/custom_expansion_tile.dart' as custom;
 
 class Workout extends StatefulWidget {
   Workout(
@@ -25,15 +24,22 @@ class Workout extends StatefulWidget {
 class _WorkoutState extends State<Workout> {
   List finalWorkoutToPerform;
   String url = " ";
+  String sets = "";
+  String reps = "";
+  String description = "";
   List finalUrlList;
-
+  List finalSetsList;
+  List finalRepsList;
+  List finalDescriptionList;
 
   @override
   void initState() {
     super.initState();
     getWorkout();
     getVideo();
-
+    getSets();
+    getReps();
+    getDescription();
   }
 
   List getWorkout() {
@@ -82,14 +88,89 @@ class _WorkoutState extends State<Workout> {
         url = value["video"];
         urlList.add(url);
       });
-        setState(() {
-          finalUrlList = urlList;
-        });
-      
+      setState(() {
+        finalUrlList = urlList;
+      });
     });
   }
 
+  void getSets() {
+    List setsList = [];
+    FirebaseDatabase.instance
+        .reference()
+        .child('workout')
+        .child('workout list')
+        .child(widget.workoutProgramName)
+        .child(widget.workoutName)
+        .child(widget.weekNumber)
+        .child(widget.dayNumber)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, value) async {
+        sets = value["sets"].toString();
+        setsList.add(sets);
+      });
+      if (this.mounted) {
+        setState(() {
+          finalSetsList = setsList;
+          print(finalSetsList);
+        });
+      }
+    });
+  }
 
+  void getReps() {
+    List repsList = [];
+    FirebaseDatabase.instance
+        .reference()
+        .child('workout')
+        .child('workout list')
+        .child(widget.workoutProgramName)
+        .child(widget.workoutName)
+        .child(widget.weekNumber)
+        .child(widget.dayNumber)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, value) async {
+        reps = value["reps"].toString();
+        repsList.add(reps);
+      });
+      if (this.mounted) {
+        setState(() {
+          finalRepsList = repsList;
+          print(finalRepsList);
+        });
+      }
+    });
+  }
+
+  void getDescription() {
+    List descriptionList = [];
+    FirebaseDatabase.instance
+        .reference()
+        .child('workout')
+        .child('workout list')
+        .child(widget.workoutProgramName)
+        .child(widget.workoutName)
+        .child(widget.weekNumber)
+        .child(widget.dayNumber)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, value) async {
+        description = value["description"];
+        descriptionList.add(description);
+      });
+      if (this.mounted) {
+        setState(() {
+          finalDescriptionList = descriptionList;
+          print(finalDescriptionList);
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,40 +191,39 @@ class _WorkoutState extends State<Workout> {
         backgroundColor: Color(0xFF0F0F0F),
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
+        padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
         child: ListView.separated(
-            separatorBuilder: (context, index) => Padding(
-                padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 7, 0,
-                    SizeConfig.widthMultiplier * 7, 0),
-                child: Divider(color: Color(0xFF8B8A8D))),
+            separatorBuilder: (context, index) =>
+                Divider(color: Color(0xff0f0f0f)),
             itemCount: finalWorkoutToPerform != null
                 ? finalWorkoutToPerform.length
                 : 0,
             itemBuilder: (context, index) {
               if (finalWorkoutToPerform != null) {
                 return Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      SizeConfig.widthMultiplier * 4,
-                      SizeConfig.heightMultiplier * 2.5,
-                      SizeConfig.widthMultiplier * 4,
-                      SizeConfig.widthMultiplier * 2.5),
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 5,
-                        0, SizeConfig.widthMultiplier * 5, 0),
-                    height: 50,
-                    color: Color(0xff0f0f0f),
-                    child: Row(
+                  padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 4,
+                      0, SizeConfig.widthMultiplier * 4, 0),
+                  child: custom.ExpansionTile(
+                    iconColor: Color(0xFFFD5739),
+                    headerBackgroundColor: Color(0xff0F0F0F),
+                    title: Row(
                       children: <Widget>[
                         IconButton(
-                          onPressed:(){
-                                setState(() {
-                            url = finalUrlList[index];
-                          });
-                          print(url);
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>VideoScreen(url: url,),),);
-        
-                          } ,
-                          icon:Icon(Icons.play_circle_outline),
+                          onPressed: () {
+                            setState(() {
+                              url = finalUrlList[index];
+                            });
+                            print(url);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VideoScreen(
+                                  url: url,
+                                ),
+                              ),
+                            );
+                          },
+                          icon: Icon(Icons.play_circle_outline),
                           color: Color(0xFFFD5739),
                           iconSize: SizeConfig.heightMultiplier * 4,
                         ),
@@ -153,21 +233,77 @@ class _WorkoutState extends State<Workout> {
                         Text(
                           finalWorkoutToPerform[index].toString(),
                           style: TextStyle(
+                              color: Colors.white,
                               fontWeight: FontWeight.w300,
                               fontFamily: 'Roboto',
                               fontSize: SizeConfig.textMultiplier * 3),
                           textAlign: TextAlign.left,
                         ),
-                        Expanded(
-                            child: SizedBox(
-                                width: SizeConfig.widthMultiplier * 25)),
-                        Icon(
-                          FontAwesomeIcons.ellipsisV,
-                          color: Color(0xFFFD5739),
-                          size: SizeConfig.heightMultiplier * 2.5,
-                        )
                       ],
                     ),
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeConfig.heightMultiplier,
+                            horizontal: SizeConfig.widthMultiplier),
+                        child: RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text:
+                                      'Sets : ${finalSetsList[index].toString()} ',
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: SizeConfig.textMultiplier * 2.5,
+                                      fontWeight: FontWeight.w300)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeConfig.heightMultiplier,
+                            horizontal: SizeConfig.widthMultiplier),
+                        child: RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text:
+                                      'Reps : ${finalRepsList[index].toString()} ',
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontSize: SizeConfig.textMultiplier * 2.5,
+                                      fontWeight: FontWeight.w300)),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: SizeConfig.heightMultiplier,
+                            horizontal: SizeConfig.widthMultiplier),
+                        child: RichText(
+                          text: TextSpan(
+                            children: <TextSpan>[
+                              finalDescriptionList[index] == null ||
+                                      finalDescriptionList[index] == " " ||
+                                      finalDescriptionList[index] == '' ||
+                                      finalDescriptionList[index] == ' '
+                                  ? TextSpan(text: " ")
+                                  : TextSpan(
+                                      text:
+                                          'Description : ${finalDescriptionList[index].toString()}',
+                                      style: TextStyle(
+                                          fontFamily: 'Roboto',
+                                          fontSize:
+                                              SizeConfig.textMultiplier * 2.5,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 );
               } else {
@@ -178,3 +314,4 @@ class _WorkoutState extends State<Workout> {
     );
   }
 }
+
