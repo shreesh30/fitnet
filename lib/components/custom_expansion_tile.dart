@@ -5,9 +5,7 @@ const Duration _kExpand = Duration(milliseconds: 200);
 
 
 class ExpansionTile extends StatefulWidget {
-  /// Creates a single-line [ListTile] with a trailing button that expands or collapses
-  /// the tile to reveal or hide the [children]. The [initiallyExpanded] property must
-  /// be non-null.
+
   const ExpansionTile({
     Key key,
     this.headerBackgroundColor,
@@ -22,14 +20,9 @@ class ExpansionTile extends StatefulWidget {
   })  : assert(initiallyExpanded != null),
         super(key: key);
 
-  /// A widget to display before the title.
-  ///
-  /// Typically a [CircleAvatar] widget.
+
   final Widget leading;
 
-  /// The primary content of the list item.
-  ///
-  /// Typically a [Text] widget.
   final Widget title;
 
   /// Called when the tile expands or collapses.
