@@ -1,3 +1,4 @@
+import 'package:fitnet/components/bottom_nav_bar.dart';
 import 'package:fitnet/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
@@ -193,16 +194,22 @@ class _WorkoutState extends State<Workout> {
       body: Padding(
         padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
         child: ListView.separated(
-            separatorBuilder: (context, index) =>
-                Divider(color: Color(0xff0f0f0f)),
+            separatorBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: SizeConfig.widthMultiplier * 4),
+                  child: Divider(color: Color(0xff8B8A8D)),
+                ),
             itemCount: finalWorkoutToPerform != null
                 ? finalWorkoutToPerform.length
                 : 0,
             itemBuilder: (context, index) {
               if (finalWorkoutToPerform != null) {
                 return Padding(
-                  padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 4,
-                      0, SizeConfig.widthMultiplier * 4, 0),
+                 padding: EdgeInsets.fromLTRB(
+                      SizeConfig.widthMultiplier * 4,
+                      SizeConfig.heightMultiplier * 2,
+                      SizeConfig.widthMultiplier * 4,
+                      SizeConfig.widthMultiplier * 2),
                   child: custom.ExpansionTile(
                     iconColor: Color(0xFFFD5739),
                     headerBackgroundColor: Color(0xff0F0F0F),
@@ -311,7 +318,7 @@ class _WorkoutState extends State<Workout> {
               }
             }),
       ),
+      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
-

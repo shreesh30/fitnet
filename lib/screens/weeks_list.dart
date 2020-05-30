@@ -70,10 +70,10 @@ class _WeeksListState extends State<WeeksList> {
       body: Padding(
         padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
         child: ListView.separated(
-            separatorBuilder: (context, index) => Padding(
-                padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 7, 0,
-                    SizeConfig.widthMultiplier * 7, 0),
-                child: Divider(color: Color(0xFF8B8A8D))),
+            separatorBuilder: (context, index) =>  Padding(
+                  padding:  EdgeInsets.symmetric(vertical: 0,horizontal: SizeConfig.widthMultiplier*4),
+                  child: Divider(color: Color(0xff8B8A8D)),
+                ),
             itemCount: finalWeeksList != null ? finalWeeksList.length : 0,
             itemBuilder: (context, index) {
               if (finalWeeksList != null) {
