@@ -3,7 +3,6 @@ import 'package:fitnet/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:fitnet/components/custom_expansion_tile.dart' as custom;
 
 class Workout extends StatefulWidget {
@@ -32,7 +31,6 @@ class _WorkoutState extends State<Workout> {
   List finalSetsList;
   List finalRepsList;
   List finalDescriptionList;
-  bool onTap = false;
 
   @override
   void initState() {
@@ -198,8 +196,7 @@ class _WorkoutState extends State<Workout> {
             separatorBuilder: (context, index) => Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: 0, horizontal: SizeConfig.widthMultiplier * 4),
-                  child: Divider(
-                      color: onTap ? Color(0xff0f0f0f) : Color(0xff8B8A8D)),
+                  child: Divider(color: Color(0xff8B8A8D)),
                 ),
             itemCount: finalWorkoutToPerform != null
                 ? finalWorkoutToPerform.length
@@ -212,121 +209,113 @@ class _WorkoutState extends State<Workout> {
                       SizeConfig.heightMultiplier,
                       SizeConfig.widthMultiplier * 4,
                       SizeConfig.widthMultiplier * 2),
-                  child: GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        onTap = !onTap;
-                      });
-                    },
-                    child: Theme(
-                      data: Theme.of(context)
-                          .copyWith(dividerColor: Colors.transparent),
-                      child: custom.ExpansionTile(
-                        iconColor: Color(0xFFFD5739),
-                        headerBackgroundColor: Color(0xff0F0F0F),
-                        title: Row(
-                          children: <Widget>[
-                            IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  url = finalUrlList[index];
-                                });
-                                print(url);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => VideoScreen(
-                                      url: url,
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: Icon(Icons.play_circle_outline),
-                              color: Color(0xFFFD5739),
-                              iconSize: SizeConfig.heightMultiplier * 4,
-                            ),
-                            SizedBox(
-                              width: SizeConfig.widthMultiplier * 5,
-                            ),
-                            Text(
-                              finalWorkoutToPerform[index].toString(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: 'Roboto',
-                                  fontSize: SizeConfig.textMultiplier * 3),
-                              textAlign: TextAlign.left,
-                            ),
-                          ],
-                        ),
+                  child: Theme(
+                    data: Theme.of(context)
+                        .copyWith(dividerColor: Colors.transparent),
+                    child: custom.ExpansionTile(
+                      iconColor: Color(0xFFFD5739),
+                      headerBackgroundColor: Color(0xff0F0F0F),
+                      title: Row(
                         children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: SizeConfig.heightMultiplier,
-                                horizontal: SizeConfig.widthMultiplier),
-                            child: RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text:
-                                          'Sets : ${finalSetsList[index].toString()} ',
-                                      style: TextStyle(
-                                          fontFamily: 'Roboto',
-                                          fontSize:
-                                              SizeConfig.textMultiplier * 2.5,
-                                          fontWeight: FontWeight.w300)),
-                                ],
-                              ),
-                            ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                url = finalUrlList[index];
+                              });
+                              print(url);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => VideoScreen(
+                                    url: url,
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: Icon(Icons.play_circle_outline),
+                            color: Color(0xFFFD5739),
+                            iconSize: SizeConfig.heightMultiplier * 4,
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: SizeConfig.heightMultiplier,
-                                horizontal: SizeConfig.widthMultiplier),
-                            child: RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text:
-                                          'Reps : ${finalRepsList[index].toString()} ',
-                                      style: TextStyle(
-                                          fontFamily: 'Roboto',
-                                          fontSize:
-                                              SizeConfig.textMultiplier * 2.5,
-                                          fontWeight: FontWeight.w300)),
-                                ],
-                              ),
-                            ),
+                          SizedBox(
+                            width: SizeConfig.widthMultiplier * 5,
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: SizeConfig.heightMultiplier,
-                                horizontal: SizeConfig.widthMultiplier),
-                            child: RichText(
-                              text: TextSpan(
-                                children: <TextSpan>[
-                                  finalDescriptionList[index] == null ||
-                                          finalDescriptionList[index] == " " ||
-                                          finalDescriptionList[index] == '' ||
-                                          finalDescriptionList[index] == ' ' ||
-                                          finalDescriptionList[index] == ""
-                                      ? TextSpan(text: " ")
-                                      : TextSpan(
-                                          text:
-                                              'Description : ${finalDescriptionList[index].toString()}',
-                                          style: TextStyle(
-                                              fontFamily: 'Roboto',
-                                              fontSize:
-                                                  SizeConfig.textMultiplier *
-                                                      2.5,
-                                              fontWeight: FontWeight.w300),
-                                        ),
-                                ],
-                              ),
-                            ),
+                          Text(
+                            finalWorkoutToPerform[index].toString(),
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Roboto',
+                                fontSize: SizeConfig.textMultiplier * 3),
+                            textAlign: TextAlign.left,
                           ),
                         ],
                       ),
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeConfig.heightMultiplier,
+                              horizontal: SizeConfig.widthMultiplier),
+                          child: RichText(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text:
+                                        'Sets : ${finalSetsList[index].toString()} ',
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize:
+                                            SizeConfig.textMultiplier * 2.5,
+                                        fontWeight: FontWeight.w300)),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeConfig.heightMultiplier,
+                              horizontal: SizeConfig.widthMultiplier),
+                          child: RichText(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text:
+                                        'Reps : ${finalRepsList[index].toString()} ',
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontSize:
+                                            SizeConfig.textMultiplier * 2.5,
+                                        fontWeight: FontWeight.w300)),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: SizeConfig.heightMultiplier,
+                              horizontal: SizeConfig.widthMultiplier),
+                          child: RichText(
+                            text: TextSpan(
+                              children: <TextSpan>[
+                                finalDescriptionList[index] == null ||
+                                        finalDescriptionList[index] == " " ||
+                                        finalDescriptionList[index] == '' ||
+                                        finalDescriptionList[index] == ' ' ||
+                                        finalDescriptionList[index] == ""
+                                    ? TextSpan(text: " ")
+                                    : TextSpan(
+                                        text:
+                                            'Description : ${finalDescriptionList[index].toString()}',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontSize:
+                                                SizeConfig.textMultiplier * 2.5,
+                                            fontWeight: FontWeight.w300),
+                                      ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 );

@@ -1,4 +1,6 @@
 import 'package:fitnet/screens/days_list.dart';
+import 'package:fitnet/screens/mental_health_list.dart';
+import 'package:fitnet/screens/mental_health_selected_option.dart';
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/splash_screen.dart';
 import 'package:fitnet/screens/video_screen.dart';
@@ -43,7 +45,9 @@ class MyApp extends StatelessWidget {
             WeeksList.id:(context)=>WeeksList(),
             DaysList.id:(context)=>DaysList(),
             Workout.id:(context)=>Workout(),
-            VideoScreen.id:(context)=>VideoScreen()
+            VideoScreen.id:(context)=>VideoScreen(),
+            MentalHealthList.id:(context)=>MentalHealthList(),
+            MentalHealthSelectedOption.id:(context)=>MentalHealthSelectedOption()
           },
         );
       },

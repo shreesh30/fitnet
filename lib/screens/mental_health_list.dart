@@ -1,58 +1,59 @@
-import 'package:fitnet/screens/workout_program.dart';
-import 'package:fitnet/size_config.dart';
-import 'package:flutter/material.dart';
 import 'package:fitnet/components/bottom_nav_bar.dart';
+import 'package:fitnet/screens/mental_health_selected_option.dart';
+import 'package:flutter/material.dart';
+import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
 
-class WorkoutList extends StatefulWidget {
-  static const String id = 'workout_list';
+class MentalHealthList extends StatefulWidget {
+  static const String id='mental_health_list';
+  
   @override
-  _WorkoutListState createState() => _WorkoutListState();
+  _MentalHealthListState createState() => _MentalHealthListState();
 }
 
-class _WorkoutListState extends State<WorkoutList> {
-  List finalWorkoutList;
+class _MentalHealthListState extends State<MentalHealthList> {
+  List finalMentalHealthList;
+
 
   @override
   void initState() {
     super.initState();
-    getWorkoutList();
+    getMentalHealthList();
   }
 
-  List getWorkoutList() {
-    List items;
-    List workoutList = [];
+  void getMentalHealthList(){
+     List items;
+    List mentalHealthList = [];
     FirebaseDatabase.instance
         .reference()
-        .child('workout')
-        .child('workout list')
+        .child('mental health')
         .once()
         .then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> values = snapshot.value;
       items = values.keys.toList();
       for (int i = 0; i < items.length; i++) {
-        String workout = items[i];
-        var newItem = workout;
-        workoutList.add(newItem);
+        String mentalHealth = items[i];
+        var newItem = mentalHealth;
+        mentalHealthList.add(newItem);
       }
       if (this.mounted) {
         setState(() {
-          finalWorkoutList = workoutList;
+          finalMentalHealthList = mentalHealthList;
         });
       }
     });
-    return finalWorkoutList;
+   
   }
+
 
   @override
   Widget build(BuildContext context) {
-    getWorkoutList();
     return Scaffold(
-        appBar: AppBar(
+      appBar:  AppBar(
           centerTitle: true,
           automaticallyImplyLeading: false,
           title: Text(
-            'Workout List',
+            'Mental Health',
             style: TextStyle(
                 fontFamily: 'CopperPlate',
                 fontSize: SizeConfig.textMultiplier * 3,
@@ -61,7 +62,7 @@ class _WorkoutListState extends State<WorkoutList> {
           ),
           backgroundColor: Color(0xFF0F0F0F),
         ),
-        body: Padding(
+      body:  Padding(
           padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
           child: ListView.separated(
               separatorBuilder: (context, index) => Padding(
@@ -70,9 +71,9 @@ class _WorkoutListState extends State<WorkoutList> {
                         horizontal: SizeConfig.widthMultiplier * 4),
                     child: Divider(color: Color(0xff8B8A8D)),
                   ),
-              itemCount: finalWorkoutList != null ? finalWorkoutList.length : 0,
+              itemCount: finalMentalHealthList != null ? finalMentalHealthList.length : 0,
               itemBuilder: (context, index) {
-                if (finalWorkoutList != null) {
+                if (finalMentalHealthList != null) {
                   return Padding(
                     padding: EdgeInsets.fromLTRB(
                         SizeConfig.widthMultiplier * 4,
@@ -83,10 +84,7 @@ class _WorkoutListState extends State<WorkoutList> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return WorkoutProgram(
-                            workoutProgramName:
-                                finalWorkoutList[index].toString(),
-                          );
+                          return MentalHealthSelectedOption(selectedOption: finalMentalHealthList[index],);
                         }));
                       },
                       child: Container(
@@ -103,7 +101,7 @@ class _WorkoutListState extends State<WorkoutList> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Text(
-                                  finalWorkoutList[index].toString(),
+                                  finalMentalHealthList[index].toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w300,
                                       fontFamily: 'Roboto',
@@ -124,6 +122,7 @@ class _WorkoutListState extends State<WorkoutList> {
                 }
               }),
         ),
-        bottomNavigationBar: BottomNavBar());
+        bottomNavigationBar: BottomNavBar(),
+    );
   }
 }

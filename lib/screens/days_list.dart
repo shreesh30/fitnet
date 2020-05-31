@@ -59,7 +59,7 @@ class _DaysListState extends State<DaysList> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-         widget.weekNumber,
+          widget.weekNumber,
           style: TextStyle(
               fontFamily: 'CopperPlate',
               fontSize: SizeConfig.textMultiplier * 3,
@@ -72,8 +72,9 @@ class _DaysListState extends State<DaysList> {
       body: Padding(
         padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
         child: ListView.separated(
-            separatorBuilder: (context, index) =>  Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 0,horizontal: SizeConfig.widthMultiplier*4),
+            separatorBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: SizeConfig.widthMultiplier * 4),
                   child: Divider(color: Color(0xff8B8A8D)),
                 ),
             itemCount: finalDaysList != null ? finalDaysList.length : 0,
@@ -89,7 +90,12 @@ class _DaysListState extends State<DaysList> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return Workout(dayNumber: finalDaysList[index].toString(),weekNumber:widget.weekNumber,workoutName: widget.workoutName,workoutProgramName: widget.workoutProgramName,);
+                        return Workout(
+                          dayNumber: finalDaysList[index].toString(),
+                          weekNumber: widget.weekNumber,
+                          workoutName: widget.workoutName,
+                          workoutProgramName: widget.workoutProgramName,
+                        );
                       }));
                     },
                     child: Container(

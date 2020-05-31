@@ -1,3 +1,4 @@
+import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/workout_list.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<String> getUserInfo() async {
     var firebaseUser = await FirebaseAuth.instance.currentUser();
-     _firestore.collection("users").document(firebaseUser.uid).snapshots();
+    _firestore.collection("users").document(firebaseUser.uid).snapshots();
     Future userName =
         _firestore.collection('users').document(firebaseUser.uid).get();
     return userName.then((value) async {
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           padding: EdgeInsets.fromLTRB(SizeConfig.widthMultiplier * 4.5, 0,
               SizeConfig.widthMultiplier * 4.5, 0),
-          child: Column(
+          child: ListView(
             children: <Widget>[
               SizedBox(
                 height: SizeConfig.heightMultiplier * 2,
@@ -96,15 +97,15 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               SizedBox(height: SizeConfig.heightMultiplier * 1.5),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Color(0xFF171717)),
-                ),
+              Container(
+                height: SizeConfig.heightMultiplier * 25,
+                width: SizeConfig.widthMultiplier,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    color: Color(0xFF171717)),
               ),
               SizedBox(
-                height: SizeConfig.heightMultiplier * 1.5,
+                height: SizeConfig.heightMultiplier * 3.5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,15 +119,17 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Text(
                     'Show More',
-                    style: TextStyle(color: Color(0xFF8B8A8D),fontSize: SizeConfig.textMultiplier*1.8),
+                    style: TextStyle(
+                        color: Color(0xFF8B8A8D),
+                        fontSize: SizeConfig.textMultiplier * 1.8),
                   )
                 ],
               ),
-              Expanded(
-                child: Container(child: null),
+              Container(
+                height: SizeConfig.heightMultiplier * 20,
               ),
               SizedBox(
-                height: SizeConfig.heightMultiplier * 1.5,
+                height: SizeConfig.heightMultiplier * 3.5,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,18 +142,53 @@ class _HomePageState extends State<HomePage> {
                         fontWeight: FontWeight.bold),
                   ),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.pushNamed(context,WorkoutList.id);
+                    onTap: () {
+                      Navigator.pushNamed(context, WorkoutList.id);
                     },
-                      child: Text(
-                    'Show More',
-                    style: TextStyle(color: Color(0xFF8B8A8D),fontSize: SizeConfig.textMultiplier*1.8),
-                  ))
+                    child: Text(
+                      'Show More',
+                      style: TextStyle(
+                          color: Color(0xFF8B8A8D),
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                  ),
                 ],
               ),
-              Expanded(
-                child: Container(),
-              )
+              Container(
+                height: SizeConfig.heightMultiplier * 20,
+              ),
+              SizedBox(
+                height: SizeConfig.heightMultiplier * 3.5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    'Mental Health',
+                    style: TextStyle(
+                        fontFamily: 'CopperPlate',
+                        fontSize: SizeConfig.textMultiplier * 2.5,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, MentalHealthList.id);
+                    },
+                    child: Text(
+                      'Show More',
+                      style: TextStyle(
+                          color: Color(0xFF8B8A8D),
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                height: SizeConfig.heightMultiplier * 20,
+              ),
+              SizedBox(
+                height: SizeConfig.heightMultiplier * 3.5,
+              ),
             ],
           ),
         ),
@@ -159,8 +197,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
 
 // Future<String> getUserInfo() async {
 //   var firebaseUser = await FirebaseAuth.instance.currentUser();

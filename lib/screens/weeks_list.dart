@@ -70,8 +70,9 @@ class _WeeksListState extends State<WeeksList> {
       body: Padding(
         padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
         child: ListView.separated(
-            separatorBuilder: (context, index) =>  Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 0,horizontal: SizeConfig.widthMultiplier*4),
+            separatorBuilder: (context, index) => Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: 0, horizontal: SizeConfig.widthMultiplier * 4),
                   child: Divider(color: Color(0xff8B8A8D)),
                 ),
             itemCount: finalWeeksList != null ? finalWeeksList.length : 0,
@@ -87,7 +88,11 @@ class _WeeksListState extends State<WeeksList> {
                     onTap: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return DaysList(weekNumber: finalWeeksList[index].toString(),workoutName: widget.workoutName,workoutProgramName: widget.workoutProgramName,);
+                        return DaysList(
+                          weekNumber: finalWeeksList[index].toString(),
+                          workoutName: widget.workoutName,
+                          workoutProgramName: widget.workoutProgramName,
+                        );
                       }));
                     },
                     child: Container(
