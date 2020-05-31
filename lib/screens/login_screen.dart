@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnet/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/constants.dart';

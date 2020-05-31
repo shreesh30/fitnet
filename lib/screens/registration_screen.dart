@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String password;
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
-  final _firestore = Firestore.instance;
   FirebaseUser newLoggedUser;
 
   @override
