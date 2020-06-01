@@ -1,3 +1,4 @@
+import 'package:fitnet/screens/audio_screen.dart';
 import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/mental_health_selected_option.dart';
@@ -47,7 +48,8 @@ class MyApp extends StatelessWidget {
             Workout.id:(context)=>Workout(),
             VideoScreen.id:(context)=>VideoScreen(),
             MentalHealthList.id:(context)=>MentalHealthList(),
-            MentalHealthSelectedOption.id:(context)=>MentalHealthSelectedOption()
+            MentalHealthSelectedOption.id:(context)=>MentalHealthSelectedOption(),
+            AudioScreen.id:(context)=>AudioScreen()
           },
         );
       },

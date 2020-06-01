@@ -1,4 +1,5 @@
 import 'package:fitnet/components/bottom_nav_bar.dart';
+import 'package:fitnet/screens/audio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -16,12 +17,15 @@ class MentalHealthSelectedOption extends StatefulWidget {
 
 class _MentalHealthSelectedOptionState
     extends State<MentalHealthSelectedOption> {
+  String url = " ";
   List finalOptionsList;
+  List finalUrlList;
 
   @override
   initState() {
     super.initState();
     getOptions();
+    getAudio();
   }
 
   List getOptions() {
@@ -47,6 +51,25 @@ class _MentalHealthSelectedOptionState
       }
     });
     return finalOptionsList;
+  }
+
+  void getAudio() {
+    List urlList = [];
+    FirebaseDatabase.instance
+        .reference()
+        .child('mental health')
+        .child(widget.selectedOption)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map<dynamic, dynamic> values = snapshot.value;
+      values.forEach((key, value) async {
+        url = value["audio"];
+        urlList.add(url);
+      });
+      setState(() {
+        finalUrlList = urlList;
+      });
+    });
   }
 
   @override
@@ -88,7 +111,22 @@ class _MentalHealthSelectedOptionState
                     child: Row(
                       children: <Widget>[
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              url=finalUrlList[index];
+                            });
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return AudioScreen(
+                                    url: url,
+                                  );
+                                },
+                              ),
+                            );
+                            print(finalUrlList[index]);
+                          },
                           icon: Icon(Icons.play_circle_outline),
                           color: Color(0xFFFD5739),
                           iconSize: SizeConfig.heightMultiplier * 4,

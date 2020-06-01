@@ -25,7 +25,7 @@ class _LandingPageState extends State<LandingPage> {
             Image.asset(
               'images/logo.png',
               height: SizeConfig.heightMultiplier*20,
-              width: SizeConfig.widthMultiplier*60,
+              width: SizeConfig.widthMultiplier*50,
             ),
             SizedBox(height: SizeConfig.heightMultiplier*2,),
             Row(
@@ -33,11 +33,11 @@ class _LandingPageState extends State<LandingPage> {
               children: <Widget>[
                 RichText(
                     text: TextSpan(children: <TextSpan>[
-                  TextSpan(text: 'FIT', style: kPageHeading.copyWith(fontSize:SizeConfig.textMultiplier*8)),
+                  TextSpan(text: 'FIT', style: kPageHeading.copyWith(fontSize:SizeConfig.textMultiplier*7)),
                   TextSpan(
                       text: 'NET',
                       style: kPageHeading.copyWith(
-                          color: Color(0xFFFD5739),fontSize: SizeConfig.textMultiplier*8),)
+                          color: Color(0xFFFD5739),fontSize: SizeConfig.textMultiplier*7),)
                 ]))
               ],
             ),

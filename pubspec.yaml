@@ -40,6 +40,7 @@ dependencies:
   http: ^0.12.1
   video_player: ^0.10.11+1
   chewie: ^0.9.10
+  chewie_audio: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:
