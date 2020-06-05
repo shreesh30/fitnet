@@ -54,7 +54,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 Image.asset(
                   'images/logo.png',
                   height: SizeConfig.heightMultiplier * 16,
-                  // width: SizeConfig.widthMultiplier*30,
                 ),
                 SizedBox(
                   height: SizeConfig.heightMultiplier * 2.5,
@@ -196,5 +195,3 @@ class _RegistrationPageState extends State<RegistrationPage> {
 }
 
 
-//  _firestore.collection('users').add(
-//                               {'userId': newLoggedUser.uid, 'userName': name,'email':email});

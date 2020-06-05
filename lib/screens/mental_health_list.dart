@@ -1,8 +1,7 @@
-import 'package:fitnet/components/bottom_nav_bar.dart';
-import 'package:fitnet/screens/mental_health_selected_option.dart';
+import 'package:fitnet/components/common_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:fitnet/widgets/mental_health_list_items.dart';
 
 class MentalHealthList extends StatefulWidget {
   static const String id='mental_health_list';
@@ -48,81 +47,8 @@ class _MentalHealthListState extends State<MentalHealthList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:  AppBar(
-          centerTitle: true,
-          automaticallyImplyLeading: false,
-          title: Text(
-            'Mental Health',
-            style: TextStyle(
-                fontFamily: 'CopperPlate',
-                fontSize: SizeConfig.textMultiplier * 3,
-                fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
-          ),
-          backgroundColor: Color(0xFF0F0F0F),
-        ),
-      body:  Padding(
-          padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
-          child: ListView.separated(
-              separatorBuilder: (context, index) => Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 0,
-                        horizontal: SizeConfig.widthMultiplier * 4),
-                    child: Divider(color: Color(0xff8B8A8D)),
-                  ),
-              itemCount: finalMentalHealthList != null ? finalMentalHealthList.length : 0,
-              itemBuilder: (context, index) {
-                if (finalMentalHealthList != null) {
-                  return Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        SizeConfig.widthMultiplier * 4,
-                        SizeConfig.heightMultiplier * 2.5,
-                        SizeConfig.widthMultiplier * 4,
-                        SizeConfig.widthMultiplier * 2.5),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return MentalHealthSelectedOption(selectedOption: finalMentalHealthList[index],);
-                        }));
-                      },
-                      child: Container(
-                        padding: EdgeInsets.fromLTRB(
-                            SizeConfig.widthMultiplier * 5,
-                            0,
-                            SizeConfig.widthMultiplier * 5,
-                            0),
-                        height: 50,
-                        color: Color(0xff0f0f0f),
-                        child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text(
-                                  finalMentalHealthList[index].toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: 'Roboto',
-                                      fontSize: SizeConfig.textMultiplier * 3),
-                                ),
-                                Icon(
-                                  Icons.navigate_next,
-                                  color: Color(0xFFFD5739),
-                                  size: SizeConfig.heightMultiplier * 4,
-                                )
-                              ],
-                            )),
-                      ),
-                    ),
-                  );
-                } else {
-                  return Text('Loading');
-                }
-              }),
-        ),
-        bottomNavigationBar: BottomNavBar(),
-    );
+    return CommonScaffold(automaticallyImplyLeading: false,text: 'Mental Health',body:  MentalHealthListItems(finalMentalHealthList: finalMentalHealthList),);
   }
 }
+
+

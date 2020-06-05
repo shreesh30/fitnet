@@ -1,4 +1,4 @@
-import 'package:fitnet/components/bottom_nav_bar.dart';
+import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
@@ -66,29 +66,19 @@ class _MentalHealthSelectedOptionState
         url = value["audio"];
         urlList.add(url);
       });
-      setState(() {
-        finalUrlList = urlList;
-      });
+      if (this.mounted) {
+        setState(() {
+          finalUrlList = urlList;
+        });
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          widget.selectedOption,
-          style: TextStyle(
-              fontFamily: 'CopperPlate',
-              fontSize: SizeConfig.textMultiplier * 3,
-              fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
-        ),
-        iconTheme: IconThemeData(
-            color: Color(0xFFFD5739), size: SizeConfig.widthMultiplier * 10),
-        backgroundColor: Color(0xFF0F0F0F),
-      ),
+    return CommonScaffold(
+      automaticallyImplyLeading: true,
+      text: widget.selectedOption,
       body: Padding(
         padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
         child: ListView.separated(
@@ -113,7 +103,7 @@ class _MentalHealthSelectedOptionState
                         IconButton(
                           onPressed: () {
                             setState(() {
-                              url=finalUrlList[index];
+                              url = finalUrlList[index];
                             });
                             Navigator.push(
                               context,
@@ -149,7 +139,7 @@ class _MentalHealthSelectedOptionState
           },
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
+

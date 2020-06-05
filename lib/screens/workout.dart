@@ -1,4 +1,4 @@
-import 'package:fitnet/components/bottom_nav_bar.dart';
+import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/screens/video_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
@@ -174,22 +174,9 @@ class _WorkoutState extends State<Workout> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          widget.dayNumber,
-          style: TextStyle(
-            fontFamily: 'CopperPlate',
-            fontSize: SizeConfig.textMultiplier * 3,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        iconTheme: IconThemeData(
-            color: Color(0xFFFD5739), size: SizeConfig.widthMultiplier * 10),
-        backgroundColor: Color(0xFF0F0F0F),
-      ),
+    return CommonScaffold(
+      automaticallyImplyLeading: true,
+      text:  widget.dayNumber,
       body: Padding(
         padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
         child: ListView.separated(
@@ -222,7 +209,6 @@ class _WorkoutState extends State<Workout> {
                               setState(() {
                                 url = finalUrlList[index];
                               });
-                              print(url);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -258,14 +244,20 @@ class _WorkoutState extends State<Workout> {
                           child: RichText(
                             text: TextSpan(
                               children: <TextSpan>[
-                                TextSpan(
-                                    text:
-                                        'Sets : ${finalSetsList[index].toString()} ',
-                                    style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2.5,
-                                        fontWeight: FontWeight.w300)),
+                                finalSetsList[index] == null ||
+                                        finalSetsList[index] == " " ||
+                                        finalSetsList[index] == '' ||
+                                        finalSetsList[index] == ' ' ||
+                                        finalSetsList[index] == ""
+                                    ? TextSpan(text: " ")
+                                    : TextSpan(
+                                        text:
+                                            'Sets : ${finalSetsList[index].toString()} ',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontSize:
+                                                SizeConfig.textMultiplier * 2.5,
+                                            fontWeight: FontWeight.w300)),
                               ],
                             ),
                           ),
@@ -277,14 +269,20 @@ class _WorkoutState extends State<Workout> {
                           child: RichText(
                             text: TextSpan(
                               children: <TextSpan>[
-                                TextSpan(
-                                    text:
-                                        'Reps : ${finalRepsList[index].toString()} ',
-                                    style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2.5,
-                                        fontWeight: FontWeight.w300)),
+                                finalRepsList[index] == null ||
+                                        finalRepsList[index] == " " ||
+                                        finalRepsList[index] == '' ||
+                                        finalRepsList[index] == ' ' ||
+                                        finalRepsList[index] == ""
+                                    ? TextSpan(text: " ")
+                                    : TextSpan(
+                                        text:
+                                            'Reps : ${finalRepsList[index].toString()} ',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontSize:
+                                                SizeConfig.textMultiplier * 2.5,
+                                            fontWeight: FontWeight.w300)),
                               ],
                             ),
                           ),
@@ -324,7 +322,8 @@ class _WorkoutState extends State<Workout> {
               }
             }),
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 }
+
+

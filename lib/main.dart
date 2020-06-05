@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: Color(0xff0f0f0f),
           ),
-          initialRoute:LandingPage.id,
+          initialRoute:HomePage.id,
           routes: {
             SplashScreen.id: (context) => SplashScreen(),
             LandingPage.id: (context) => LandingPage(),
