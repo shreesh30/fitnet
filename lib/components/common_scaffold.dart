@@ -3,16 +3,18 @@ import 'package:fitnet/size_config.dart';
 import 'bottom_nav_bar.dart';
 
 class CommonScaffold extends StatelessWidget {
-  CommonScaffold({this.text, this.automaticallyImplyLeading, this.body});
+  CommonScaffold({this.text, this.automaticallyImplyLeading, this.body,this.actions});
 
   final String text;
   final bool automaticallyImplyLeading;
   final Widget body;
+  final List<Widget> actions;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          actions: actions,
           centerTitle: true,
           automaticallyImplyLeading: automaticallyImplyLeading,
           leading: automaticallyImplyLeading

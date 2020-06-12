@@ -1,4 +1,5 @@
 import 'package:fitnet/screens/mental_health_list.dart';
+import 'package:fitnet/screens/recipe_search.dart';
 import 'package:fitnet/screens/workout_list.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
@@ -111,17 +112,22 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Text(
-                    'Foods',
+                    'Recipes',
                     style: TextStyle(
                         fontFamily: 'CopperPlate',
                         fontSize: SizeConfig.textMultiplier * 2.5,
                         fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    'Show More',
-                    style: TextStyle(
-                        color: Color(0xFF8B8A8D),
-                        fontSize: SizeConfig.textMultiplier * 1.8),
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, RecipeSearch.id);
+                    },
+                    child: Text(
+                      'Show More',
+                      style: TextStyle(
+                          color: Color(0xFF8B8A8D),
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
                   )
                 ],
               ),
