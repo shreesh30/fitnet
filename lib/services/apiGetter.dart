@@ -1,17 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:fitnet/models/search_food_items.dart';
-
-// import 'package:flutter_test_app/error/FatSecretException.dart';
-// import 'package:flutter_test_app/model/dayNutrientsEntry.dart';
 import 'package:fitnet/services/api.dart';
-// import 'package:flutter_test_app/model/foodItem.dart';
 
 class RestClient {
-  // if  you don't have one, generate from fatSecret API
   String consumerKey;
 
-  // if  you don't have one, generate from fatSecret API
   String consumerKeySecret;
 
   // creates a new RestClient instance.
@@ -32,7 +26,8 @@ class RestClient {
 
   Future<List<SearchFoodItem>> getFoodName(String query) async {
     List<SearchFoodItem> list = [];
-    List foodName=[];
+    List recipeName=[];
+    List recipeDescription=[];
 
     // FatSecretApi be sure that consumer keys are set before you send a call
     FatSecretApi foodSearch = FatSecretApi(
@@ -52,12 +47,20 @@ class RestClient {
           print(err);
         });
 
+    
     // Create a POJO class and parse it
     result.forEach((foodItem) => list.add(SearchFoodItem.fromJson(foodItem)));
     for(int i=0;i<list.length;i++){
-      foodName.add(list[i].recipeName);
+      recipeName.add(list[i].recipeName);
     }
-    print(foodName);
+
+     for(int i=0;i<list.length;i++){
+      recipeDescription.add(list[i].recipeDescription);
+    }
+
+
+    print(recipeName);
+    print(recipeDescription);
     return list;
   }
 
