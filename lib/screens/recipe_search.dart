@@ -9,7 +9,6 @@ import 'package:fitnet/models/search_food_items.dart';
 import 'package:fitnet/services/api.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'dart:convert';
-import 'package:fitnet/widgets/search_bar.dart';
 
 List<String> _searchResult = [];
 List recipeName = [];
@@ -27,7 +26,6 @@ class _RecipeSearchState extends State<RecipeSearch> {
   TextEditingController controller = new TextEditingController();
   var recipeNameFinalListReference = RestClient.recipeNameFinalList;
   String searchedRecipeName;
-  SearchBarController _searchBarController=SearchBarController();
 
   Future onSearchTextChanged(String text) async {
     // object.getRecipeName(text);

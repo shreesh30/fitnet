@@ -114,7 +114,6 @@ class _WorkoutState extends State<Workout> {
       if (this.mounted) {
         setState(() {
           finalSetsList = setsList;
-          print(finalSetsList);
         });
       }
     });
@@ -140,7 +139,6 @@ class _WorkoutState extends State<Workout> {
       if (this.mounted) {
         setState(() {
           finalRepsList = repsList;
-          print(finalRepsList);
         });
       }
     });
@@ -166,7 +164,6 @@ class _WorkoutState extends State<Workout> {
       if (this.mounted) {
         setState(() {
           finalDescriptionList = descriptionList;
-          print(finalDescriptionList);
         });
       }
     });
