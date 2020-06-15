@@ -1,3 +1,4 @@
+
 import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/constants.dart';
 import 'package:fitnet/models/search_food_items.dart';
@@ -8,9 +9,11 @@ import 'package:fitnet/models/search_food_items.dart';
 import 'package:fitnet/services/api.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'dart:convert';
+import 'package:fitnet/widgets/search_bar.dart';
 
 List<String> _searchResult = [];
 List recipeName = [];
+List recentRecipeName=['butter chicken','dal','paneer tikka','paneer butter masala'];
 // List<SearchFoodItem> list = [];
 
 class RecipeSearch extends StatefulWidget {
@@ -22,12 +25,11 @@ class RecipeSearch extends StatefulWidget {
 class _RecipeSearchState extends State<RecipeSearch> {
   RestClient object = RestClient();
   TextEditingController controller = new TextEditingController();
-  var listReference = RestClient.list;
+  var recipeNameFinalListReference = RestClient.recipeNameFinalList;
   String searchedRecipeName;
+  SearchBarController _searchBarController=SearchBarController();
 
-  // var recipeName = RestClient.recipeName;
-
-  onSearchTextChanged(String text) async {
+  Future onSearchTextChanged(String text) async {
     // object.getRecipeName(text);
     // _searchResult.clear();
     // if (text.isEmpty) {
@@ -49,10 +51,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
     setState(() {
       searchedRecipeName = text;
     });
-    object.getRecipeName(searchedRecipeName);
-    
 
-    // await object.getRecipeName(searchedRecipeName);
   }
 
 
@@ -75,17 +74,22 @@ class _RecipeSearchState extends State<RecipeSearch> {
                   size: SizeConfig.heightMultiplier * 3,
                 ),
                 title: TextField(
-                  controller: controller,
-                  decoration: InputDecoration(
-                      hintText: 'Search Recipes',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.heightMultiplier * 1.5,
-                          horizontal: SizeConfig.widthMultiplier * 2),
-                      hintStyle:
-                          TextStyle(fontSize: SizeConfig.textMultiplier * 2)),
-                  onChanged: onSearchTextChanged
-                ),
+                    controller: controller,
+                    decoration: InputDecoration(
+                        hintText: 'Search Recipes',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: SizeConfig.heightMultiplier * 1.5,
+                            horizontal: SizeConfig.widthMultiplier * 2),
+                        hintStyle:
+                            TextStyle(fontSize: SizeConfig.textMultiplier * 2)),
+                    onChanged: (value)async{
+                      await onSearchTextChanged(value);
+                      
+
+                    },onEditingComplete:()async{
+                     await object.getRecipeName(searchedRecipeName);
+                    },),
                 trailing: IconButton(
                   icon: Icon(
                     Icons.cancel,
@@ -104,3 +108,6 @@ class _RecipeSearchState extends State<RecipeSearch> {
     );
   }
 }
+
+
+
