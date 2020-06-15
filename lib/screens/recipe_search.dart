@@ -1,4 +1,3 @@
-
 import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/constants.dart';
 import 'package:fitnet/models/search_food_items.dart';
@@ -12,7 +11,12 @@ import 'dart:convert';
 
 List<String> _searchResult = [];
 List recipeName = [];
-List recentRecipeName=['butter chicken','dal','paneer tikka','paneer butter masala'];
+List recentRecipeName = [
+  'butter chicken',
+  'dal',
+  'paneer tikka',
+  'paneer butter masala'
+];
 // List<SearchFoodItem> list = [];
 
 class RecipeSearch extends StatefulWidget {
@@ -49,10 +53,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
     setState(() {
       searchedRecipeName = text;
     });
-
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,22 +73,22 @@ class _RecipeSearchState extends State<RecipeSearch> {
                   size: SizeConfig.heightMultiplier * 3,
                 ),
                 title: TextField(
-                    controller: controller,
-                    decoration: InputDecoration(
-                        hintText: 'Search Recipes',
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                            vertical: SizeConfig.heightMultiplier * 1.5,
-                            horizontal: SizeConfig.widthMultiplier * 2),
-                        hintStyle:
-                            TextStyle(fontSize: SizeConfig.textMultiplier * 2)),
-                    onChanged: (value)async{
-                      await onSearchTextChanged(value);
-                      
-
-                    },onEditingComplete:()async{
-                     await object.getRecipeName(searchedRecipeName);
-                    },),
+                  controller: controller,
+                  decoration: InputDecoration(
+                      hintText: 'Search Recipes',
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: SizeConfig.heightMultiplier * 1.5,
+                          horizontal: SizeConfig.widthMultiplier * 2),
+                      hintStyle:
+                          TextStyle(fontSize: SizeConfig.textMultiplier * 2)),
+                  onChanged: (value) async {
+                    await onSearchTextChanged(value);
+                  },
+                  onEditingComplete: () async {
+                    await object.getRecipeName(searchedRecipeName);
+                  },
+                ),
                 trailing: IconButton(
                   icon: Icon(
                     Icons.cancel,
@@ -106,6 +107,3 @@ class _RecipeSearchState extends State<RecipeSearch> {
     );
   }
 }
-
-
-
