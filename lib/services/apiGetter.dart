@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:ffi';
 import 'package:fitnet/models/search_food_items.dart';
 import 'package:fitnet/services/api.dart';
 
@@ -9,18 +10,15 @@ class RestClient {
   String consumerKeySecret;
   static List recipeName = [];
   static List recipeDescription = [];
-  static List recipeNamelist=[];
-  static List recipeNameFinalList=[];
-
+  static List recipeNamelist = [];
+  static List recipeNameFinalList = [];
 
   RestClient() {
     this.consumerKey = '0f96f7fee7a7414f96287863baebd11f';
     this.consumerKeySecret = '79a934b831e54641801a001d7320c89d';
   }
 
-  Future<List> getRecipeName(String query) async {
-
-
+  Future getRecipeName(String query) async {
     FatSecretApi recipeSearch = FatSecretApi(
       this.consumerKey,
       this.consumerKeySecret,
@@ -42,37 +40,36 @@ class RestClient {
     if (result == null) {
       return null;
     } else {
-      //  result.forEach((foodItem){
-      //     // print(foodItem['recipe_name']);
-      //   print(foodItem.runtimeType);
-      //   //  return list.add(foodItem);
-      //   });
-      // for (int i = 0; i < list.length; i++) {
-      //   recipeName.add(list[i].recipeName);
+      result.forEach((element) {
+        recipeNamelist.add(element);
+      });
+
+      if (recipeNameFinalList.isNotEmpty) {
+        recipeNamelist.forEach((element) {
+          if (!recipeNameFinalList.contains(element['recipe_name'])) {
+            recipeNameFinalList.add(element['recipe_name']);
+          }
+        });
+      } else {
+        recipeNamelist.forEach((element) {
+          recipeNameFinalList.add(element['recipe_name']);
+        });
+      }
+
+
+    
+
+     
+
+      // for (int j = 0; j < recipeNamelist.length; j++) {
+      //   if (recipeNamelist[j] != null) {
+      //     recipeNameFinalList.add(recipeNamelist[j]['recipe_name']);
+      //   }
       // }
-      // await result.forEach((foodItem) {
-      //  list.add(foodItem['recipe_name']);
-      // });
-
-
-      for (int i = 0; i < result.length; i++) {
-           recipeNamelist.add(result[i]);
-      }
-
-      for(int j=0;j<recipeNamelist.length;j++){
-        if(recipeNamelist[j]!=null){
-          recipeNameFinalList.add(recipeNamelist[j]['recipe_name']);
-        }
-      }
     }
-     print(recipeNameFinalList);
-    return recipeNameFinalList;
   }
 
-
-
   // Future<List> recipeList(int query) async {
-
 
   //   FatSecretApi recipeSearch = FatSecretApi(
   //     this.consumerKey,
@@ -96,7 +93,6 @@ class RestClient {
   //   return recipeNameFinalList;
   // }
 
-
   // Future getFood(int foodId) async {
   //   FatSecretApi foodItem = FatSecretApi(
   //     this.consumerKey,
@@ -119,34 +115,20 @@ class RestClient {
 
 }
 
-
-
 // void main(List<String> args) {
 //   RestClient object = RestClient();
 // //  object.getFood(33691);
 //   object.getRecipeName('dal');
 //   // object.recipeList(99);
+//   object.getRecipeName('butter chicken');
+//   object.getRecipeName('dal');
+//   object.getRecipeName('dal');
+//   object.getRecipeName('dal');
+//   object.getRecipeName('dal');
+//   object.getRecipeName('dal');
+//   object.getRecipeName('tikka');
+
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import 'dart:async';
 // import 'dart:convert';
@@ -205,4 +187,3 @@ class RestClient {
 //     print(list);
 //     return list;
 //   }
-

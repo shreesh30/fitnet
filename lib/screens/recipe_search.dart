@@ -1,23 +1,8 @@
 import 'package:fitnet/components/common_scaffold.dart';
-import 'package:fitnet/constants.dart';
-import 'package:fitnet/models/search_food_items.dart';
+import 'package:fitnet/screens/recipe.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/services/apiGetter.dart';
-import 'package:fitnet/models/search_food_items.dart';
-import 'package:fitnet/services/api.dart';
-import 'package:fitnet/services/apiGetter.dart';
-import 'dart:convert';
-
-List<String> _searchResult = [];
-List recipeName = [];
-List recentRecipeName = [
-  'butter chicken',
-  'dal',
-  'paneer tikka',
-  'paneer butter masala'
-];
-// List<SearchFoodItem> list = [];
 
 class RecipeSearch extends StatefulWidget {
   static const String id = 'recipe_search';
@@ -30,29 +15,57 @@ class _RecipeSearchState extends State<RecipeSearch> {
   TextEditingController controller = new TextEditingController();
   var recipeNameFinalListReference = RestClient.recipeNameFinalList;
   String searchedRecipeName;
+  List _searchResult = [];
+  List _recentRecipes = [];
 
   Future onSearchTextChanged(String text) async {
-    // object.getRecipeName(text);
-    // _searchResult.clear();
-    // if (text.isEmpty) {
-    //   setState(() {});
-    //   return;
-    // }
+    recipeNameFinalListReference.clear();
 
-    // for (int i = 0; i < listReference.length; i++) {
-    //   recipeName.add(listReference[i]);
-    // }
-    // print(recipeName);
-    // // RestClient.list.forEach((recipeName) {
-    // //   if (list.recipeName.contains(text)) _searchResult.add(recipeName);
-    // // });
-
-    // setState(() {});
-
-    _searchResult.clear();
     setState(() {
+      _searchResult.clear();
+      recipeNameFinalListReference.clear();
       searchedRecipeName = text;
     });
+  }
+
+  Future searchedResult() async {
+    await object.getRecipeName(searchedRecipeName);
+
+    // if (searchedRecipeName.isEmpty) {
+    //   setState(() {});
+    //   return;
+    // } else {
+    //   recipeNameFinalListReference.forEach((recipeName) {
+    //     if (recipeName
+    //             .toLowerCase()
+    //             .contains(searchedRecipeName.toLowerCase()) ||
+    //         recipeName
+    //             .toUpperCase()
+    //             .contains(searchedRecipeName.toUpperCase())) {
+    //       _searchResult.add(recipeName);
+    //     }
+    //   });
+    //   setState(() {});
+    // }
+
+    if (searchedRecipeName.isEmpty) {
+      setState(() {});
+      return;
+    } else {
+      recipeNameFinalListReference.forEach((recipeNameFinalListElement) {
+        if (!_searchResult.contains(recipeNameFinalListElement)) {
+          if (recipeNameFinalListElement
+                  .toLowerCase()
+                  .contains(searchedRecipeName.toLowerCase()) ||
+              recipeNameFinalListElement
+                  .toUpperCase()
+                  .contains(searchedRecipeName.toUpperCase())) {
+            _searchResult.add(recipeNameFinalListElement);
+          }
+        }
+      });
+      setState(() {});
+    }
   }
 
   @override
@@ -73,6 +86,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
                   size: SizeConfig.heightMultiplier * 3,
                 ),
                 title: TextField(
+                  style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
                   controller: controller,
                   decoration: InputDecoration(
                       hintText: 'Search Recipes',
@@ -86,7 +100,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
                     await onSearchTextChanged(value);
                   },
                   onEditingComplete: () async {
-                    await object.getRecipeName(searchedRecipeName);
+                    await searchedResult();
                   },
                 ),
                 trailing: IconButton(
@@ -97,11 +111,77 @@ class _RecipeSearchState extends State<RecipeSearch> {
                   onPressed: () {
                     controller.clear();
                     onSearchTextChanged('');
+                    setState(() {});
                   },
                 ),
               ),
             ),
           ),
+          Expanded(
+            child: _searchResult.length != 0 || controller.text.isNotEmpty
+                ? ListView.builder(
+                    itemCount: _searchResult.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Recipe(
+                                        recipeName: _searchResult[index],
+                                      )));
+                          if (!_recentRecipes.contains(_searchResult[index])) {
+                            _recentRecipes.add(_searchResult[index]);
+                          }
+                        },
+                        child: ListTile(
+                          title: Text(_searchResult[index],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w300,
+                                  fontFamily: 'Roboto',
+                                  fontSize: SizeConfig.textMultiplier * 2)),
+                        ),
+                      );
+                    })
+                : _recentRecipes.length != 0
+                    ? ListView.builder(
+                        itemCount: _recentRecipes.length < 5
+                            ? _recentRecipes.length
+                            : 5,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Recipe(
+                                            recipeName: _recentRecipes[index],
+                                          )));
+                            },
+                            child: ListTile(
+                              contentPadding: EdgeInsets.only(
+                                  left: SizeConfig.widthMultiplier * 4,
+                                  bottom: SizeConfig.heightMultiplier * 1.5),
+                              leading: Icon(
+                                Icons.history,
+                                size: SizeConfig.heightMultiplier * 3,
+                              ),
+                              title: Text(
+                                  _recentRecipes.reversed.toList()[index],
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: 'Roboto',
+                                      fontSize: SizeConfig.textMultiplier * 2)),
+                            ),
+                          );
+                        },
+                      )
+                    : Text('No Recent Searches',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w300,
+                            fontFamily: 'Roboto',
+                            fontSize: SizeConfig.textMultiplier * 2)),
+          )
         ],
       ),
     );
