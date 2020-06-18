@@ -42,7 +42,6 @@ dependencies:
   chewie: ^0.9.10
   chewie_audio: ^1.0.0+1
   crypto: 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
