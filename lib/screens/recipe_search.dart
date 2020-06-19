@@ -218,11 +218,13 @@ class _RecipeSearchState extends State<RecipeSearch> {
                           );
                         },
                       )
-                    : Text('No Recent Searches',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontFamily: 'Roboto',
-                            fontSize: SizeConfig.textMultiplier * 2)),
+                    : Center(
+                      child: Text('No Recent Searches',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontFamily: 'Roboto',
+                              fontSize: SizeConfig.textMultiplier * 2)),
+                    ),
           )
         ],
       ),

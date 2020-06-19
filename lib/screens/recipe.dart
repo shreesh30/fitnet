@@ -1,5 +1,6 @@
 import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/services/apiGetter.dart';
+import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 
 // import 'dart:convert';
@@ -16,13 +17,21 @@ class Recipe extends StatefulWidget {
 
 class _RecipeState extends State<Recipe> {
   RestClient object = RestClient();
+  List<ListTile> directions = [];
   // Map data = {};
   // @override
   // void initState() {
   //   super.initState();
 
-  //   // object.getRecipeImageUrl(widget.recipeId);
+  //   fetchData();
   // }
+
+  Future fetchData() async {
+    RestClient.directionList.clear();
+    RestClient.finalResults.clear();
+    RestClient.directionListTile.clear();
+    return object.getRecipeImageUrl(widget.recipeId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +39,8 @@ class _RecipeState extends State<Recipe> {
     return CommonScaffold(
       automaticallyImplyLeading: true,
       text: widget.recipeName,
-      // text: data['recipeName'],
       body: FutureBuilder(
-        future: object.getRecipeImageUrl(widget.recipeId),
-        // future: object.getRecipeImageUrl(data['recipeId']),
+        future: fetchData(),
         builder: (context, snapshot) {
           // String finalImageUrl=snapshot.data;
           // if(snapshot.hasError){
@@ -52,13 +59,262 @@ class _RecipeState extends State<Recipe> {
             case ConnectionState.waiting:
               return Center(child: CircularProgressIndicator());
             default:
-              if (snapshot.hasError)
-                return new Text('Error');
-              else if (!snapshot.hasData) {
-                return Text('');
-              } else
+              if (snapshot.hasError ||
+                  !snapshot.hasData ||
+                  snapshot.connectionState == ConnectionState.none)
+                return Center(child: new CircularProgressIndicator());
+              else
+                // return ListView.builder(
+                //   itemCount:snapshot.data.length,
+                //   itemBuilder: (context, index) {
+                //     return Column(
+                //       children: <Widget>[
+                //         snapshot.data[0] == null
+                //             ? Container()
+                //             : Image.network(
+                //                 snapshot.data[0],
+                //                 height: SizeConfig.heightMultiplier*25,
+                //                 width: SizeConfig.widthMultiplier*100,
+                //               ),
+                //         snapshot.data[1] == null
+                //             ? Container()
+                //             : Container(
+                //                 padding: EdgeInsets.symmetric(
+                //                     horizontal: SizeConfig.widthMultiplier * 3),
+                //                 child: Text(
+                //                   'Cooking Time : ${snapshot.data[1]} mins',
+                //                   style: TextStyle(
+                //                       fontSize: SizeConfig.textMultiplier * 2,
+                //                       fontFamily: 'Roboto',
+                //                       fontWeight: FontWeight.w300),
+                //                 ),
+                //               ),
+                //       ],
+                //     );
+                //   },
+                // );
+
+
+
+                // return ListView.builder(
+                //   itemCount: 1,
+                //   itemBuilder: (context, index) {
+                //     return Column(
+                //       children: <Widget>[
+                //         snapshot.data[0] == null
+                //             ? Container()
+                //             : Container(
+                //               color: Colors.white,
+                //               height: SizeConfig.heightMultiplier * 25,
+                //               width: SizeConfig.widthMultiplier*92,
+                //               child: Image.network(
+                //                   snapshot.data[0],
+                //                  fit: BoxFit.fill,
+                //                 ),
+                //             ),
+                //             SizedBox(height:SizeConfig.heightMultiplier*2),
+                //         Container(
+                //           padding: EdgeInsets.symmetric(
+                //               horizontal: SizeConfig.widthMultiplier * 3.5),
+                //           child: Row(
+                //             children: <Widget>[
+                //               Column(
+                //                 // mainAxisAlignment: MainAxisAlignment.start,
+                //                 crossAxisAlignment: CrossAxisAlignment.start,
+                //                 children: <Widget>[
+                //                   snapshot.data[1] == null
+                //                       ? Container()
+                //                       : Text(
+                //                           'Cooking Time : ${snapshot.data[1]} mins',
+                //                           style: TextStyle(
+                //                               fontSize:
+                //                                   SizeConfig.textMultiplier * 2,
+                //                               fontFamily: 'Roboto',
+                //                               fontWeight: FontWeight.w300),
+                //                               // textAlign: TextAlign.left,
+                //                         ),
+                //                            snapshot.data[3] == null
+                //                       ? Container()
+                //                       : Text(
+                //                             'Calories : ${snapshot.data[3]} ',
+                //                             style: TextStyle(
+                //                                 fontSize:
+                //                                     SizeConfig.textMultiplier * 2,
+                //                                 fontFamily: 'Roboto',
+                //                                 fontWeight: FontWeight.w300),
+                //                                 textAlign: TextAlign.left,
+                //                           ),
+                //                              snapshot.data[4] == null
+                //                       ? Container()
+                //                       : Text(
+                //                             'Carbs : ${snapshot.data[4]} g',
+                //                             style: TextStyle(
+                //                                 fontSize:
+                //                                     SizeConfig.textMultiplier * 2,
+                //                                 fontFamily: 'Roboto',
+                //                                 fontWeight: FontWeight.w300),
+                //                                 textAlign: TextAlign.left,
+                //                           ),
+                //                                snapshot.data[5] == null
+                //                       ? Container()
+                //                       : Text(
+                //                             'Protein : ${snapshot.data[5]} g',
+                //                             style: TextStyle(
+                //                                 fontSize:
+                //                                     SizeConfig.textMultiplier * 2,
+                //                                 fontFamily: 'Roboto',
+                //                                 fontWeight: FontWeight.w300),
+                //                                 textAlign: TextAlign.left,
+                //                           ),
+                //                             snapshot.data[6] == null
+                //                       ? Container()
+                //                       : Text(
+                //                             'Fats : ${snapshot.data[6]} g',
+                //                             style: TextStyle(
+                //                                 fontSize:
+                //                                     SizeConfig.textMultiplier * 2,
+                //                                 fontFamily: 'Roboto',
+                //                                 fontWeight: FontWeight.w300),
+                //                                 textAlign: TextAlign.left,
+                //                           ),
+                //                 ],
+                //               ),
+                //               // Column(
+                //               //   children: <Widget>[
+                               
+                //               //   ],
+                //               // )
+                //             ],
+                //           ),
+                //         ),
+                //         snapshot.data[2] == null || snapshot.data[2] == []
+                //             ? Container()
+                //             : ListView.builder(
+                //               scrollDirection: Axis.vertical,
+                //                 shrinkWrap: true,
+                //                 itemCount: snapshot.data[2].length,
+                //                 itemBuilder: (context, index2) {
+                //                   // print(snapshot.data[2]);
+                //                   return ListTile(
+                //                     title: Text(
+                //                       '${index2 + 1} . ${snapshot.data[2][index2]}',
+                //                       style: TextStyle(
+                //                           fontFamily: 'Roboto',
+                //                           fontWeight: FontWeight.w300,
+                //                           fontSize:
+                //                               SizeConfig.textMultiplier * 2),
+                //                     ),
+                //                   );
+                //                 },
+                //               )
+                //       ],
+                //     );
+                //   },
+                // );
                 return ListView(
-                  children: <Widget>[Image.network(snapshot.data)],
+                  children: <Widget>[
+                    snapshot.data[0] == null
+                            ? Container()
+                            : Container(
+                               padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier*4),
+                              height: SizeConfig.heightMultiplier * 25,
+                              width: SizeConfig.widthMultiplier*92,
+                              child: Image.network(
+                                  snapshot.data[0],
+                                 fit: BoxFit.fill,
+                                ),
+                            ),
+                             SizedBox(height:SizeConfig.heightMultiplier*2),
+                                 Container(
+                                   padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier*4),
+                                   child: Column(
+                                // mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                    snapshot.data[1] == null
+                                        ? Container()
+                                        : Text(
+                                            'Cooking Time : ${snapshot.data[1]} mins',
+                                            style: TextStyle(
+                                                fontSize:
+                                                    SizeConfig.textMultiplier * 2,
+                                                fontFamily: 'Roboto',
+                                                fontWeight: FontWeight.w300),
+                                                // textAlign: TextAlign.left,
+                                          ),
+                                             snapshot.data[3] == null
+                                        ? Container()
+                                        : Text(
+                                              'Calories : ${snapshot.data[3]} ',
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      SizeConfig.textMultiplier * 2,
+                                                  fontFamily: 'Roboto',
+                                                  fontWeight: FontWeight.w300),
+                                                  textAlign: TextAlign.left,
+                                            ),
+                                               snapshot.data[4] == null
+                                        ? Container()
+                                        : Text(
+                                              'Carbs : ${snapshot.data[4]} g',
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      SizeConfig.textMultiplier * 2,
+                                                  fontFamily: 'Roboto',
+                                                  fontWeight: FontWeight.w300),
+                                                  textAlign: TextAlign.left,
+                                            ),
+                                                 snapshot.data[5] == null
+                                        ? Container()
+                                        : Text(
+                                              'Protein : ${snapshot.data[5]} g',
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      SizeConfig.textMultiplier * 2,
+                                                  fontFamily: 'Roboto',
+                                                  fontWeight: FontWeight.w300),
+                                                  textAlign: TextAlign.left,
+                                            ),
+                                              snapshot.data[6] == null
+                                        ? Container()
+                                        : Text(
+                                              'Fats : ${snapshot.data[6]} g',
+                                              style: TextStyle(
+                                                  fontSize:
+                                                      SizeConfig.textMultiplier * 2,
+                                                  fontFamily: 'Roboto',
+                                                  fontWeight: FontWeight.w300),
+                                                  textAlign: TextAlign.left,
+                                            ),
+                                ],
+                              ),
+                                 ),
+                                            snapshot.data[2] == null || snapshot.data[2] == []
+                            ? Container()
+                            // : ListView.builder(
+                            //   scrollDirection: Axis.vertical,
+                            //     shrinkWrap: true,
+                            //     itemCount: snapshot.data[2].length,
+                            //     itemBuilder: (context, index2) {
+                            //       // print(snapshot.data[2]);
+                            //       return ListTile(
+                            //         title: Text(
+                            //           '${index2 + 1} . ${snapshot.data[2][index2]}',
+                            //           style: TextStyle(
+                            //               fontFamily: 'Roboto',
+                            //               fontWeight: FontWeight.w300,
+                            //               fontSize:
+                            //                   SizeConfig.textMultiplier * 2),
+                            //         ),
+                            //       );
+                            //     },
+                            //   )
+                            :Column(
+                              children: RestClient.directionListTile,
+                            )
+                  ],
+                  
+               
                 );
           }
         },
