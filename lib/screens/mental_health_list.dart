@@ -2,28 +2,30 @@ import 'package:fitnet/components/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fitnet/widgets/mental_health_list_items.dart';
+import 'package:fitnet/size_config.dart';
+import 'package:fitnet/screens/mental_health_selected_option.dart';
 
 class MentalHealthList extends StatefulWidget {
-  static const String id='mental_health_list';
-  
+  static const String id = 'mental_health_list';
+
   @override
   _MentalHealthListState createState() => _MentalHealthListState();
 }
 
 class _MentalHealthListState extends State<MentalHealthList> {
   List finalMentalHealthList;
-
+  Future _future;
 
   @override
   void initState() {
     super.initState();
-    getMentalHealthList();
+    _future = getMentalHealthList();
   }
 
-  void getMentalHealthList(){
-     List items;
+  Future getMentalHealthList() async {
+    List items;
     List mentalHealthList = [];
-    FirebaseDatabase.instance
+    await FirebaseDatabase.instance
         .reference()
         .child('mental health')
         .once()
@@ -41,14 +43,16 @@ class _MentalHealthListState extends State<MentalHealthList> {
         });
       }
     });
-   
+    return finalMentalHealthList;
   }
-
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(automaticallyImplyLeading: false,text: 'Mental Health',body:  MentalHealthListItems(finalMentalHealthList: finalMentalHealthList),);
+    return CommonScaffold(
+      automaticallyImplyLeading: false,
+      text: 'Mental Health',
+      body: MentalHealthListItems(future: _future),
+    );
   }
 }
-
 

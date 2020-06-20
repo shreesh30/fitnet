@@ -20,18 +20,22 @@ class _MentalHealthSelectedOptionState
   String url = " ";
   List finalOptionsList;
   List finalUrlList;
+  Future _future;
 
   @override
   initState() {
     super.initState();
-    getOptions();
-    getAudio();
+    _future = getData();
   }
 
-  List getOptions() {
+  Future getData() async {
+    return [await getOptions(), await getAudio()];
+  }
+
+  Future getOptions() async {
     List items;
     List options = [];
-    FirebaseDatabase.instance
+    await FirebaseDatabase.instance
         .reference()
         .child('mental health')
         .child(widget.selectedOption)
@@ -53,9 +57,9 @@ class _MentalHealthSelectedOptionState
     return finalOptionsList;
   }
 
-  void getAudio() {
+  Future getAudio() async {
     List urlList = [];
-    FirebaseDatabase.instance
+    await FirebaseDatabase.instance
         .reference()
         .child('mental health')
         .child(widget.selectedOption)
@@ -72,6 +76,7 @@ class _MentalHealthSelectedOptionState
         });
       }
     });
+    return finalUrlList;
   }
 
   @override
@@ -79,67 +84,140 @@ class _MentalHealthSelectedOptionState
     return CommonScaffold(
       automaticallyImplyLeading: true,
       text: widget.selectedOption,
-      body: Padding(
-        padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
-        child: ListView.separated(
-          separatorBuilder: (context, index) => Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: 0, horizontal: SizeConfig.widthMultiplier * 4),
-            child: Divider(color: Color(0xff8B8A8D)),
-          ),
-          itemCount: finalOptionsList != null ? finalOptionsList.length : 0,
-          itemBuilder: (context, index) {
-            if (finalOptionsList != null) {
-              return Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      SizeConfig.widthMultiplier * 4,
-                      SizeConfig.heightMultiplier,
-                      SizeConfig.widthMultiplier * 4,
-                      SizeConfig.widthMultiplier * 2),
-                  child: Card(
-                    color: Color(0xff0f0f0f),
-                    child: Row(
-                      children: <Widget>[
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              url = finalUrlList[index];
-                            });
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return AudioScreen(
-                                    url: url,
-                                  );
-                                },
+      // body: Padding(
+      //   padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
+      //   child: ListView.separated(
+      //     separatorBuilder: (context, index) => Padding(
+      //       padding: EdgeInsets.symmetric(
+      //           vertical: 0, horizontal: SizeConfig.widthMultiplier * 4),
+      //       child: Divider(color: Color(0xff8B8A8D)),
+      //     ),
+      //     itemCount: finalOptionsList != null ? finalOptionsList.length : 0,
+      //     itemBuilder: (context, index) {
+      //       if (finalOptionsList != null) {
+      //         return Padding(
+      //             padding: EdgeInsets.fromLTRB(
+      //                 SizeConfig.widthMultiplier * 4,
+      //                 SizeConfig.heightMultiplier,
+      //                 SizeConfig.widthMultiplier * 4,
+      //                 SizeConfig.widthMultiplier * 2),
+      //             child: Card(
+      //               color: Color(0xff0f0f0f),
+      //               child: Row(
+      //                 children: <Widget>[
+      //                   IconButton(
+      //                     onPressed: () {
+      //                       setState(() {
+      //                         url = finalUrlList[index];
+      //                       });
+      //                       Navigator.push(
+      //                         context,
+      //                         MaterialPageRoute(
+      //                           builder: (context) {
+      //                             return AudioScreen(
+      //                               url: url,
+      //                             );
+      //                           },
+      //                         ),
+      //                       );
+      //                       print(finalUrlList[index]);
+      //                     },
+      //                     icon: Icon(Icons.play_circle_outline),
+      //                     color: Color(0xFFFD5739),
+      //                     iconSize: SizeConfig.heightMultiplier * 4,
+      //                   ),
+      //                   SizedBox(
+      //                     width: SizeConfig.widthMultiplier * 5,
+      //                   ),
+      //                   Text(finalOptionsList[index],
+      //                       style: TextStyle(
+      //                           color: Colors.white,
+      //                           fontWeight: FontWeight.w300,
+      //                           fontFamily: 'Roboto',
+      //                           fontSize: SizeConfig.textMultiplier * 3))
+      //                 ],
+      //               ),
+      //             ));
+      //       } else {
+      //         return Text('Loading');
+      //       }
+      //     },
+      //   ),
+      // ),
+      body: FutureBuilder(
+          future: _future,
+          builder: (context, snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return Center(child: CircularProgressIndicator());
+              default:
+                if (snapshot.hasError ||
+                    !snapshot.hasData ||
+                    snapshot.connectionState == ConnectionState.none)
+                  return Center(child: new CircularProgressIndicator());
+                else
+                  return Padding(
+                    padding:
+                        EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => Padding(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 0,
+                            horizontal: SizeConfig.widthMultiplier * 4),
+                        child: Divider(color: Color(0xff8B8A8D)),
+                      ),
+                      itemCount: snapshot.data[0] != null
+                          ? snapshot.data[0].length
+                          : 0,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                SizeConfig.widthMultiplier * 4,
+                                SizeConfig.heightMultiplier,
+                                SizeConfig.widthMultiplier * 4,
+                                SizeConfig.widthMultiplier * 2),
+                            child: Card(
+                              color: Color(0xff0f0f0f),
+                              child: Row(
+                                children: <Widget>[
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        url = snapshot.data[1][index];
+                                      });
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return AudioScreen(
+                                              url: url,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    icon: Icon(Icons.play_circle_outline),
+                                    color: Color(0xFFFD5739),
+                                    iconSize: SizeConfig.heightMultiplier * 4,
+                                  ),
+                                  SizedBox(
+                                    width: SizeConfig.widthMultiplier * 5,
+                                  ),
+                                  Text(snapshot.data[0][index],
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w300,
+                                          fontFamily: 'Roboto',
+                                          fontSize:
+                                              SizeConfig.textMultiplier * 3))
+                                ],
                               ),
-                            );
-                            print(finalUrlList[index]);
-                          },
-                          icon: Icon(Icons.play_circle_outline),
-                          color: Color(0xFFFD5739),
-                          iconSize: SizeConfig.heightMultiplier * 4,
-                        ),
-                        SizedBox(
-                          width: SizeConfig.widthMultiplier * 5,
-                        ),
-                        Text(finalOptionsList[index],
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w300,
-                                fontFamily: 'Roboto',
-                                fontSize: SizeConfig.textMultiplier * 3))
-                      ],
+                            ));
+                      },
                     ),
-                  ));
-            } else {
-              return Text('Loading');
+                  );
             }
-          },
-        ),
-      ),
+          }),
     );
   }
 }
-

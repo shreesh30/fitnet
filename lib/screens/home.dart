@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
               ),
               SizedBox(height: SizeConfig.heightMultiplier * 1.5),
               Container(
-                height: SizeConfig.heightMultiplier * 25,
+                height: SizeConfig.heightMultiplier * 30,
                 width: SizeConfig.widthMultiplier,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(20)),

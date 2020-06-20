@@ -1,8 +1,8 @@
-import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fitnet/widgets/workout_list_items.dart';
 import 'package:fitnet/components/common_scaffold.dart';
+
 
 class WorkoutList extends StatefulWidget {
   static const String id = 'workout_list';
@@ -12,17 +12,21 @@ class WorkoutList extends StatefulWidget {
 
 class _WorkoutListState extends State<WorkoutList> {
   List finalWorkoutList;
-
+  Future _future;
   @override
   void initState() {
     super.initState();
-    getWorkoutList();
+    _future = getWorkoutList();
   }
 
-  List getWorkoutList() {
+  getData() async {
+    return await getWorkoutList();
+  }
+
+  Future getWorkoutList() async {
     List items;
     List workoutList = [];
-    FirebaseDatabase.instance
+    await FirebaseDatabase.instance
         .reference()
         .child('workout')
         .child('workout list')
@@ -46,11 +50,11 @@ class _WorkoutListState extends State<WorkoutList> {
 
   @override
   Widget build(BuildContext context) {
-    getWorkoutList();
-    return CommonScaffold(automaticallyImplyLeading: false,text: 'Workout List',body: Padding(
-          padding: EdgeInsets.only(top: SizeConfig.heightMultiplier),
-          child: WorkouListItems(finalWorkoutList: finalWorkoutList),
-        ),);
+    return CommonScaffold(
+      automaticallyImplyLeading: false,
+      text: 'Workout List',
+      body: WorkoutListItems(future: _future),
+    );
   }
 }
 

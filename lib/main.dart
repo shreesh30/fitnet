@@ -1,11 +1,13 @@
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:fitnet/screens/days_list.dart';
+import 'package:fitnet/screens/meal_tracker.dart';
 import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/mental_health_selected_option.dart';
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/screens/recipe.dart';
 import 'package:fitnet/screens/recipe_search.dart';
 import 'package:fitnet/screens/splash_screen.dart';
+import 'package:fitnet/screens/user_profile.dart';
 import 'package:fitnet/screens/video_screen.dart';
 import 'package:fitnet/screens/weeks_list.dart';
 import 'package:fitnet/screens/workout.dart';
@@ -53,7 +55,9 @@ class MyApp extends StatelessWidget {
             MentalHealthSelectedOption.id:(context)=>MentalHealthSelectedOption(),
             AudioScreen.id:(context)=>AudioScreen(),
             RecipeSearch.id:(context)=>RecipeSearch(),
-            Recipe.id:(context)=>Recipe()
+            Recipe.id:(context)=>Recipe(),
+            MealTracker.id:(context)=>MealTracker(),
+            UserProfile.id:(context)=>UserProfile()
           },
         );
       },

@@ -78,7 +78,7 @@ class RestClient {
     }
   }
 
-  Future getRecipeImageUrl(String recipeId) async {
+  Future getRecipeInfo(String recipeId) async {
     FatSecretApi foodItem = FatSecretApi(
       this.consumerKey,
       this.consumerKeySecret,

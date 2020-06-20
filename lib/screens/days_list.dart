@@ -2,6 +2,8 @@ import 'package:fitnet/components/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fitnet/widgets/days_list_items.dart';
+import 'package:fitnet/screens/workout.dart';
+import 'package:fitnet/size_config.dart';
 
 class DaysList extends StatefulWidget {
   DaysList({this.weekNumber, this.workoutProgramName, this.workoutName});
@@ -17,17 +19,18 @@ class DaysList extends StatefulWidget {
 
 class _DaysListState extends State<DaysList> {
   List finalDaysList;
+  Future _future;
 
   @override
   void initState() {
     super.initState();
-    getDaysList();
+    _future = getDaysList();
   }
 
-  List getDaysList() {
+  Future getDaysList() async {
     List items;
     List daysList = [];
-    FirebaseDatabase.instance
+    await FirebaseDatabase.instance
         .reference()
         .child('workout')
         .child('workout list')
@@ -54,7 +57,11 @@ class _DaysListState extends State<DaysList> {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(automaticallyImplyLeading: true,text: widget.weekNumber,body:DaysListItems(finalDaysList: finalDaysList, widget: widget),);
+    return CommonScaffold(
+      automaticallyImplyLeading: true,
+      text: widget.weekNumber,
+      body: DaysListItems(future: _future, widget: widget),
+    );
   }
 }
 
