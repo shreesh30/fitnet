@@ -17,6 +17,8 @@ class RestClient {
   static List directionList = [];
   static List finalResults = [];
   static List<ListTile> directionListTile = [];
+  static List ingredientList = [];
+  static List<Text> ingredientListTile = [];
 
   RestClient() {
     this.consumerKey = '0f96f7fee7a7414f96287863baebd11f';
@@ -86,6 +88,8 @@ class RestClient {
     directionList.clear();
     finalResults.clear();
     directionList.clear();
+    ingredientList.clear();
+    ingredientListTile.clear();
     var result = await foodItem
         .request({"recipe_id": recipeId, "method": "recipe.get"})
         .then((res) => res.body)
@@ -94,7 +98,7 @@ class RestClient {
         .catchError((err) {
           print(err);
         });
-
+    // print(result);
     // print(result['directions']['direction']);
     //  print(result['serving_sizes']['serving']['fat']);
     if (result != null) {
@@ -106,7 +110,7 @@ class RestClient {
           await result['serving_sizes']['serving']['carbohydrate'];
       var proteinResult = await result['serving_sizes']['serving']['protein'];
       var fatResult = await result['serving_sizes']['serving']['fat'];
-
+      var ingredientsResult = await result['ingredients']['ingredient'];
       // 1.image result
       // 2.cooking time
       // 3.directions
@@ -114,6 +118,8 @@ class RestClient {
       // 5.carbs
       // 6.Proteins
       // 7. fats
+      // 8. ingredients
+
       if (await imageResult == null ||
           await imageResult == [] ||
           await imageResult['recipe_image'] == null) {
@@ -141,16 +147,28 @@ class RestClient {
         });
         finalResults.add(directionList);
         for (int i = 0; i < directionList.length; i++) {
-          directionListTile.add(ListTile(
-              title: Text('${i + 1} . ${directionList[i]}',
-                  style: TextStyle(
-                      fontSize: SizeConfig.textMultiplier * 2,
-                      fontFamily: 'Roboto',
-                      fontWeight: FontWeight.w300))));
+          directionListTile.add(
+            ListTile(
+              contentPadding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier*4),
+              title: Text(
+                '${i + 1} . ${directionList[i]}',
+                style: TextStyle(
+                    fontSize: SizeConfig.textMultiplier * 2,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w300),
+              ),
+            ),
+          );
         }
       } else {
-        // directionListTile.add(ListTile(title: Text('1. $directionList'),));
-        finalResults.add(directionList);
+        directionListTile.add(ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier*4),
+          title: Text('1. ${directionResult['direction_description']}',style: TextStyle(
+                    fontSize: SizeConfig.textMultiplier * 2,
+                    fontFamily: 'Roboto',
+                    fontWeight: FontWeight.w300)),
+        ));
+        finalResults.add(directionListTile);
       }
       if (caloriesResult == null) {
         finalResults.add(null);
@@ -171,6 +189,25 @@ class RestClient {
         finalResults.add(null);
       } else {
         finalResults.add(fatResult);
+      }
+      if (ingredientsResult == null) {
+        finalResults.add(null);
+      } else if (ingredientsResult.runtimeType.toString() == 'List<dynamic>') {
+        await ingredientsResult.forEach((ingredient) {
+          ingredientList.add(ingredient['ingredient_description']);
+        });
+        finalResults.add(ingredientList);
+        for (int i = 0; i < ingredientList.length; i++) {
+          ingredientListTile.add(
+            Text(
+              '${i + 1} . ${ingredientList[i]}',
+              style: TextStyle(
+                  fontSize: SizeConfig.textMultiplier * 2,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w300),
+            ),
+          );
+        }
       }
 
       // print(finalResults);
@@ -234,14 +271,14 @@ class RestClient {
 
 }
 
-//void main(List<String> args) {
-//  RestClient object = RestClient();
-//  //  object.getFood(33691);
-//  //    object.getRecipeId('Brown Lentil Dal');
-//  // object.recipeList(99);
-//  //    object.getRecipeName('Brown Lentil Dal');
-//  object.getRecipeImageUrl('27');
-//  //   object.getRecipeNameAndId('chicken');
-//  //   object.getRecipeNameAndId('dal');
-//  //   object.getRecipeNameAndId('chicken');
-//}
+// void main(List<String> args) {
+//   RestClient object = RestClient();
+//   //  object.getFood(33691);
+//   //    object.getRecipeId('Brown Lentil Dal');
+//   // object.recipeList(99);
+//   //    object.getRecipeName('Brown Lentil Dal');
+//   object.getRecipeImageUrl('27');
+//   //   object.getRecipeNameAndId('chicken');
+//   //   object.getRecipeNameAndId('dal');
+//   //   object.getRecipeNameAndId('chicken');
+// }
