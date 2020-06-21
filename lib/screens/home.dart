@@ -1,4 +1,3 @@
-import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/screens/meal_tracker.dart';
 import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/recipe_search.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitnet/components/bottom_nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'home_page';

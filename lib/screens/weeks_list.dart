@@ -1,8 +1,6 @@
-import 'package:fitnet/components/bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fitnet/widgets/weeks_list_items.dart';
-import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:fitnet/screens/days_list.dart';
 

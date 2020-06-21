@@ -1,4 +1,3 @@
-import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/meal_tracker.dart';
@@ -43,7 +42,6 @@ class MyApp extends StatelessWidget {
          
           initialRoute:TabsScreen.id,
           routes: {
-            CommonScaffold.id:(context)=>CommonScaffold(),
             SplashScreen.id: (context) => SplashScreen(),
             LandingPage.id: (context) => LandingPage(),
             LoginPage.id: (context) => LoginPage(),

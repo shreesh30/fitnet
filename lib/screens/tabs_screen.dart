@@ -42,7 +42,7 @@ class _TabsScreenState extends State<TabsScreen> {
                 Icons.home,
                 size: SizeConfig.heightMultiplier * 3,
               ),
-              title: Text('home')),
+              title: Text('Home')),
           BottomNavigationBarItem(
               icon: Icon(Icons.fitness_center,
                   size: SizeConfig.heightMultiplier * 3),

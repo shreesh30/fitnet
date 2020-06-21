@@ -1,5 +1,4 @@
-import 'package:fitnet/components/bottom_nav_bar.dart';
-import 'package:fitnet/components/common_scaffold.dart';
+
 import 'package:flutter/material.dart';
 
 import '../size_config.dart';
