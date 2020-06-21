@@ -1,3 +1,4 @@
+import 'package:fitnet/components/bottom_nav_bar.dart';
 import 'package:fitnet/components/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -48,9 +49,29 @@ class _MentalHealthListState extends State<MentalHealthList> {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      automaticallyImplyLeading: false,
-      text: 'Mental Health',
+    // return CommonScaffold(
+    //   appbar: true,
+    //   automaticallyImplyLeading: false,
+    //   text: 'Mental Health',
+    //   body: MentalHealthListItems(future: _future),
+    // );
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'Mental Health',
+            style: TextStyle(
+                fontFamily: 'CopperPlate',
+                fontSize: SizeConfig.textMultiplier * 3,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        backgroundColor: Color(0xFF0F0F0F),
+      ),
       body: MentalHealthListItems(future: _future),
     );
   }

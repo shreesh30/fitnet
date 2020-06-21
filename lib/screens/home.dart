@@ -1,3 +1,5 @@
+import 'package:fitnet/components/common_scaffold.dart';
+import 'package:fitnet/screens/meal_tracker.dart';
 import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/recipe_search.dart';
 import 'package:fitnet/screens/workout_list.dart';
@@ -98,12 +100,17 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               SizedBox(height: SizeConfig.heightMultiplier * 1.5),
-              Container(
-                height: SizeConfig.heightMultiplier * 30,
-                width: SizeConfig.widthMultiplier,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Color(0xFF171717)),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, MealTracker.id);
+                },
+                child: Container(
+                  height: SizeConfig.heightMultiplier * 30,
+                  width: SizeConfig.widthMultiplier,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      color: Color(0xFF171717)),
+                ),
               ),
               SizedBox(
                 height: SizeConfig.heightMultiplier * 3.5,
@@ -119,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                         fontWeight: FontWeight.bold),
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, RecipeSearch.id);
                     },
                     child: Text(
@@ -199,7 +206,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(),
     );
   }
 }

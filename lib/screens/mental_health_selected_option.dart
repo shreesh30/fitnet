@@ -1,3 +1,4 @@
+import 'package:fitnet/components/bottom_nav_bar.dart';
 import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:flutter/material.dart';
@@ -81,9 +82,33 @@ class _MentalHealthSelectedOptionState
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      automaticallyImplyLeading: true,
-      text: widget.selectedOption,
+    return Scaffold(
+       appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+            padding: EdgeInsets.only(left: SizeConfig.widthMultiplier * 2),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: SizeConfig.heightMultiplier * 3,
+              color: Color(0xFFFD5739),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            }),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            widget.selectedOption,
+            style: TextStyle(
+                fontFamily: 'CopperPlate',
+                fontSize: SizeConfig.textMultiplier * 3,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        backgroundColor: Color(0xFF0F0F0F),
+      ),
       // body: Padding(
       //   padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
       //   child: ListView.separated(
@@ -145,79 +170,79 @@ class _MentalHealthSelectedOptionState
       //   ),
       // ),
       body: FutureBuilder(
-          future: _future,
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return Center(child: CircularProgressIndicator());
-              default:
-                if (snapshot.hasError ||
-                    !snapshot.hasData ||
-                    snapshot.connectionState == ConnectionState.none)
-                  return Center(child: new CircularProgressIndicator());
-                else
-                  return Padding(
-                    padding:
-                        EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 0,
-                            horizontal: SizeConfig.widthMultiplier * 4),
-                        child: Divider(color: Color(0xff8B8A8D)),
-                      ),
-                      itemCount: snapshot.data[0] != null
-                          ? snapshot.data[0].length
-                          : 0,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                SizeConfig.widthMultiplier * 4,
-                                SizeConfig.heightMultiplier,
-                                SizeConfig.widthMultiplier * 4,
-                                SizeConfig.widthMultiplier * 2),
-                            child: Card(
-                              color: Color(0xff0f0f0f),
-                              child: Row(
-                                children: <Widget>[
-                                  IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        url = snapshot.data[1][index];
-                                      });
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) {
-                                            return AudioScreen(
-                                              url: url,
-                                            );
-                                          },
-                                        ),
-                                      );
-                                    },
-                                    icon: Icon(Icons.play_circle_outline),
-                                    color: Color(0xFFFD5739),
-                                    iconSize: SizeConfig.heightMultiplier * 4,
-                                  ),
-                                  SizedBox(
-                                    width: SizeConfig.widthMultiplier * 5,
-                                  ),
-                                  Text(snapshot.data[0][index],
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.w300,
-                                          fontFamily: 'Roboto',
-                                          fontSize:
-                                              SizeConfig.textMultiplier * 3))
-                                ],
-                              ),
-                            ));
-                      },
+        future: _future,
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Center(child: CircularProgressIndicator());
+            default:
+              if (snapshot.hasError ||
+                  !snapshot.hasData ||
+                  snapshot.connectionState == ConnectionState.none)
+                return Center(child: new CircularProgressIndicator());
+              else
+                return Padding(
+                  padding:
+                      EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 0,
+                          horizontal: SizeConfig.widthMultiplier * 4),
+                      child: Divider(color: Color(0xff8B8A8D)),
                     ),
-                  );
-            }
-          }),
+                    itemCount:
+                        snapshot.data[0] != null ? snapshot.data[0].length : 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                          padding: EdgeInsets.fromLTRB(
+                              SizeConfig.widthMultiplier * 4,
+                              SizeConfig.heightMultiplier,
+                              SizeConfig.widthMultiplier * 4,
+                              SizeConfig.widthMultiplier * 2),
+                          child: Card(
+                            color: Color(0xff0f0f0f),
+                            child: Row(
+                              children: <Widget>[
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      url = snapshot.data[1][index];
+                                    });
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) {
+                                          return AudioScreen(
+                                            url: url,
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(Icons.play_circle_outline),
+                                  color: Color(0xFFFD5739),
+                                  iconSize: SizeConfig.heightMultiplier * 4,
+                                ),
+                                SizedBox(
+                                  width: SizeConfig.widthMultiplier * 5,
+                                ),
+                                Text(snapshot.data[0][index],
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w300,
+                                        fontFamily: 'Roboto',
+                                        fontSize:
+                                            SizeConfig.textMultiplier * 3))
+                              ],
+                            ),
+                          ));
+                    },
+                  ),
+                );
+          }
+        },
+      ),
     );
   }
 }

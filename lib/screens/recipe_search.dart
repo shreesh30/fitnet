@@ -1,3 +1,4 @@
+import 'package:fitnet/components/bottom_nav_bar.dart';
 import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/screens/recipe.dart';
 import 'package:fitnet/size_config.dart';
@@ -84,9 +85,23 @@ class _RecipeSearchState extends State<RecipeSearch> {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      text: 'Recipes',
-      automaticallyImplyLeading: false,
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'Recipes',
+            style: TextStyle(
+                fontFamily: 'CopperPlate',
+                fontSize: SizeConfig.textMultiplier * 3,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        backgroundColor: Color(0xFF0F0F0F),
+      ),
       body: Column(
         children: <Widget>[
           Padding(
@@ -219,12 +234,12 @@ class _RecipeSearchState extends State<RecipeSearch> {
                         },
                       )
                     : Center(
-                      child: Text('No Recent Searches',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontFamily: 'Roboto',
-                              fontSize: SizeConfig.textMultiplier * 2)),
-                    ),
+                        child: Text('No Recent Searches',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w300,
+                                fontFamily: 'Roboto',
+                                fontSize: SizeConfig.textMultiplier * 2)),
+                      ),
           )
         ],
       ),

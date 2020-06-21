@@ -1,3 +1,5 @@
+import 'package:fitnet/components/bottom_nav_bar.dart';
+import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fitnet/widgets/workout_list_items.dart';
@@ -50,9 +52,23 @@ class _WorkoutListState extends State<WorkoutList> {
 
   @override
   Widget build(BuildContext context) {
-    return CommonScaffold(
-      automaticallyImplyLeading: false,
-      text: 'Workout List',
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            'Workout List',
+            style: TextStyle(
+                fontFamily: 'CopperPlate',
+                fontSize: SizeConfig.textMultiplier * 3,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        backgroundColor: Color(0xFF0F0F0F),
+      ),
       body: WorkoutListItems(future: _future),
     );
   }

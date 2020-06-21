@@ -1,3 +1,4 @@
+import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/meal_tracker.dart';
@@ -20,6 +21,8 @@ import 'package:fitnet/screens/login_screen.dart';
 import 'package:fitnet/screens/home.dart';
 import 'package:flutter/services.dart';
 import 'package:fitnet/screens/registration_screen.dart';
+import 'package:fitnet/screens/tabs_screen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -37,8 +40,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: Color(0xff0f0f0f),
           ),
-          initialRoute:HomePage.id,
+         
+          initialRoute:TabsScreen.id,
           routes: {
+            CommonScaffold.id:(context)=>CommonScaffold(),
             SplashScreen.id: (context) => SplashScreen(),
             LandingPage.id: (context) => LandingPage(),
             LoginPage.id: (context) => LoginPage(),
@@ -57,7 +62,8 @@ class MyApp extends StatelessWidget {
             RecipeSearch.id:(context)=>RecipeSearch(),
             Recipe.id:(context)=>Recipe(),
             MealTracker.id:(context)=>MealTracker(),
-            UserProfile.id:(context)=>UserProfile()
+            UserProfile.id:(context)=>UserProfile(),
+            TabsScreen.id:(context)=>TabsScreen()
           },
         );
       },

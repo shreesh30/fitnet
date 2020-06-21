@@ -1,3 +1,4 @@
+import 'package:fitnet/components/bottom_nav_bar.dart';
 import 'package:fitnet/components/common_scaffold.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'package:fitnet/size_config.dart';
@@ -38,9 +39,32 @@ class _RecipeState extends State<Recipe> {
   @override
   Widget build(BuildContext context) {
     // data=ModalRoute.of(context).settings.arguments;
-    return CommonScaffold(
-      automaticallyImplyLeading: true,
-      text: widget.recipeName,
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        leading: IconButton(
+            padding: EdgeInsets.only(left: SizeConfig.widthMultiplier * 2),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: SizeConfig.heightMultiplier * 3,
+              color: Color(0xFFFD5739),
+            ),
+            onPressed: () {
+              Navigator.of(context).pop();
+            }),
+        title: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            widget.recipeName,
+            style: TextStyle(
+                fontFamily: 'CopperPlate',
+                fontSize: SizeConfig.textMultiplier * 3,
+                fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        backgroundColor: Color(0xFF0F0F0F),
+      ),
       body: FutureBuilder(
         future: fetchData(),
         builder: (context, snapshot) {
@@ -139,6 +163,9 @@ class _RecipeState extends State<Recipe> {
                           ),
                           Column(
                             children: <Widget>[
+                              SizedBox(
+                                height: SizeConfig.heightMultiplier,
+                              ),
                               snapshot.data[5] == null
                                   ? Container()
                                   : Text(
