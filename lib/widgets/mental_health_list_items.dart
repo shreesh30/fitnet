@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:fitnet/screens/mental_health_selected_option.dart';
@@ -49,7 +50,7 @@ class MentalHealthListItems extends StatelessWidget {
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.push(context,
-                                    MaterialPageRoute(builder: (context) {
+                                    CupertinoPageRoute(builder: (context) {
                                   return MentalHealthSelectedOption(
                                     selectedOption:
                                         snapshot.data[index],

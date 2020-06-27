@@ -1,5 +1,6 @@
 
 import 'package:fitnet/screens/video_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -409,7 +410,7 @@ class _WorkoutState extends State<Workout> {
                                             });
                                             Navigator.push(
                                               context,
-                                              MaterialPageRoute(
+                                              CupertinoPageRoute(
                                                 builder: (context) =>
                                                     VideoScreen(
                                                   url: url,

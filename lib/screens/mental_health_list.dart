@@ -57,6 +57,16 @@ class _MentalHealthListState extends State<MentalHealthList> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+          // leading: IconButton(
+          //   padding: EdgeInsets.only(left: SizeConfig.widthMultiplier * 2),
+          //   icon: Icon(
+          //     Icons.arrow_back_ios,
+          //     size: SizeConfig.heightMultiplier * 3,
+          //     color: Color(0xFFFD5739),
+          //   ),
+          //   onPressed: () {
+          //     Navigator.of(context).pop();
+          //   }),
         centerTitle: true,
         title: FittedBox(
           fit: BoxFit.scaleDown,

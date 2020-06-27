@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:fitnet/screens/days_list.dart';
@@ -50,7 +51,7 @@ class DaysListItems extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
+                                  CupertinoPageRoute(builder: (context) {
                                 return Workout(
                                   dayNumber: snapshot.data[index].toString(),
                                   weekNumber: widget.weekNumber,

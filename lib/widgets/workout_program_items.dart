@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:fitnet/screens/workout_program.dart';
@@ -51,7 +52,7 @@ class WorkoutProgramItems extends StatelessWidget {
                           child: GestureDetector(
                             onTap: () {
                               Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
+                                  CupertinoPageRoute(builder: (context) {
                                 return WeeksList(
                                   workoutName:
                                       snapshot.data[index].toString(),

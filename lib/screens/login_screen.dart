@@ -1,4 +1,7 @@
+import 'package:fitnet/main.dart';
 import 'package:fitnet/screens/home.dart';
+import 'package:fitnet/screens/tabs_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/constants.dart';
 import 'package:fitnet/components/rounded_button.dart';
@@ -8,6 +11,10 @@ import 'package:fitnet/size_config.dart';
 
 class LoginPage extends StatefulWidget {
   static const String id = 'login_screen';
+  final VoidCallback onSignedIn;
+  final VoidCallback onSignOut;
+
+  const LoginPage({Key key, this.onSignedIn,this.onSignOut}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -19,6 +26,9 @@ class _LoginPageState extends State<LoginPage> {
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
 
+  // Future onPressed()async{
+  //   widget.onSignedIn();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -128,6 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: RoundButton(
                   title: 'Sign In',
                   onPressed: () async {
+                    
                     setState(() {
                       showSpinner = true;
                     });
@@ -135,8 +146,15 @@ class _LoginPageState extends State<LoginPage> {
                         email: email, password: password);
                     try {
                       if (user != null) {
-                        
-                       Navigator.pushNamed(context,HomePage.id);
+                        widget.onSignedIn();
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => TabsScreen(onSignOut: widget.onSignOut,),
+                            ));
+                        // setState(() {
+                        //   MyApp.isLoggedin = true;
+                        // });
                       }
                       setState(() {
                         showSpinner = false;

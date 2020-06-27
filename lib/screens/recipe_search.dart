@@ -1,6 +1,7 @@
 
 import 'package:fitnet/screens/recipe.dart';
 import 'package:fitnet/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/services/apiGetter.dart';
 
@@ -87,6 +88,16 @@ class _RecipeSearchState extends State<RecipeSearch> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+          // leading: IconButton(
+          //   padding: EdgeInsets.only(left: SizeConfig.widthMultiplier * 2),
+          //   icon: Icon(
+          //     Icons.arrow_back_ios,
+          //     size: SizeConfig.heightMultiplier * 3,
+          //     color: Color(0xFFFD5739),
+          //   ),
+          //   onPressed: () {
+          //     Navigator.of(context).pop();
+          //   }),
         centerTitle: true,
         title: FittedBox(
           fit: BoxFit.scaleDown,
@@ -167,7 +178,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
                           // });
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
+                            CupertinoPageRoute(
                               builder: (context) {
                                 return Recipe(
                                   recipeId: _searchResultRecipeId[index],
@@ -197,7 +208,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
+                                CupertinoPageRoute(
                                   builder: (context) {
                                     return Recipe(
                                       recipeId: _recentRecipesId.reversed

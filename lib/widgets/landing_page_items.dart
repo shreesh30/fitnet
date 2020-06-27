@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:fitnet/constants.dart';
@@ -5,9 +6,18 @@ import 'package:fitnet/components/rounded_button.dart';
 import 'package:fitnet/screens/registration_screen.dart';
 import 'package:fitnet/screens/login_screen.dart';
 
-class LandingPageItems extends StatelessWidget {
+class LandingPageItems extends StatefulWidget {
+  final VoidCallback onSignedIn;
+  final VoidCallback onSignedOut;
 
+  const LandingPageItems({Key key, this.onSignedIn, this.onSignedOut})
+      : super(key: key);
 
+  @override
+  _LandingPageItemsState createState() => _LandingPageItemsState();
+}
+
+class _LandingPageItemsState extends State<LandingPageItems> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -99,7 +109,14 @@ class LandingPageItems extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, LoginPage.id);
+                Navigator.push(
+                    context,
+                    CupertinoPageRoute(
+                      builder: (context) => LoginPage(
+                        onSignedIn: widget.onSignedIn,
+                        onSignOut: widget.onSignedOut,
+                      ),
+                    ));
               },
               child: Text(
                 'Log in',

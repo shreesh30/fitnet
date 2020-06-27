@@ -18,13 +18,14 @@ class Recipe extends StatefulWidget {
 class _RecipeState extends State<Recipe> {
   RestClient object = RestClient();
   List<ListTile> directions = [];
+  Future future;
   // Map data = {};
-  // @override
-  // void initState() {
-  //   super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-  //   fetchData();
-  // }
+    future=fetchData();
+  }
 
   Future fetchData() async {
     RestClient.directionList.clear();
@@ -34,10 +35,22 @@ class _RecipeState extends State<Recipe> {
     RestClient.ingredientListTile.clear();
     return object.getRecipeInfo(widget.recipeId);
   }
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   RestClient.directionList.clear();
+  //   RestClient.finalResults.clear();
+  //   RestClient.directionListTile.clear();
+  //   RestClient.ingredientList.clear();
+  //   RestClient.ingredientListTile.clear();
+
+  // }
 
   @override
   Widget build(BuildContext context) {
     // data=ModalRoute.of(context).settings.arguments;
+    
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -65,7 +78,7 @@ class _RecipeState extends State<Recipe> {
         backgroundColor: Color(0xFF0F0F0F),
       ),
       body: FutureBuilder(
-        future: fetchData(),
+        future: future,
         builder: (context, snapshot) {
           // String finalImageUrl=snapshot.data;
           // if(snapshot.hasError){

@@ -85,11 +85,11 @@ class RestClient {
       "",
       "",
     );
-    directionList.clear();
     finalResults.clear();
     directionList.clear();
     ingredientList.clear();
     ingredientListTile.clear();
+    directionListTile.clear();
     var result = await foodItem
         .request({"recipe_id": recipeId, "method": "recipe.get"})
         .then((res) => res.body)

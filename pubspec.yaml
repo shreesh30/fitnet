@@ -43,6 +43,7 @@ dependencies:
   chewie_audio: ^1.0.0+1
   crypto: 
   persistent_bottom_nav_bar: ^1.5.5
+  custom_navigator: ^0.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
