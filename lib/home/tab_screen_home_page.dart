@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 
 class TabScreenHomePage extends StatefulWidget {
   static const String id = 'tab_screen_home_page';
-  final VoidCallback signIn;
-  final VoidCallback signOut;
-  final FirebaseAuth auth;
+  // final VoidCallback signIn;
+  // final VoidCallback signOut;
+  // final FirebaseAuth auth;
 
-  const TabScreenHomePage({Key key, this.signIn, this.signOut, this.auth})
-      : super(key: key);
+  // const TabScreenHomePage({Key key, this.signIn, this.signOut, this.auth})
+      // : super(key: key);
 
   @override
   _TabScreenHomePageState createState() => _TabScreenHomePageState();
@@ -37,8 +37,8 @@ class _TabScreenHomePageState extends State<TabScreenHomePage> {
       TabItem.mealTracker: (_) => MealTracker(),
       TabItem.mentalHealthList: (_) => MentalHealthList(),
       TabItem.userProfile: (_) => UserProfile(
-            auth: widget.auth,
-            onSignOut: widget.signOut,
+            // auth: widget.auth,
+            // onSignOut: widget.signOut,
           
           ),
     };

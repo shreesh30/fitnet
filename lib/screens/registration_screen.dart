@@ -1,5 +1,6 @@
 import 'package:fitnet/screens/new_user.dart';
 import 'package:fitnet/size_config.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitnet/constants.dart';
@@ -172,7 +173,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
                         if (newUser != null) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
+                          Navigator.push(context, CupertinoPageRoute(builder: (context){
                             return NewUser(name: name,);
                           }));
                         }

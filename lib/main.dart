@@ -1,8 +1,10 @@
 import 'package:fitnet/home/tab_screen_home_page.dart';
+import 'package:fitnet/models/auth_status_data.dart';
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/meal_tracker.dart';
-import 'package:fitnet/screens/meal_tracker_recipe_search.dart';
+import 'package:fitnet/screens/meal_tracker_food.dart';
+import 'package:fitnet/screens/meal_tracker_food_search.dart';
 import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/mental_health_selected_option.dart';
 import 'package:fitnet/screens/new_user.dart';
@@ -24,9 +26,10 @@ import 'package:fitnet/screens/login_screen.dart';
 import 'package:fitnet/screens/home.dart';
 import 'package:flutter/services.dart';
 import 'package:fitnet/screens/registration_screen.dart';
-import 'package:fitnet/screens/tabs_screen.dart';
-import 'package:fitnet/home/tab_screen_home_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:fitnet/screens/tabs_screen.dart';
+// import 'package:fitnet/home/tab_screen_home_page.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,7 +47,7 @@ void main() {
 //   // // final uid= _auth.uid;
 //   // Future<bool> home() async {
 //   //   if (await _auth== null) {
-//   //     return false; 
+//   //     return false;
 //   //   } else
 //   //     return true;
 //   // }
@@ -90,7 +93,7 @@ void main() {
 
 //           // home: MyApp.isLoggedin==false?LandingPage():TabsScreen(),
 //           home: RootPage(),
-       
+
 //           routes: {
 //             SplashScreen.id: (context) => SplashScreen(),
 //             LandingPage.id: (context) => LandingPage(),
@@ -130,51 +133,58 @@ class MyApp extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         SizeConfig().init(constraints);
-        return MaterialApp(
-          theme: ThemeData.dark().copyWith(
-            scaffoldBackgroundColor: Color(0xff0f0f0f),
-          ),
-          // initialRoute:FirebaseAuth.instance.currentUser().then((value) => null)!=null?TabScreenHomePage.id:LandingPage.id,
-          // initialRoute: LandingPage.id,
-          // home: FutureBuilder(
-          //   future: home(),
-          //   builder: (context, snapshot) {
-          //     if (snapshot.data == false) {
-          //       return LandingPage();
-          //     } else
-          //       return TabsScreen();
-          //   },
-          // ),
+        return MultiProvider(
+          // create: (BuildContext context) => AuthStatusData(),
+          providers:[
+            ChangeNotifierProvider<AuthStatusData>(create: (context) => AuthStatusData(),)
+          ],
+          child: MaterialApp(
+            theme: ThemeData.dark().copyWith(
+              scaffoldBackgroundColor: Color(0xff0f0f0f),
+            ),
+            // initialRoute:FirebaseAuth.instance.currentUser().then((value) => null)!=null?TabScreenHomePage.id:LandingPage.id,
+            // initialRoute: LandingPage.id,
+            // home: FutureBuilder(
+            //   future: home(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.data == false) {
+            //       return LandingPage();
+            //     } else
+            //       return TabsScreen();
+            //   },
+            // ),
 
-          // home: MyApp.isLoggedin==false?LandingPage():TabsScreen(),
-          home: RootPage(),
-       
-          routes: {
-            SplashScreen.id: (context) => SplashScreen(),
-            LandingPage.id: (context) => LandingPage(),
-            LoginPage.id: (context) => LoginPage(),
-            HomePage.id: (context) => HomePage(),
-            RegistrationPage.id: (context) => RegistrationPage(),
-            NewUser.id: (context) => NewUser(),
-            WorkoutList.id: (context) => WorkoutList(),
-            WorkoutProgram.id: (context) => WorkoutProgram(),
-            WeeksList.id: (context) => WeeksList(),
-            DaysList.id: (context) => DaysList(),
-            Workout.id: (context) => Workout(),
-            VideoScreen.id: (context) => VideoScreen(),
-            MentalHealthList.id: (context) => MentalHealthList(),
-            MentalHealthSelectedOption.id: (context) =>
-                MentalHealthSelectedOption(),
-            AudioScreen.id: (context) => AudioScreen(),
-            RecipeSearch.id: (context) => RecipeSearch(),
-            Recipe.id: (context) => Recipe(),
-            MealTracker.id: (context) => MealTracker(),
-            UserProfile.id: (context) => UserProfile(),
-            TabsScreen.id: (context) => TabsScreen(),
-            TabScreenHomePage.id: (context) => TabScreenHomePage(),
-            RootPage.id:(context)=>RootPage(),
-            MealTrackerRecipeSearch.id:(context)=>MealTrackerRecipeSearch()
-          },
+            // home: MyApp.isLoggedin==false?LandingPage():TabsScreen(),
+            home: RootPage(),
+
+            routes: {
+              SplashScreen.id: (context) => SplashScreen(),
+              LandingPage.id: (context) => LandingPage(),
+              LoginPage.id: (context) => LoginPage(),
+              HomePage.id: (context) => HomePage(),
+              RegistrationPage.id: (context) => RegistrationPage(),
+              NewUser.id: (context) => NewUser(),
+              WorkoutList.id: (context) => WorkoutList(),
+              WorkoutProgram.id: (context) => WorkoutProgram(),
+              WeeksList.id: (context) => WeeksList(),
+              DaysList.id: (context) => DaysList(),
+              Workout.id: (context) => Workout(),
+              VideoScreen.id: (context) => VideoScreen(),
+              MentalHealthList.id: (context) => MentalHealthList(),
+              MentalHealthSelectedOption.id: (context) =>
+                  MentalHealthSelectedOption(),
+              AudioScreen.id: (context) => AudioScreen(),
+              RecipeSearch.id: (context) => RecipeSearch(),
+              Recipe.id: (context) => Recipe(),
+              MealTracker.id: (context) => MealTracker(),
+              UserProfile.id: (context) => UserProfile(),
+              // TabsScreen.id: (context) => TabsScreen(),
+              TabScreenHomePage.id: (context) => TabScreenHomePage(),
+              RootPage.id: (context) => RootPage(),
+              MealTrackerRecipeSearch.id: (context) => MealTrackerRecipeSearch(),
+              MealTrackerFood.id:(context)=>MealTrackerFood()
+            },
+          ),
         );
       },
     );

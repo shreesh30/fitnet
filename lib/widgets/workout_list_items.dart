@@ -1,8 +1,8 @@
 import 'package:fitnet/screens/workout_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:fitnet/screens/workout_program.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class WorkoutListItems extends StatelessWidget {
   const WorkoutListItems({

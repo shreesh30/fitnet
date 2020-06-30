@@ -1,4 +1,5 @@
-import 'package:fitnet/screens/meal_tracker_recipe_search.dart';
+import 'package:fitnet/screens/meal_tracker_food_search.dart';
+import 'package:fitnet/services/apiGetter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,14 +12,9 @@ class MealTracker extends StatefulWidget {
 }
 
 class _MealTrackerState extends State<MealTracker> {
+  RestClient object = RestClient();
   @override
   Widget build(BuildContext context) {
-    // return CommonScaffold(
-    //   appbar: true,
-    //   automaticallyImplyLeading: false,
-    //   text: 'Today',
-
-    // );
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -103,6 +99,9 @@ class _MealTrackerState extends State<MealTracker> {
                             ),
                             IconButton(
                               onPressed: () {
+                                // object.getFoodInfo('butter coffee');
+                                // showSearch(
+                                //     context: context, delegate: DataSearch());
                                 Navigator.push(
                                     context,
                                     CupertinoPageRoute(
@@ -146,12 +145,14 @@ class _MealTrackerState extends State<MealTracker> {
                             ),
                             IconButton(
                               onPressed: () {
-                                 Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) =>
-                                          MealTrackerRecipeSearch(),
-                                    ));
+                                object.getFoodInfo('butter coffee');
+
+                                // Navigator.push(
+                                //     context,
+                                //     CupertinoPageRoute(
+                                //       builder: (context) =>
+                                //           MealTrackerRecipeSearch(),
+                                //     ));
                               },
                               icon: Icon(
                                 Icons.add_circle_outline,
@@ -189,12 +190,13 @@ class _MealTrackerState extends State<MealTracker> {
                             ),
                             IconButton(
                               onPressed: () {
-                                 Navigator.push(
-                                    context,
-                                    CupertinoPageRoute(
-                                      builder: (context) =>
-                                          MealTrackerRecipeSearch(),
-                                    ));
+                                // Navigator.push(
+                                //     context,
+                                //     CupertinoPageRoute(
+                                //       builder: (context) =>
+                                //           MealTrackerRecipeSearch(),
+                                //     ));
+                                showSearch(context: context, delegate: DataSearch());
                               },
                               icon: Icon(
                                 Icons.add_circle_outline,
@@ -232,7 +234,7 @@ class _MealTrackerState extends State<MealTracker> {
                             ),
                             IconButton(
                               onPressed: () {
-                                 Navigator.push(
+                                Navigator.push(
                                     context,
                                     CupertinoPageRoute(
                                       builder: (context) =>
@@ -275,7 +277,7 @@ class _MealTrackerState extends State<MealTracker> {
                             ),
                             IconButton(
                               onPressed: () {
-                                 Navigator.push(
+                                Navigator.push(
                                     context,
                                     CupertinoPageRoute(
                                       builder: (context) =>
@@ -556,5 +558,81 @@ class MyIngredientProgress2 extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+class DataSearch extends SearchDelegate {
+  RestClient object=RestClient();
+  final cities = [
+    'Mumbai',
+    'Delhi',
+    'Bokaro',
+    'dehradun',
+    'Patna',
+    'Ranchi',
+    'Kolkata',
+    'Assam'
+  ];
+
+  final recentCities = ['Mumbai', 'Rajasthan', 'Udaipur', 'Jodhpur'];
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+          icon: Icon(Icons.clear),
+          onPressed: () {
+            query = "";
+          })
+    ];
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    return Container(
+      height: 100,
+      width: 100,
+      child: Card(
+        color: Colors.red,
+        child: Text(query),
+      ),
+    );
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    object.getFoodInfo(query);
+    final suggestionList = query.isEmpty
+        ? recentCities
+        : RestClient.foodNameList;
+
+    return ListView.builder(
+      itemCount: suggestionList.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          onTap: () {
+            showResults(context);
+          },
+          leading: Icon(Icons.location_city),
+          title: Text(suggestionList[index]),
+        );
+      },
+    );
+    throw UnimplementedError();
   }
 }

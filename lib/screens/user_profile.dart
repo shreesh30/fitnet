@@ -1,29 +1,31 @@
 import 'package:fitnet/home/tab_screen_home_page.dart';
 import 'package:fitnet/main.dart';
+import 'package:fitnet/models/auth_status_data.dart';
 import 'package:fitnet/screens/landing_page.dart';
 import 'package:fitnet/screens/root_page.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class UserProfile extends StatefulWidget {
   static const String id = 'user_profile';
-  final VoidCallback onSignOut;
-  final FirebaseAuth auth;
+  // final FirebaseAuth auth;
 
-  const UserProfile({Key key, this.onSignOut, this.auth}) : super(key: key);
+  // const UserProfile({Key key, this.onSignOut, this.auth}) : super(key: key);
   @override
   _UserProfileState createState() => _UserProfileState();
 }
 
 class _UserProfileState extends State<UserProfile> {
-final _auth=FirebaseAuth.instance;
+// final _auth=FirebaseAuth.instance;
   // Future<FirebaseAuth> _firebaseAuth;
   // FirebaseAuth _auth;
   Future<void> signOut() async {
-    var auth = await _auth.signOut();
-    print('before trying signout');
+        print('before trying signout');
+
+    var auth = await FirebaseAuth.instance.signOut();
     // if(FirebaseAuth.instance.currentUser()!=null){
     //       print(widget.auth.currentUser().toString());
     // }
@@ -33,24 +35,25 @@ final _auth=FirebaseAuth.instance;
     return auth;
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
+  // @override
+  // void initState() {
+  //   // TODO: implement initState
 
-    super.initState();
-    FirebaseAuth.instance;
-    // getFirebaseAuthInstance();
-    // setState(()async {
-    //   auth=await FirebaseAuth.instance.signOut();
-    // });
+  //   super.initState();
+  //   FirebaseAuth.instance;
+  //   // getFirebaseAuthInstance();
+  //   // setState(()async {
+  //   //   auth=await FirebaseAuth.instance.signOut();
+  //   // });
    
-  }
+  // }
 
   void _signOut() async {
     try {
       print('trying once');
       await signOut();
-      widget.onSignOut();
+      await Provider.of<AuthStatusData>(context,listen: false).signedOut();
+      // widget.onSignOut();
       // Navigator.of(context).pop(TabScreenHomePage());
       // Navigator.of(context).popUntil(ModalRoute.withName(RootPage.id));
       // Navigator.pushReplacement(context,CupertinoPageRoute(builder: (context) => RootPage(),));

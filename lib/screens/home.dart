@@ -1,7 +1,7 @@
 import 'package:fitnet/screens/meal_tracker.dart';
 import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/recipe_search.dart';
-import 'package:fitnet/screens/tabs_screen.dart';
+// import 'package:fitnet/screens/tabs_screen.dart';
 import 'package:fitnet/screens/workout_list.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   final _auth = FirebaseAuth.instance;
   FirebaseUser loggedInUser;
   String userName = "";
+  Future future;
 
   void getCurrentUser() async {
     try {
@@ -50,10 +51,11 @@ class _HomePageState extends State<HomePage> {
     return null;
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    future=getUserInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       FutureBuilder<String>(
-                        future: getUserInfo(),
+                        future: future,
                         builder: (BuildContext context,
                             AsyncSnapshot<String> snapshot) {
                           switch (snapshot.connectionState) {

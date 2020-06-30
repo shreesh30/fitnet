@@ -1,6 +1,8 @@
+import 'package:fitnet/home/tab_screen_home_page.dart';
 import 'package:fitnet/main.dart';
+import 'package:fitnet/models/auth_status_data.dart';
 import 'package:fitnet/screens/home.dart';
-import 'package:fitnet/screens/tabs_screen.dart';
+// import 'package:fitnet/screens/tabs_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/constants.dart';
@@ -8,13 +10,14 @@ import 'package:fitnet/components/rounded_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:fitnet/size_config.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const String id = 'login_screen';
-  final VoidCallback onSignedIn;
-  final VoidCallback onSignOut;
+  // final VoidCallback onSignedIn;
+  // final VoidCallback onSignOut;
 
-  const LoginPage({Key key, this.onSignedIn,this.onSignOut}) : super(key: key);
+  // const LoginPage({Key key, this.onSignedIn,this.onSignOut}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -146,11 +149,12 @@ class _LoginPageState extends State<LoginPage> {
                         email: email, password: password);
                     try {
                       if (user != null) {
-                        widget.onSignedIn();
-                        Navigator.push(
+                        // widget.onSignedIn();
+                        Provider.of<AuthStatusData>(context,listen: false).signedIn();
+                        Navigator.pushReplacement(
                             context,
                             CupertinoPageRoute(
-                              builder: (context) => TabsScreen(onSignOut: widget.onSignOut,),
+                              builder: (context) => TabScreenHomePage(),
                             ));
                         // setState(() {
                         //   MyApp.isLoggedin = true;
