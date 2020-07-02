@@ -1,5 +1,6 @@
 import 'package:fitnet/home/tab_screen_home_page.dart';
 import 'package:fitnet/models/auth_status_data.dart';
+import 'package:fitnet/models/nutrition_data.dart';
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/meal_tracker.dart';
@@ -135,8 +136,13 @@ class MyApp extends StatelessWidget {
         SizeConfig().init(constraints);
         return MultiProvider(
           // create: (BuildContext context) => AuthStatusData(),
-          providers:[
-            ChangeNotifierProvider<AuthStatusData>(create: (context) => AuthStatusData(),)
+          providers: [
+            ChangeNotifierProvider<AuthStatusData>(
+              create: (context) => AuthStatusData(),
+            ),
+            ChangeNotifierProvider<NutritionData>(
+              create: (context) => NutritionData(),
+            )
           ],
           child: MaterialApp(
             theme: ThemeData.dark().copyWith(
@@ -181,8 +187,9 @@ class MyApp extends StatelessWidget {
               // TabsScreen.id: (context) => TabsScreen(),
               TabScreenHomePage.id: (context) => TabScreenHomePage(),
               RootPage.id: (context) => RootPage(),
-              MealTrackerRecipeSearch.id: (context) => MealTrackerRecipeSearch(),
-              MealTrackerFood.id:(context)=>MealTrackerFood()
+              MealTrackerRecipeSearch.id: (context) =>
+                  MealTrackerRecipeSearch(),
+              MealTrackerFood.id: (context) => MealTrackerFood()
             },
           ),
         );

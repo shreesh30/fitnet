@@ -1,4 +1,3 @@
-
 import 'package:fitnet/services/apiGetter.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ class Recipe extends StatefulWidget {
   static const String id = 'recipe';
   final String recipeName;
   final String recipeId;
+
 
   @override
   _RecipeState createState() => _RecipeState();
@@ -24,12 +24,12 @@ class _RecipeState extends State<Recipe> {
   void initState() {
     super.initState();
 
-    future=fetchData();
+    future = fetchData();
   }
 
   Future fetchData() async {
     RestClient.directionList.clear();
-    RestClient.finalResults.clear();
+    RestClient.finalRecipeResults.clear();
     RestClient.directionListTile.clear();
     RestClient.ingredientList.clear();
     RestClient.ingredientListTile.clear();
@@ -50,7 +50,7 @@ class _RecipeState extends State<Recipe> {
   @override
   Widget build(BuildContext context) {
     // data=ModalRoute.of(context).settings.arguments;
-    
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -102,7 +102,6 @@ class _RecipeState extends State<Recipe> {
                   snapshot.connectionState == ConnectionState.none)
                 return Center(child: new CircularProgressIndicator());
               else
-                
                 return ListView(
                   children: <Widget>[
                     snapshot.data[0] == null
@@ -206,7 +205,7 @@ class _RecipeState extends State<Recipe> {
                       ),
                     ),
                     SizedBox(
-                      height: SizeConfig.heightMultiplier*2,
+                      height: SizeConfig.heightMultiplier * 2,
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(
@@ -231,7 +230,7 @@ class _RecipeState extends State<Recipe> {
                             ),
                           ),
                     SizedBox(
-                      height: SizeConfig.heightMultiplier*2,
+                      height: SizeConfig.heightMultiplier * 2,
                     ),
                     snapshot.data[2] != null
                         ? Column(
@@ -280,10 +279,10 @@ class _RecipeState extends State<Recipe> {
                               ),
                               // Container(
                               //   padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier),
-                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: RestClient.directionListTile,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: RestClient.directionListTile,
+                              ),
                               // ),
                             ],
                           )

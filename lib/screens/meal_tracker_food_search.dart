@@ -2,7 +2,7 @@ import 'package:fitnet/screens/meal_tracker_food.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:modal_progress_hud/modal_progress_hud.dart';
 import '../size_config.dart';
 
 class MealTrackerRecipeSearch extends StatefulWidget {
@@ -20,6 +20,7 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
   List _searchResultFoodId = [];
   List _recentFoodNames = [];
   List _recentFoodId = [];
+  bool showSpinner = false;
 
   Future onSearchTextChanged(String text) async {
     RestClient.foodNameList.clear();
@@ -32,6 +33,9 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
   }
 
   Future searchedResult() async {
+    setState(() {
+      showSpinner = true;
+    });
     _searchResultFoodId.clear();
     _searchResultFoodNames.clear();
     await object.getFoodInfo(searchedFoodName);
@@ -58,9 +62,12 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
       });
       setState(() {});
     }
-    print(_searchResultFoodId);
-    print(searchedFoodName);
-    print(_searchResultFoodNames);
+    setState(() {
+      showSpinner = false;
+    });
+    // print(_searchResultFoodId);
+    // print(searchedFoodName);
+    // print(_searchResultFoodNames);
   }
 
   @override
@@ -105,13 +112,14 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                   style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
                   controller: controller,
                   decoration: InputDecoration(
-                      hintText: 'Search Recipes',
-                      border: InputBorder.none,
-                      contentPadding: EdgeInsets.symmetric(
-                          vertical: SizeConfig.heightMultiplier * 1.5,
-                          horizontal: SizeConfig.widthMultiplier * 2),
-                      hintStyle:
-                          TextStyle(fontSize: SizeConfig.textMultiplier * 2)),
+                    hintText: 'Search Recipes',
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: SizeConfig.heightMultiplier * 1.5,
+                        horizontal: SizeConfig.widthMultiplier * 2),
+                    hintStyle:
+                        TextStyle(fontSize: SizeConfig.textMultiplier * 2),
+                  ),
                   onChanged: (value) async {
                     await onSearchTextChanged(value);
                   },
@@ -136,45 +144,51 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
           Expanded(
             child: _searchResultFoodNames.length != 0 ||
                     controller.text.isNotEmpty
-                ? ListView.builder(
-                    itemCount: _searchResultFoodNames.length,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            _recentFoodNames.add(_searchResultFoodNames[index]);
-                          });
+                ? ModalProgressHUD(
+                    progressIndicator: CircularProgressIndicator(),
+                    opacity: 0.0,
+                    inAsyncCall: showSpinner,
+                    child: ListView.builder(
+                      itemCount: _searchResultFoodNames.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _recentFoodNames
+                                  .add(_searchResultFoodNames[index]);
+                            });
 
-                          setState(() {
-                            _recentFoodId.add(_searchResultFoodId[index]);
-                          });
-                          // Navigator.pushNamed(context, Recipe.id, arguments: {
-                          //   'recipeName': _searchResultRecipeNames[index],
-                          //   'recipeId': _searchResultRecipeId[index],
-                          // });
-                          Navigator.push(
-                            context,
-                            CupertinoPageRoute(
-                              builder: (context) {
-                                return MealTrackerFood(
-                                  foodName: _searchResultFoodNames[index],
-                                  foodId: _searchResultFoodId[index],
-                                  // recipeId: _searchResultRecipeId[index],
-                                  // recipeName: _searchResultRecipeNames[index],
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        child: ListTile(
-                          title: Text(_searchResultFoodNames[index],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontFamily: 'Roboto',
-                                  fontSize: SizeConfig.textMultiplier * 2)),
-                        ),
-                      );
-                    },
+                            setState(() {
+                              _recentFoodId.add(_searchResultFoodId[index]);
+                            });
+                            // Navigator.pushNamed(context, Recipe.id, arguments: {
+                            //   'recipeName': _searchResultRecipeNames[index],
+                            //   'recipeId': _searchResultRecipeId[index],
+                            // });
+                            Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                builder: (context) {
+                                  return MealTrackerFood(
+                                    foodName: _searchResultFoodNames[index],
+                                    foodId: _searchResultFoodId[index],
+                                    // recipeId: _searchResultRecipeId[index],
+                                    // recipeName: _searchResultRecipeNames[index],
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            title: Text(_searchResultFoodNames[index],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w300,
+                                    fontFamily: 'Roboto',
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                          ),
+                        );
+                      },
+                    ),
                   )
                 : _recentFoodNames.length != 0
                     ? ListView.builder(
@@ -189,7 +203,8 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                                 CupertinoPageRoute(
                                   builder: (context) {
                                     return MealTrackerFood(
-                                      foodName: _recentFoodNames.reversed.toList()[index],
+                                      foodName: _recentFoodNames.reversed
+                                          .toList()[index],
                                       foodId: _recentFoodId[index],
                                       // recipeId: _recentRecipesId.reversed
                                       //     .toList()[index],
