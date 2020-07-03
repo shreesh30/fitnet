@@ -1,5 +1,3 @@
-
-
 import 'package:fitnet/models/nutrition_data.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'package:flutter/material.dart';
@@ -38,10 +36,23 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
     Provider.of<NutritionData>(context, listen: false).fat = null;
     Provider.of<NutritionData>(context, listen: false).protein = null;
     Provider.of<NutritionData>(context, listen: false).saturatedFats = null;
-        Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats = null;
-     Provider.of<NutritionData>(context, listen: false).monoUnsaturatedFats = null;
-Provider.of<NutritionData>(context, listen: false).transFat = null;
-Provider.of<NutritionData>(context, listen: false).cholesterol = null;
+    Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats =
+        null;
+    Provider.of<NutritionData>(context, listen: false).monoUnsaturatedFats =
+        null;
+    Provider.of<NutritionData>(context, listen: false).transFat = null;
+    Provider.of<NutritionData>(context, listen: false).cholesterol = null;
+    Provider.of<NutritionData>(context, listen: false).sodium = null;
+    Provider.of<NutritionData>(context, listen: false).potassium = null;
+    Provider.of<NutritionData>(context, listen: false).fiber = null;
+    Provider.of<NutritionData>(context, listen: false).sugars = null;
+    Provider.of<NutritionData>(context, listen: false).vitaminA = null;
+    Provider.of<NutritionData>(context, listen: false).vitaminC = null;
+    Provider.of<NutritionData>(context, listen: false).calcium = null;
+        Provider.of<NutritionData>(context, listen: false).iron = null;
+
+
+
   }
 
   Widget servingPopUp(BuildContext context) {
@@ -96,7 +107,10 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
           ),
           DropdownButton(
             // value: RestClient.servingDescriptionList[0],
-            hint: RestClient.servingDescriptionDropdownItems[0],
+            // hint: Text(Provider.of<NutritionData>(context).servingDescription==null?RestClient.servingDescriptionDropdownItems:Provider.of<NutritionData>(context).servingDescription),
+            hint: Provider.of<NutritionData>(context).servingDescription == null
+                ? RestClient.servingDescriptionDropdownItems[0]
+                : Text(Provider.of<NutritionData>(context).servingDescription),
             isExpanded: true,
             items: RestClient.servingDescriptionDropdownItems,
             onChanged: (value) {
@@ -147,41 +161,141 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
               value == null
                   ? Provider.of<NutritionData>(context, listen: false)
                           .polyUnsaturatedFats =
-                      RestClient.polyUnsaturatedFatsList[0]!=null?double.parse(RestClient.polyUnsaturatedFatsList[0]):0.0
-                  :RestClient.polyUnsaturatedFatsList!=null?Provider.of<NutritionData>(context, listen: false)
-                          .polyUnsaturatedFats =
-                      double.parse(RestClient.polyUnsaturatedFatsList[
-                          RestClient.servingDescriptionList.indexOf(value)]):Provider.of<NutritionData>(context, listen: false)
-                          .polyUnsaturatedFats =0.0;
+                      RestClient.polyUnsaturatedFatsList[0] != null
+                          ? double.parse(RestClient.polyUnsaturatedFatsList[0])
+                          : 0.0
+                  : RestClient.polyUnsaturatedFatsList != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .polyUnsaturatedFats =
+                          double.parse(RestClient.polyUnsaturatedFatsList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .polyUnsaturatedFats = 0.0;
 
-               value == null
+              value == null
                   ? Provider.of<NutritionData>(context, listen: false)
-                          .monoUnsaturatedFats =RestClient.monoUnsaturatedFatsList[0]!=null?
-                      double.parse(RestClient.monoUnsaturatedFatsList[0]):0.0
-                  :RestClient.monoUnsaturatedFatsList!=null?Provider.of<NutritionData>(context, listen: false)
                           .monoUnsaturatedFats =
-                      double.parse(RestClient.monoUnsaturatedFatsList[
-                          RestClient.servingDescriptionList.indexOf(value)]):Provider.of<NutritionData>(context, listen: false)
-                          .monoUnsaturatedFats =0.0;
+                      RestClient.monoUnsaturatedFatsList[0] != null
+                          ? double.parse(RestClient.monoUnsaturatedFatsList[0])
+                          : 0.0
+                  : RestClient.monoUnsaturatedFatsList != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .monoUnsaturatedFats =
+                          double.parse(RestClient.monoUnsaturatedFatsList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .monoUnsaturatedFats = 0.0;
 
-                          value == null
+              value == null
                   ? Provider.of<NutritionData>(context, listen: false)
-                          .transFat =
-                      double.parse(RestClient.transFatList[0])
-                  : RestClient.transFatList[0]!=null?Provider.of<NutritionData>(context, listen: false)
-                          .transFat =
-                      double.parse(RestClient.transFatList[
-                          RestClient.servingDescriptionList.indexOf(value)]):Provider.of<NutritionData>(context, listen: false)
-                          .transFat =0.0;
+                      .transFat = double.parse(RestClient.transFatList[0])
+                  : RestClient.transFatList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .transFat =
+                          double.parse(RestClient.transFatList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .transFat = 0.0;
 
-                        value == null
+              value == null
                   ? Provider.of<NutritionData>(context, listen: false)
-                          .cholesterol =
-                      double.parse(RestClient.cholesterolList[0])
+                      .cholesterol = double.parse(RestClient.cholesterolList[0])
                   : Provider.of<NutritionData>(context, listen: false)
                           .cholesterol =
                       double.parse(RestClient.cholesterolList[
                           RestClient.servingDescriptionList.indexOf(value)]);
+
+              value == null
+                  ? Provider.of<NutritionData>(context, listen: false).sodium =
+                      double.parse(RestClient.sodiumList[0])
+                  : Provider.of<NutritionData>(context, listen: false).sodium =
+                      double.parse(RestClient.sodiumList[
+                          RestClient.servingDescriptionList.indexOf(value)]);
+
+              value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .potassium =
+                      RestClient.potassiumList[0] != null
+                          ? double.parse(RestClient.potassiumList[0])
+                          : 0.0
+                  : RestClient.potassiumList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .potassium =
+                          double.parse(RestClient.potassiumList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .potassium = 0.0;
+
+              value == null
+                  ? Provider.of<NutritionData>(context, listen: false).fiber =
+                      double.parse(RestClient.fiberList[0])
+                  : Provider.of<NutritionData>(context, listen: false).fiber =
+                      double.parse(RestClient.fiberList[
+                          RestClient.servingDescriptionList.indexOf(value)]);
+
+              value == null
+                  ? Provider.of<NutritionData>(context, listen: false).sugars =
+                      double.parse(RestClient.sugarsList[0])
+                  : Provider.of<NutritionData>(context, listen: false).sugars =
+                      double.parse(RestClient.sugarsList[
+                          RestClient.servingDescriptionList.indexOf(value)]);
+
+              value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .vitaminA =
+                      RestClient.vitaminAList[0] != null
+                          ? double.parse(RestClient.vitaminAList[0])
+                          : 0.0
+                  : RestClient.vitaminAList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .vitaminA =
+                          double.parse(RestClient.vitaminAList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .vitaminA = 0.0;
+
+               value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .vitaminC =
+                      RestClient.vitaminCList[0] != null
+                          ? double.parse(RestClient.vitaminCList[0])
+                          : 0.0
+                  : RestClient.vitaminCList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .vitaminC =
+                          double.parse(RestClient.vitaminCList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .vitaminC = 0.0;
+
+              value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .calcium =
+                      RestClient.calciumList[0] != null
+                          ? double.parse(RestClient.calciumList[0])
+                          : 0.0
+                  : RestClient.calciumList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .calcium =
+                          double.parse(RestClient.calciumList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .calcium = 0.0;
+
+
+              value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .iron =
+                      RestClient.ironList[0] != null
+                          ? double.parse(RestClient.ironList[0])
+                          : 0.0
+                  : RestClient.ironList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .iron =
+                          double.parse(RestClient.ironList[
+                              RestClient.servingDescriptionList.indexOf(value)])
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .iron = 0.0;
               // print(Provider.of<NutritionData>(context,listen: false).calories);
               // print(value);
               // value != null
@@ -268,7 +382,7 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                   snapshot.connectionState == ConnectionState.none)
                 return Center(child: new CircularProgressIndicator());
               else
-              // print(snapshot.data[6]);
+                // print(snapshot.data[6]);
                 return ListView(
                   children: <Widget>[
                     ListTile(
@@ -402,25 +516,30 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                 // }
                                 snapshot.data[1] != null
                                     ? snapshot.data[1].length > 1
-                                        ? Text(Provider.of<NutritionData>(context, listen: false).calories == null ? ((double.parse((snapshot.data[1][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)) : ((Provider.of<NutritionData>(context, listen: false).calories) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize:
-                                                    SizeConfig.textMultiplier *
-                                                        2.5))
-                                        : Text(
+                                        ? Text(
                                             Provider.of<NutritionData>(context, listen: false).calories == null
-                                                ? (double.parse((snapshot.data[1][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)
-                                                    // .toString()
-                                                : ((Provider.of<NutritionData>(context, listen: false).calories) *
+                                                ? ((double.parse((snapshot.data[1][0])) *
                                                         (Provider.of<NutritionData>(context, listen: false)
+                                                            .numberOfServings))
+                                                    .toStringAsFixed(1))
+                                                : ((Provider.of<NutritionData>(context,
+                                                                listen: false)
+                                                            .calories) *
+                                                        (Provider.of<NutritionData>(
+                                                                context,
+                                                                listen: false)
                                                             .numberOfServings))
                                                     .toStringAsFixed(1),
                                             style: TextStyle(
                                                 fontFamily: 'Roboto',
                                                 fontWeight: FontWeight.w300,
                                                 fontSize: SizeConfig.textMultiplier * 2.5))
+                                        : Text(
+                                            Provider.of<NutritionData>(context, listen: false).calories == null
+                                                ? (double.parse((snapshot.data[1][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)
+                                                // .toString()
+                                                : ((Provider.of<NutritionData>(context, listen: false).calories) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1),
+                                            style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2.5))
                                     : Container(),
                                 Text('Cal',
                                     style: TextStyle(
@@ -438,25 +557,21 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                 // }
                                 snapshot.data[2] != null
                                     ? snapshot.data[2].length > 1
-                                        ? Text(
-                                            Provider.of<NutritionData>(context, listen: false)
-                                                        .carbs ==
-                                                    null
-                                                ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).carbs) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                                        ? Text(Provider.of<NutritionData>(context, listen: false).carbs == null ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).carbs) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
                                             style: TextStyle(
                                                 fontFamily: 'Roboto',
                                                 fontWeight: FontWeight.w300,
-                                                fontSize:
-                                                    SizeConfig.textMultiplier *
-                                                        2.5))
+                                                fontSize: SizeConfig.textMultiplier *
+                                                    2.5))
                                         : Text(
-                                            Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .carbs ==
-                                                    null
-                                                ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).carbs) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                                            Provider.of<NutritionData>(context, listen: false).carbs == null
+                                                ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
+                                                    'g')
+                                                : (((Provider.of<NutritionData>(context, listen: false).carbs) *
+                                                            (Provider.of<NutritionData>(context, listen: false)
+                                                                .numberOfServings))
+                                                        .toStringAsFixed(1) +
+                                                    'g'),
                                             style: TextStyle(
                                                 fontFamily: 'Roboto',
                                                 fontWeight: FontWeight.w300,
@@ -479,25 +594,21 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                 // }
                                 snapshot.data[3] != null
                                     ? snapshot.data[3].length > 1
-                                        ? Text(
-                                            Provider.of<NutritionData>(context, listen: false)
-                                                        .fat ==
-                                                    null
-                                                ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                                        ? Text(Provider.of<NutritionData>(context, listen: false).fat == null ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
                                             style: TextStyle(
                                                 fontFamily: 'Roboto',
                                                 fontWeight: FontWeight.w300,
-                                                fontSize:
-                                                    SizeConfig.textMultiplier *
-                                                        2.5))
+                                                fontSize: SizeConfig.textMultiplier *
+                                                    2.5))
                                         : Text(
-                                            Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .fat ==
-                                                    null
-                                                ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                                            Provider.of<NutritionData>(context, listen: false).fat == null
+                                                ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
+                                                    'g')
+                                                : (((Provider.of<NutritionData>(context, listen: false).fat) *
+                                                            (Provider.of<NutritionData>(context, listen: false)
+                                                                .numberOfServings))
+                                                        .toStringAsFixed(1) +
+                                                    'g'),
                                             style: TextStyle(
                                                 fontFamily: 'Roboto',
                                                 fontWeight: FontWeight.w300,
@@ -520,25 +631,21 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                 // }
                                 snapshot.data[4] != null
                                     ? snapshot.data[4].length > 1
-                                        ? Text(
-                                            Provider.of<NutritionData>(context, listen: false)
-                                                        .protein ==
-                                                    null
-                                                ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).protein) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                                        ? Text(Provider.of<NutritionData>(context, listen: false).protein == null ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).protein) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
                                             style: TextStyle(
                                                 fontFamily: 'Roboto',
                                                 fontWeight: FontWeight.w300,
-                                                fontSize:
-                                                    SizeConfig.textMultiplier *
-                                                        2.5))
+                                                fontSize: SizeConfig.textMultiplier *
+                                                    2.5))
                                         : Text(
-                                            Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .protein ==
-                                                    null
-                                                ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).protein) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                                            Provider.of<NutritionData>(context, listen: false).protein == null
+                                                ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
+                                                    'g')
+                                                : (((Provider.of<NutritionData>(context, listen: false).protein) *
+                                                            (Provider.of<NutritionData>(context, listen: false)
+                                                                .numberOfServings))
+                                                        .toStringAsFixed(1) +
+                                                    'g'),
                                             style: TextStyle(
                                                 fontFamily: 'Roboto',
                                                 fontWeight: FontWeight.w300,
@@ -579,8 +686,7 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
                             Text(
-                                Provider.of<NutritionData>(context,
-                                                listen: false)
+                                Provider.of<NutritionData>(context, listen: false)
                                             .calories ==
                                         null
                                     ? (double.parse((snapshot.data[1][0])) *
@@ -626,29 +732,25 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                     fontSize: SizeConfig.textMultiplier * 2)),
                             snapshot.data[3].length > 1
                                 ? Text(
-                                    Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .fat ==
-                                            null
-                                        ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                                    Provider.of<NutritionData>(context, listen: false).fat == null
+                                        ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false).fat) *
+                                                    (Provider.of<NutritionData>(context, listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
                                     style: TextStyle(
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
                                 : Text(
-                                    Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .fat ==
-                                            null
-                                        ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
-                                    style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                                    Provider.of<NutritionData>(context, listen: false).fat == null
+                                        ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
+                                    style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2))
                           ],
                         ),
                       ),
@@ -675,25 +777,29 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                           snapshot.data[5]!=null?Text(
-                                    Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .saturatedFats ==
-                                            null
-                                        ? ((double.parse((snapshot.data[5][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).saturatedFats) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                            snapshot.data[5] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false).saturatedFats == null
+                                        ? ((double.parse((snapshot.data[5][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false).saturatedFats) *
+                                                    (Provider.of<NutritionData>(context, listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
                                     style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
-                                :Text('-',style: TextStyle(
+                                : Text('-',
+                                    style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                                        fontSize: SizeConfig.textMultiplier * 2))
                           ],
                         ),
                       ),
@@ -720,31 +826,34 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[6][0]!=null?
-                                 Text(
-                                    Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .polyUnsaturatedFats ==
-                                            null
-                                        ? ((double.parse((snapshot.data[6][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                            snapshot.data[6][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats == null
+                                        ? ((double.parse((snapshot.data[6][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false)
+                                                        .polyUnsaturatedFats) *
+                                                    (Provider.of<NutritionData>(context, listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
                                     style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
-                                :Text('-', style: TextStyle(
+                                : Text('-',
+                                    style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                                        fontSize: SizeConfig.textMultiplier * 2))
                           ],
                         ),
                       ),
                     ),
-                     Divider(
+                    Divider(
                       color: Colors.white,
                       indent: SizeConfig.widthMultiplier * 4,
                       endIndent: SizeConfig.widthMultiplier * 4,
@@ -766,25 +875,29 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[7][0]!=null?Text(
-                                    Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .polyUnsaturatedFats ==
-                                            null
-                                        ? ((double.parse((snapshot.data[7][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).monoUnsaturatedFats) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                            snapshot.data[7][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats == null
+                                        ? ((double.parse((snapshot.data[7][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false)
+                                                        .monoUnsaturatedFats) *
+                                                    (Provider.of<NutritionData>(context, listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
                                     style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
-                                :Text('-',  style: TextStyle(
+                                : Text('-',
+                                    style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                                        fontSize: SizeConfig.textMultiplier * 2))
                           ],
                         ),
                       ),
@@ -811,30 +924,34 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[8][0]!=null?Text(
-                                    Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .transFat ==
-                                            null
-                                        ? ((double.parse((snapshot.data[8][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).transFat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'g'),
+                            snapshot.data[8][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false).transFat == null
+                                        ? ((double.parse((snapshot.data[8][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false).transFat) *
+                                                    (Provider.of<NutritionData>(context, listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
                                     style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
-                                :Text('-',  style: TextStyle(
+                                : Text('-',
+                                    style: TextStyle(
                                         color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                                        fontSize: SizeConfig.textMultiplier * 2))
                           ],
                         ),
                       ),
                     ),
-                           Divider(
+                    Divider(
                       color: Colors.white,
                       indent: SizeConfig.widthMultiplier * 4,
                       endIndent: SizeConfig.widthMultiplier * 4,
@@ -856,29 +973,604 @@ Provider.of<NutritionData>(context, listen: false).cholesterol = null;
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[9][0]!=null?Text(
-                                    Provider.of<NutritionData>(context,
-                                                    listen: false)
+                            snapshot.data[9][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
                                                 .cholesterol ==
                                             null
-                                        ? ((double.parse((snapshot.data[9][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'mg')
-                                        : (((Provider.of<NutritionData>(context, listen: false).cholesterol) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)+'mg'),
+                                        ? ((double.parse((snapshot.data[9][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'mg')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .cholesterol) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'mg'),
                                     style: TextStyle(
                                         // color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
-                                :Text('-',  style: TextStyle(
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
                                         // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Sodium',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[10][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .sodium ==
+                                            null
+                                        ? ((double.parse((snapshot.data[10][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'mg')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .sodium) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'mg'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Potassium',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[11][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .potassium ==
+                                            null
+                                        ? ((double.parse((snapshot.data[11][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'mg')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .potassium) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'mg'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Carbohydrates',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[2][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .carbs ==
+                                            null
+                                        ? ((double.parse((snapshot.data[2][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .carbs) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Fiber',
+                                style: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[12][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false).carbs == null
+                                        ? ((double.parse((snapshot.data[12][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false).fiber) *
+                                                    (Provider.of<NutritionData>(context, listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
+                                    style: TextStyle(
+                                        color: Colors.grey[400],
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
                           ],
                         ),
                       ),
-                    )
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Sugars',
+                                style: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[13][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false).sugars == null
+                                        ? ((double.parse((snapshot.data[13][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context, listen: false).sugars) *
+                                                    (Provider.of<NutritionData>(context, listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
+                                    style: TextStyle(
+                                        color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize:
+                                            SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Protein',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[4][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .protein ==
+                                            null
+                                        ? ((double.parse((snapshot.data[4][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .protein) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            'g'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Vitamin A',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[14][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .vitaminA ==
+                                            null
+                                        ? ((double.parse((snapshot.data[14][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .vitaminA) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                     Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Vitamin C',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[15][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .vitaminC ==
+                                            null
+                                        ? ((double.parse((snapshot.data[15][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .vitaminC) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                       Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Calcium',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[16][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .calcium ==
+                                            null
+                                        ? ((double.parse((snapshot.data[16][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .calcium) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
+                       Divider(
+                      color: Colors.white,
+                      indent: SizeConfig.widthMultiplier * 4,
+                      endIndent: SizeConfig.widthMultiplier * 4,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: SizeConfig.widthMultiplier * 5,
+                          right: SizeConfig.widthMultiplier * 5,
+                          top: SizeConfig.heightMultiplier * 1.5,
+                          bottom: SizeConfig.heightMultiplier * 1.5),
+                      child: Card(
+                        color: Color(0xFF0F0F0F),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Iron',
+                                style: TextStyle(
+                                    // color: Colors.grey[400],
+                                    fontFamily: 'Roboto',
+                                    fontWeight: FontWeight.w300,
+                                    fontSize: SizeConfig.textMultiplier * 2)),
+                            snapshot.data[17][0] != null
+                                ? Text(
+                                    Provider.of<NutritionData>(context, listen: false)
+                                                .iron ==
+                                            null
+                                        ? ((double.parse((snapshot.data[17][0])) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%')
+                                        : (((Provider.of<NutritionData>(context,
+                                                            listen: false)
+                                                        .iron) *
+                                                    (Provider.of<NutritionData>(
+                                                            context,
+                                                            listen: false)
+                                                        .numberOfServings))
+                                                .toStringAsFixed(1) +
+                                            '%'),
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                                : Text('-',
+                                    style: TextStyle(
+                                        // color: Colors.grey[400],
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: SizeConfig.textMultiplier * 2))
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 );
           }

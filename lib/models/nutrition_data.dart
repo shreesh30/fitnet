@@ -12,6 +12,14 @@ class NutritionData extends ChangeNotifier{
   double monoUnsaturatedFats;
   double transFat;
   double cholesterol;
+  double sodium;
+  double potassium;
+  double fiber;
+  double sugars;
+  double vitaminA;
+  double vitaminC;
+  double calcium;
+  double iron;
   var servingDescription;
 
   // void servingDescChange(servingDescValue){

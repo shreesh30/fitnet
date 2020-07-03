@@ -31,8 +31,16 @@ class RestClient {
   static List saturatedFatsList = [];
   static List polyUnsaturatedFatsList = [];
   static List monoUnsaturatedFatsList = [];
-  static List transFatList=[];
-  static List cholesterolList=[];
+  static List transFatList = [];
+  static List cholesterolList = [];
+  static List sodiumList = [];
+  static List potassiumList = [];
+  static List fiberList = [];
+  static List sugarsList = [];
+  static List vitaminAList = [];
+  static List vitaminCList = [];
+  static List calciumList = [];
+  static List ironList = [];
 
   RestClient() {
     this.consumerKey = '0f96f7fee7a7414f96287863baebd11f';
@@ -289,6 +297,14 @@ class RestClient {
     monoUnsaturatedFatsList.clear();
     transFatList.clear();
     cholesterolList.clear();
+    sodiumList.clear();
+    potassiumList.clear();
+    fiberList.clear();
+    sugarsList.clear();
+    vitaminAList.clear();
+    vitaminCList.clear();
+    calciumList.clear();
+    ironList.clear();
 
     FatSecretApi foodItem = FatSecretApi(
       this.consumerKey,
@@ -351,8 +367,16 @@ class RestClient {
           await result['food']['servings']['serving'];
       var monoUnsaturatedFatsResult =
           await result['food']['servings']['serving'];
-          var transFatsResult=await result['food']['servings']['serving'];
-      var cholesterolResult=await result['food']['servings']['serving'];
+      var transFatsResult = await result['food']['servings']['serving'];
+      var cholesterolResult = await result['food']['servings']['serving'];
+      var sodiumResult = await result['food']['servings']['serving'];
+      var potassiumResult = await result['food']['servings']['serving'];
+      var fiberResult = await result['food']['servings']['serving'];
+      var sugarsResult = await result['food']['servings']['serving'];
+      var vitaminAResult = await result['food']['servings']['serving'];
+      var vitaminCResult = await result['food']['servings']['serving'];
+      var calciumResult = await result['food']['servings']['serving'];
+      var ironResult = await result['food']['servings']['serving'];
 
       //1.serving description
       //2.calories
@@ -364,6 +388,14 @@ class RestClient {
       // 8.monounsaturated fat
       // 9. trans fat
       // 10.cholesterol
+      // 11.sodium
+      // 12.potassium
+      // 13.fiber
+      // 14.sugars
+      // 15.vitamin A
+      // 16.vitamin C
+      // 17.calcium
+      // 18.iron
 
       if (await servingDescription == null) {
         finalFoodResults.add(null);
@@ -479,13 +511,12 @@ class RestClient {
         });
         finalFoodResults.add(monoUnsaturatedFatsList);
       }
-           if (await transFatsResult == null) {
+      if (await transFatsResult == null) {
         transFatList.add(null);
         finalFoodResults.add(transFatList);
       } else if (transFatsResult.runtimeType.toString() ==
           '_InternalLinkedHashMap<String, dynamic>') {
-        transFatList
-            .add(await transFatsResult['trans_fat']);
+        transFatList.add(await transFatsResult['trans_fat']);
         finalFoodResults.add(transFatList);
       } else {
         await transFatsResult.forEach((value) {
@@ -493,13 +524,12 @@ class RestClient {
         });
         finalFoodResults.add(transFatList);
       }
-            if (await cholesterolResult == null) {
+      if (await cholesterolResult == null) {
         cholesterolList.add(null);
         finalFoodResults.add(cholesterolList);
       } else if (cholesterolResult.runtimeType.toString() ==
           '_InternalLinkedHashMap<String, dynamic>') {
-        cholesterolList
-            .add(await cholesterolResult['cholesterol']);
+        cholesterolList.add(await cholesterolResult['cholesterol']);
         finalFoodResults.add(cholesterolList);
       } else {
         await cholesterolResult.forEach((value) {
@@ -507,6 +537,116 @@ class RestClient {
         });
         finalFoodResults.add(cholesterolList);
       }
+      if (await sodiumResult == null) {
+        sodiumList.add(null);
+        finalFoodResults.add(sodiumList);
+      } else if (sodiumResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        sodiumList.add(await sodiumResult['sodium']);
+        finalFoodResults.add(sodiumList);
+      } else {
+        await sodiumResult.forEach((value) {
+          sodiumList.add(value['sodium']);
+        });
+        finalFoodResults.add(sodiumList);
+      }
+      if (await potassiumResult == null) {
+        potassiumList.add(null);
+        finalFoodResults.add(potassiumList);
+      } else if (potassiumResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        potassiumList.add(await potassiumResult['potassium']);
+        finalFoodResults.add(potassiumList);
+      } else {
+        await potassiumResult.forEach((value) {
+          potassiumList.add(value['potassium']);
+        });
+        finalFoodResults.add(potassiumList);
+      }
+      if (await fiberResult == null) {
+        fiberList.add(null);
+        finalFoodResults.add(fiberList);
+      } else if (fiberResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        fiberList.add(await fiberResult['fiber']);
+        finalFoodResults.add(fiberList);
+      } else {
+        await fiberResult.forEach((value) {
+          fiberList.add(value['fiber']);
+        });
+        finalFoodResults.add(fiberList);
+      }
+      if (await sugarsResult == null) {
+        sugarsList.add(null);
+        finalFoodResults.add(sugarsList);
+      } else if (sugarsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        sugarsList.add(await sugarsResult['sugar']);
+        finalFoodResults.add(sugarsList);
+      } else {
+        await sugarsResult.forEach((value) {
+          sugarsList.add(value['sugar']);
+        });
+        finalFoodResults.add(sugarsList);
+      }
+      if (await vitaminAResult == null) {
+        vitaminAList.add(null);
+        finalFoodResults.add(vitaminAList);
+      } else if (vitaminAResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        vitaminAList.add(await vitaminAResult['vitamin_a']);
+        finalFoodResults.add(vitaminAList);
+      } else {
+        await vitaminAResult.forEach((value) {
+          vitaminAList.add(value['vitamin_a']);
+        });
+        finalFoodResults.add(vitaminAList);
+      }
+
+      if (await vitaminCResult == null) {
+        vitaminCResult.add(null);
+        finalFoodResults.add(vitaminCList);
+      } else if (vitaminCResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        vitaminCList.add(await vitaminCResult['vitamin_c']);
+        finalFoodResults.add(vitaminCList);
+      } else {
+        await vitaminCResult.forEach((value) {
+          vitaminCList.add(value['vitamin_c']);
+        });
+        finalFoodResults.add(vitaminCList);
+      }
+
+      if (await calciumResult == null) {
+        calciumResult.add(null);
+        finalFoodResults.add(calciumResult);
+      } else if (calciumResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        calciumList.add(await calciumResult['calcium']);
+        finalFoodResults.add(calciumList);
+      } else {
+        await calciumResult.forEach((value) {
+          calciumList.add(value['calcium']);
+        });
+        finalFoodResults.add(calciumList);
+      }
+
+
+      if (await ironResult == null) {
+        ironResult.add(null);
+        finalFoodResults.add(ironResult);
+      } else if (ironResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        ironList.add(await ironResult['iron']);
+        finalFoodResults.add(ironList);
+      } else {
+        await ironResult.forEach((value) {
+          ironList.add(value['iron']);
+        });
+        finalFoodResults.add(ironList);
+      }
+
+      // print(finalFoodResults[13]);
 
       // print(cholesterolList);
       // print(await result['food']['servings']['serving']['cholestrol']);
