@@ -7,6 +7,11 @@ class NutritionData extends ChangeNotifier{
   double carbs;
   double fat;
   double protein;
+  double saturatedFats;
+  double polyUnsaturatedFats;
+  double monoUnsaturatedFats;
+  double transFat;
+  double cholesterol;
   var servingDescription;
 
   // void servingDescChange(servingDescValue){

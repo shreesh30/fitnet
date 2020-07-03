@@ -24,10 +24,15 @@ class RestClient {
   static List finalFoodResults = [];
   static List servingDescriptionList = [];
   static List<DropdownMenuItem> servingDescriptionDropdownItems = [];
-  static List caloriesList=[];
-  static List carbsList=[];
-  static List fatsList=[];
-  static List proteinsList=[];
+  static List caloriesList = [];
+  static List carbsList = [];
+  static List fatsList = [];
+  static List proteinsList = [];
+  static List saturatedFatsList = [];
+  static List polyUnsaturatedFatsList = [];
+  static List monoUnsaturatedFatsList = [];
+  static List transFatList=[];
+  static List cholesterolList=[];
 
   RestClient() {
     this.consumerKey = '0f96f7fee7a7414f96287863baebd11f';
@@ -279,6 +284,11 @@ class RestClient {
     carbsList.clear();
     proteinsList.clear();
     fatsList.clear();
+    saturatedFatsList.clear();
+    polyUnsaturatedFatsList.clear();
+    monoUnsaturatedFatsList.clear();
+    transFatList.clear();
+    cholesterolList.clear();
 
     FatSecretApi foodItem = FatSecretApi(
       this.consumerKey,
@@ -325,23 +335,35 @@ class RestClient {
 
       // print(result['food']['servings']['serving'][0]['calories']); //List<dynamic>
       // print(result['food']['servings']['serving']['calories']);
-            // print(result['food']['servings']['serving']);//_InternalLinkedHashMap<String, dynamic>
+      // print(result['food']['servings']['serving']);//_InternalLinkedHashMap<String, dynamic>
 
       // print(result['food']['servings']['serving']['carbohydrate']);
       // print(result['food']['servings']['serving']['fat']);
       // print(result['food']['servings']['serving']['protein']);
 
       var servingDescription = await result['food']['servings']['serving'];
-      var caloriesResult=await result['food']['servings']['serving'];
-      var carbsResult=await result['food']['servings']['serving'];
-      var fatsResult=await result['food']['servings']['serving'];
-      var proteinsResult=await result['food']['servings']['serving'];
+      var caloriesResult = await result['food']['servings']['serving'];
+      var carbsResult = await result['food']['servings']['serving'];
+      var fatsResult = await result['food']['servings']['serving'];
+      var proteinsResult = await result['food']['servings']['serving'];
+      var saturatedFatsResult = await result['food']['servings']['serving'];
+      var polyUnsaturatedFatsResult =
+          await result['food']['servings']['serving'];
+      var monoUnsaturatedFatsResult =
+          await result['food']['servings']['serving'];
+          var transFatsResult=await result['food']['servings']['serving'];
+      var cholesterolResult=await result['food']['servings']['serving'];
 
       //1.serving description
       //2.calories
       //3.carbs
       // 4.fat
       // 5.protein
+      // 6.saturated fat
+      // 7. polyunsaturated fat
+      // 8.monounsaturated fat
+      // 9. trans fat
+      // 10.cholesterol
 
       if (await servingDescription == null) {
         finalFoodResults.add(null);
@@ -350,7 +372,8 @@ class RestClient {
         // servingDescription['serving_description'].forEach((value){servingDescriptionDropdownItems.add(value)});
         // servingDescriptionList.add(await servingDescription['serving_description']);
         // print(servingDescription);
-        servingDescriptionList.add(await servingDescription['serving_description']);
+        servingDescriptionList
+            .add(await servingDescription['serving_description']);
         servingDescriptionDropdownItems.add(DropdownMenuItem(
             child: Text(await servingDescription['serving_description'])));
         finalFoodResults.add(servingDescriptionDropdownItems);
@@ -367,58 +390,131 @@ class RestClient {
         });
         finalFoodResults.add(servingDescriptionDropdownItems);
       }
-      if(await caloriesResult==null){
+      if (await caloriesResult == null) {
         finalFoodResults.add(null);
-      }
-      else if(caloriesResult.runtimeType.toString()=='_InternalLinkedHashMap<String, dynamic>'){
+      } else if (caloriesResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
         caloriesList.add(await caloriesResult['calories']);
-          finalFoodResults.add(caloriesList);
-      }
-      else{
-        await caloriesResult.forEach((value){
+        finalFoodResults.add(caloriesList);
+      } else {
+        await caloriesResult.forEach((value) {
           caloriesList.add(value['calories']);
         });
         finalFoodResults.add(caloriesList);
       }
-      if(await carbsResult==null){
+      if (await carbsResult == null) {
         finalFoodResults.add(null);
-      }
-      else if(carbsResult.runtimeType.toString()=='_InternalLinkedHashMap<String, dynamic>'){
+      } else if (carbsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
         carbsList.add(await carbsResult['carbohydrate']);
-          finalFoodResults.add(carbsList);
-      }
-      else{
-        await carbsResult.forEach((value){
+        finalFoodResults.add(carbsList);
+      } else {
+        await carbsResult.forEach((value) {
           carbsList.add(value['carbohydrate']);
         });
         finalFoodResults.add(carbsList);
       }
-        if(await fatsResult==null){
+      if (await fatsResult == null) {
         finalFoodResults.add(null);
-      }
-      else if(fatsResult.runtimeType.toString()=='_InternalLinkedHashMap<String, dynamic>'){
+      } else if (fatsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
         fatsList.add(await fatsResult['fat']);
-          finalFoodResults.add(fatsList);
-      }
-      else{
-        await fatsResult.forEach((value){
+        finalFoodResults.add(fatsList);
+      } else {
+        await fatsResult.forEach((value) {
           fatsList.add(value['fat']);
         });
         finalFoodResults.add(fatsList);
       }
-           if(await proteinsResult==null){
+      if (await proteinsResult == null) {
         finalFoodResults.add(null);
-      }
-      else if(proteinsResult.runtimeType.toString()=='_InternalLinkedHashMap<String, dynamic>'){
+      } else if (proteinsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
         proteinsList.add(await proteinsResult['protein']);
-          finalFoodResults.add(proteinsList);
-      }
-      else{
-        await proteinsResult.forEach((value){
+        finalFoodResults.add(proteinsList);
+      } else {
+        await proteinsResult.forEach((value) {
           proteinsList.add(value['protein']);
         });
         finalFoodResults.add(proteinsList);
       }
+      if (await saturatedFatsResult == null) {
+        saturatedFatsList.add(null);
+        finalFoodResults.add(saturatedFatsList);
+      } else if (saturatedFatsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        saturatedFatsList.add(await saturatedFatsResult['saturated_fat']);
+        finalFoodResults.add(saturatedFatsList);
+      } else {
+        await saturatedFatsResult.forEach((value) {
+          saturatedFatsList.add(value['saturated_fat']);
+        });
+        finalFoodResults.add(saturatedFatsList);
+      }
+      if (await polyUnsaturatedFatsResult == null) {
+        polyUnsaturatedFatsList.add(null);
+        finalFoodResults.add(polyUnsaturatedFatsList);
+      } else if (polyUnsaturatedFatsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        polyUnsaturatedFatsList
+            .add(await polyUnsaturatedFatsResult['polyunsaturated_fat']);
+        finalFoodResults.add(polyUnsaturatedFatsList);
+      } else {
+        await polyUnsaturatedFatsResult.forEach((value) {
+          polyUnsaturatedFatsList.add(value['polyunsaturated_fat']);
+        });
+        finalFoodResults.add(polyUnsaturatedFatsList);
+      }
+      if (await monoUnsaturatedFatsResult == null) {
+        monoUnsaturatedFatsList.add(null);
+        finalFoodResults.add(monoUnsaturatedFatsList);
+      } else if (monoUnsaturatedFatsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        monoUnsaturatedFatsList
+            .add(await monoUnsaturatedFatsResult['monounsaturated_fat']);
+        finalFoodResults.add(monoUnsaturatedFatsList);
+      } else {
+        await monoUnsaturatedFatsResult.forEach((value) {
+          monoUnsaturatedFatsList.add(value['monounsaturated_fat']);
+        });
+        finalFoodResults.add(monoUnsaturatedFatsList);
+      }
+           if (await transFatsResult == null) {
+        transFatList.add(null);
+        finalFoodResults.add(transFatList);
+      } else if (transFatsResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        transFatList
+            .add(await transFatsResult['trans_fat']);
+        finalFoodResults.add(transFatList);
+      } else {
+        await transFatsResult.forEach((value) {
+          transFatList.add(value['trans_fat']);
+        });
+        finalFoodResults.add(transFatList);
+      }
+            if (await cholesterolResult == null) {
+        cholesterolList.add(null);
+        finalFoodResults.add(cholesterolList);
+      } else if (cholesterolResult.runtimeType.toString() ==
+          '_InternalLinkedHashMap<String, dynamic>') {
+        cholesterolList
+            .add(await cholesterolResult['cholesterol']);
+        finalFoodResults.add(cholesterolList);
+      } else {
+        await cholesterolResult.forEach((value) {
+          cholesterolList.add(value['cholesterol']);
+        });
+        finalFoodResults.add(cholesterolList);
+      }
+
+      // print(cholesterolList);
+      // print(await result['food']['servings']['serving']['cholestrol']);
+      // print(monoUnsaturatedFatsResult['monounsaturated_fat']);
+      //       print(polyUnsaturatedFatsResult);
+
+      // print(monoUnsaturatedFatsList);
+      // print(finalFoodResults[6]);
       // print(finalFoodResults[1]);
       // print(testList);
       // print(testList2);
@@ -427,7 +523,7 @@ class RestClient {
       // print(carbsResult);
 
     }
-    
+
     return finalFoodResults;
   }
   //  Future getFood(int foodId) async {
