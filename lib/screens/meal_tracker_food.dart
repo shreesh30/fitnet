@@ -49,10 +49,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
     Provider.of<NutritionData>(context, listen: false).vitaminA = null;
     Provider.of<NutritionData>(context, listen: false).vitaminC = null;
     Provider.of<NutritionData>(context, listen: false).calcium = null;
-        Provider.of<NutritionData>(context, listen: false).iron = null;
-
-
-
+    Provider.of<NutritionData>(context, listen: false).iron = null;
   }
 
   Widget servingPopUp(BuildContext context) {
@@ -254,7 +251,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                       : Provider.of<NutritionData>(context, listen: false)
                           .vitaminA = 0.0;
 
-               value == null
+              value == null
                   ? Provider.of<NutritionData>(context, listen: false)
                           .vitaminC =
                       RestClient.vitaminCList[0] != null
@@ -269,8 +266,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           .vitaminC = 0.0;
 
               value == null
-                  ? Provider.of<NutritionData>(context, listen: false)
-                          .calcium =
+                  ? Provider.of<NutritionData>(context, listen: false).calcium =
                       RestClient.calciumList[0] != null
                           ? double.parse(RestClient.calciumList[0])
                           : 0.0
@@ -282,10 +278,8 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                       : Provider.of<NutritionData>(context, listen: false)
                           .calcium = 0.0;
 
-
               value == null
-                  ? Provider.of<NutritionData>(context, listen: false)
-                          .iron =
+                  ? Provider.of<NutritionData>(context, listen: false).iron =
                       RestClient.ironList[0] != null
                           ? double.parse(RestClient.ironList[0])
                           : 0.0
@@ -773,7 +767,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Saturated',
                                 style: TextStyle(
-                                    color: Colors.grey[400],
+                                    color:Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
@@ -789,14 +783,14 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                                 .toStringAsFixed(1) +
                                             'g'),
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize: SizeConfig.textMultiplier * 2))
@@ -822,7 +816,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Polyunsaturated',
                                 style: TextStyle(
-                                    color: Colors.grey[400],
+                                    color:Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
@@ -838,14 +832,14 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                                 .toStringAsFixed(1) +
                                             'g'),
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color:Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color:Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize: SizeConfig.textMultiplier * 2))
@@ -871,7 +865,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Monounsaturated',
                                 style: TextStyle(
-                                    color: Colors.grey[400],
+                                    color:Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
@@ -887,14 +881,14 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                                 .toStringAsFixed(1) +
                                             'g'),
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color:Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize: SizeConfig.textMultiplier * 2))
@@ -920,7 +914,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Trans',
                                 style: TextStyle(
-                                    color: Colors.grey[400],
+                                    color: Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
@@ -936,14 +930,14 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                                 .toStringAsFixed(1) +
                                             'g'),
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF595959),
                                         fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
+                                        fontWeight: FontWeight.w500,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize: SizeConfig.textMultiplier * 2))
@@ -1201,7 +1195,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Fiber',
                                 style: TextStyle(
-                                    color: Colors.grey[400],
+                                    color: Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
@@ -1217,14 +1211,14 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                                 .toStringAsFixed(1) +
                                             'g'),
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize: SizeConfig.textMultiplier * 2))
@@ -1250,7 +1244,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Sugars',
                                 style: TextStyle(
-                                    color: Colors.grey[400],
+                                    color:Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
@@ -1266,14 +1260,14 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                                 .toStringAsFixed(1) +
                                             'g'),
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize:
                                             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
-                                        color: Colors.grey[400],
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize: SizeConfig.textMultiplier * 2))
@@ -1397,7 +1391,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                         ),
                       ),
                     ),
-                     Divider(
+                    Divider(
                       color: Colors.white,
                       indent: SizeConfig.widthMultiplier * 4,
                       endIndent: SizeConfig.widthMultiplier * 4,
@@ -1455,7 +1449,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                         ),
                       ),
                     ),
-                       Divider(
+                    Divider(
                       color: Colors.white,
                       indent: SizeConfig.widthMultiplier * 4,
                       endIndent: SizeConfig.widthMultiplier * 4,
@@ -1513,7 +1507,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                         ),
                       ),
                     ),
-                       Divider(
+                    Divider(
                       color: Colors.white,
                       indent: SizeConfig.widthMultiplier * 4,
                       endIndent: SizeConfig.widthMultiplier * 4,
