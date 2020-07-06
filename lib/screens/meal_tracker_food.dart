@@ -28,6 +28,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
     super.initState();
     future = object.getFood(widget.foodId);
     controller = TextEditingController(text: 1.toString());
+    Provider.of<NutritionData>(context, listen: false).name = widget.foodName;
     Provider.of<NutritionData>(context, listen: false).numberOfServings = 1;
     Provider.of<NutritionData>(context, listen: false).servingDescription =
         null;
@@ -50,10 +51,12 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
     Provider.of<NutritionData>(context, listen: false).vitaminC = null;
     Provider.of<NutritionData>(context, listen: false).calcium = null;
     Provider.of<NutritionData>(context, listen: false).iron = null;
+    Provider.of<NutritionData>(context, listen: false).value = null;
   }
 
   Widget servingPopUp(BuildContext context) {
     // controller.text=1.toString();
+    //  Provider.of<NutritionData>(context,listen: false).calories= Provider.of<NutritionData>(context,listen: false).calories==null?double.parse(RestClient.caloriesList[0]): Provider.of<NutritionData>(context,listen: false).calories;
     return AlertDialog(
       scrollable: true,
       title: Text(
@@ -75,8 +78,10 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                   onChanged: (value) {
                     Provider.of<NutritionData>(context, listen: false)
                         .numberOfServings = double.parse(value);
-                    print(Provider.of<NutritionData>(context, listen: false)
-                        .numberOfServings);
+                    // Provider.of<NutritionData>(context).calories=(Provider.of<NutritionData>(context).calories==null?((Provider.of<NutritionData>(context).numberOfServings*double.parse(RestClient.caloriesList[0]))):((Provider.of<NutritionData>(context).calories*Provider.of<NutritionData>(context).numberOfServings)));
+                    // print(Provider.of<NutritionData>(context, listen: false)
+                    //     .numberOfServings);
+                    // Provider.of(context)
                   },
                   decoration: InputDecoration(
                     // hintText: 'Search Recipes',
@@ -103,14 +108,17 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
             height: SizeConfig.heightMultiplier,
           ),
           DropdownButton(
-            // value: RestClient.servingDescriptionList[0],
+            value: Provider.of<NutritionData>(context,listen: false).servingDescription==null?RestClient.servingDescriptionList.length>1?RestClient.servingDescriptionList[0]:Provider.of<NutritionData>(context,listen: false).servingDescription:null,
+            // value: Provider.of<NutritionData>(context,listen: false).servingDescription==null?RestClient.servingDescriptionDropdownItems[0]:Provider.of<NutritionData>(context,listen: false).servingDescription,
             // hint: Text(Provider.of<NutritionData>(context).servingDescription==null?RestClient.servingDescriptionDropdownItems:Provider.of<NutritionData>(context).servingDescription),
-            hint: Provider.of<NutritionData>(context).servingDescription == null
-                ? RestClient.servingDescriptionDropdownItems[0]
-                : Text(Provider.of<NutritionData>(context).servingDescription),
+            // hint: Provider.of<NutritionData>(context).servingDescription == null
+            //     ? RestClient.servingDescriptionDropdownItems[0]
+            //     : Text(Provider.of<NutritionData>(context).servingDescription),
             isExpanded: true,
             items: RestClient.servingDescriptionDropdownItems,
             onChanged: (value) {
+              // print(value);
+              Provider.of<NutritionData>(context, listen: false).value = value;
               value == null
                   ? Provider.of<NutritionData>(context, listen: false)
                       .servingDescription = RestClient.servingDescriptionList[0]
@@ -317,13 +325,232 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
       actions: <Widget>[
         MaterialButton(
           onPressed: () {
+            Provider.of<NutritionData>(context, listen: false)
+                .numberOfServings = 1.0;
+            Provider.of<NutritionData>(context, listen: false)
+                .servingDescription = null;
+            Provider.of<NutritionData>(context, listen: false).calories = null;
+            Provider.of<NutritionData>(context, listen: false).carbs = null;
+            Provider.of<NutritionData>(context, listen: false).fat = null;
+            Provider.of<NutritionData>(context, listen: false).protein = null;
+            Provider.of<NutritionData>(context, listen: false).saturatedFats =
+                null;
+            Provider.of<NutritionData>(context, listen: false)
+                .polyUnsaturatedFats = null;
+            Provider.of<NutritionData>(context, listen: false)
+                .monoUnsaturatedFats = null;
+            Provider.of<NutritionData>(context, listen: false).transFat = null;
+            Provider.of<NutritionData>(context, listen: false).cholesterol =
+                null;
+            Provider.of<NutritionData>(context, listen: false).sodium = null;
+            Provider.of<NutritionData>(context, listen: false).potassium = null;
+            Provider.of<NutritionData>(context, listen: false).fiber = null;
+            Provider.of<NutritionData>(context, listen: false).sugars = null;
+            Provider.of<NutritionData>(context, listen: false).vitaminA = null;
+            Provider.of<NutritionData>(context, listen: false).vitaminC = null;
+            Provider.of<NutritionData>(context, listen: false).calcium = null;
+            Provider.of<NutritionData>(context, listen: false).iron = null;
             Navigator.pop(context);
           },
           elevation: 5.0,
           child: Text('Cancel'),
         ),
         MaterialButton(
-          onPressed: () {},
+          onPressed: () {
+            // Provider.of<NutritionData>(context,listen: false).calories=Provider.of<NutritionData>(context,listen: false).calories==null?(double.parse(RestClient.caloriesList[0])* Provider.of<NutritionData>(context,listen: false).numberOfServings):( Provider.of<NutritionData>(context,listen: false).calories* Provider.of<NutritionData>(context,listen: false).numberOfServings);
+            //  RestClient.caloriesList.length>1? Provider.of<NutritionData>(context,listen: false).calories==null?( Provider.of<NutritionData>(context,listen: false).calories=(double.parse(RestClient.caloriesList[0])* Provider.of<NutritionData>(context,listen: false).numberOfServings)):( Provider.of<NutritionData>(context,listen: false).calories= Provider.of<NutritionData>(context,listen: false).calories* Provider.of<NutritionData>(context,listen: false).numberOfServings):Provider.of<NutritionData>(context,listen: false).calories==null?( Provider.of<NutritionData>(context,listen: false).calories=(double.parse(RestClient.caloriesList[0])* Provider.of<NutritionData>(context,listen: false).numberOfServings)):( Provider.of<NutritionData>(context,listen: false).calories= Provider.of<NutritionData>(context,listen: false).calories* Provider.of<NutritionData>(context,listen: false).numberOfServings);
+            // Provider.of<NutritionData>(context,listen: false).calories=(Provider.of<NutritionData>(context,listen: false).calories==null?(double.parse(RestClient.caloriesList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings):(Provider.of<NutritionData>(context,listen: false).calories());
+            //  Provider.of<NutritionData>(context,listen: false).calories= (Provider.of<NutritionData>(context,listen: false).calories==null?(double.parse(RestClient.caloriesList[0])* Provider.of<NutritionData>(context,listen: false).numberOfServings):( Provider.of<NutritionData>(context,listen: false).calories* Provider.of<NutritionData>(context,listen: false).numberOfServings));
+            //  Provider.of<NutritionData>(context,listen: false).calories=RestClient.caloriesList[]
+            //  Provider.of<NutritionData>(context,listen: false).calories= Provider.of<NutritionData>(context,listen: false).calories* Provider.of<NutritionData>(context,listen: false).numberOfServings;
+            Provider.of<NutritionData>(context, listen: false).calories =
+                (Provider.of<NutritionData>(context, listen: false).value ==
+                        null
+                    ? (Provider.of<NutritionData>(context, listen: false)
+                            .numberOfServings *
+                        double.parse(RestClient.caloriesList[0]))
+                    : (Provider.of<NutritionData>(context, listen: false)
+                            .numberOfServings *
+                        double.parse(RestClient.caloriesList[
+                            RestClient.servingDescriptionList.indexOf(
+                                Provider.of<NutritionData>(context, listen: false)
+                                    .value)])));
+
+            Provider.of<NutritionData>(context,listen: false).carbs= Provider.of<NutritionData>(context,listen: false).value == null
+                  ? (Provider.of<NutritionData>(context,listen: false).numberOfServings*
+                      double.parse(RestClient.carbsList[0]))
+                  : ( Provider.of<NutritionData>(context,listen: false).numberOfServings*
+                      double.parse(RestClient.carbsList[
+                          RestClient.servingDescriptionList.indexOf( Provider.of<NutritionData>(context,listen: false).value)]));
+            
+
+            Provider.of<NutritionData>(context,listen: false).fat=Provider.of<NutritionData>(context,listen:false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false).numberOfServings*
+                      double.parse(RestClient.fatsList[0])
+                  : Provider.of<NutritionData>(context, listen: false).numberOfServings*
+                      double.parse(RestClient.fatsList[
+                          RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen:false).value)]);
+
+
+            Provider.of<NutritionData>(context,listen: false).protein= Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false).numberOfServings*
+                      double.parse(RestClient.proteinsList[0])
+                  : Provider.of<NutritionData>(context, listen: false).numberOfServings*
+                      double.parse(RestClient.proteinsList[
+                          RestClient.servingDescriptionList.indexOf( Provider.of<NutritionData>(context,listen: false).value)]);
+           
+            Provider.of<NutritionData>(context,listen: false).saturatedFats=  Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .numberOfServings*
+                      double.parse(RestClient.saturatedFatsList[0])
+                  : Provider.of<NutritionData>(context, listen: false)
+                          .numberOfServings*
+                      double.parse(RestClient.saturatedFatsList[
+                          RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)]);
+
+            Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .polyUnsaturatedFats =
+                      RestClient.polyUnsaturatedFatsList[0] != null
+                          ? double.parse(RestClient.polyUnsaturatedFatsList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                          : 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.polyUnsaturatedFatsList != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .polyUnsaturatedFats =
+                          double.parse(RestClient.polyUnsaturatedFatsList[
+                              RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])* Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .polyUnsaturatedFats = 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+
+
+               Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .monoUnsaturatedFats =
+                      RestClient.monoUnsaturatedFatsList[0] != null
+                          ? double.parse(RestClient.monoUnsaturatedFatsList[0])* Provider.of<NutritionData>(context,listen: false).numberOfServings
+                          : 0.0* Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.monoUnsaturatedFatsList != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .monoUnsaturatedFats =
+                          double.parse(RestClient.monoUnsaturatedFatsList[
+                              RestClient.servingDescriptionList.indexOf( Provider.of<NutritionData>(context,listen: false).value)])* Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .monoUnsaturatedFats = 0.0* Provider.of<NutritionData>(context,listen: false).numberOfServings;
+
+
+            Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                      .transFat =RestClient.transFatList[0]!=null?double.parse(RestClient.transFatList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings:0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.transFatList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .transFat =
+                          double.parse(RestClient.transFatList[
+                              RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .transFat = 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+
+             Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                      .cholesterol = double.parse(RestClient.cholesterolList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : Provider.of<NutritionData>(context, listen: false)
+                          .cholesterol =
+                      double.parse(RestClient.cholesterolList[
+                          RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+            
+             Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false).sodium =
+                      double.parse(RestClient.sodiumList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : Provider.of<NutritionData>(context, listen: false).sodium =
+                      double.parse(RestClient.sodiumList[
+                          RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+            
+
+            Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .potassium =
+                      RestClient.potassiumList[0] != null
+                          ? double.parse(RestClient.potassiumList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                          : 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.potassiumList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .potassium =
+                          double.parse(RestClient.potassiumList[
+                              RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .potassium = 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+
+             Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false).fiber =
+                      double.parse(RestClient.fiberList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : Provider.of<NutritionData>(context, listen: false).fiber =
+                      double.parse(RestClient.fiberList[
+                          RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+            
+
+            Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false).sugars =
+                      double.parse(RestClient.sugarsList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : Provider.of<NutritionData>(context, listen: false).sugars =
+                      double.parse(RestClient.sugarsList[
+                          RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+            
+            Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .vitaminA =
+                      RestClient.vitaminAList[0] != null
+                          ? double.parse(RestClient.vitaminAList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                          : 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.vitaminAList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .vitaminA =
+                          double.parse(RestClient.vitaminAList[
+                              RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .vitaminA = 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+
+              Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false)
+                          .vitaminC =
+                      RestClient.vitaminCList[0] != null
+                          ? double.parse(RestClient.vitaminCList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                          : 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.vitaminCList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .vitaminC =
+                          double.parse(RestClient.vitaminCList[
+                              RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .vitaminC = 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+            
+
+            Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false).calcium =
+                      RestClient.calciumList[0] != null
+                          ? double.parse(RestClient.calciumList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                          : 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.calciumList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .calcium =
+                          double.parse(RestClient.calciumList[
+                              RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .calcium = 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+
+            Provider.of<NutritionData>(context,listen: false).value == null
+                  ? Provider.of<NutritionData>(context, listen: false).iron =
+                      RestClient.ironList[0] != null
+                          ? double.parse(RestClient.ironList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                          : 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                  : RestClient.ironList[0] != null
+                      ? Provider.of<NutritionData>(context, listen: false)
+                              .iron =
+                          double.parse(RestClient.ironList[
+                              RestClient.servingDescriptionList.indexOf(Provider.of<NutritionData>(context,listen: false).value)])*Provider.of<NutritionData>(context,listen: false).numberOfServings
+                      : Provider.of<NutritionData>(context, listen: false)
+                          .iron = 0.0*Provider.of<NutritionData>(context,listen: false).numberOfServings;
+              
+            Navigator.pop(context);
+          },
           elevation: 5.0,
           child: Text('Save'),
         )
@@ -331,8 +558,51 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
     );
   }
 
+  // void actionButtonOnPressed() {
+  //   Provider.of<NutritionData>(context, listen: false)
+  //       .foodCalories
+  //       .clear();
+  //       Provider.of<NutritionData>(context, listen: false)
+  //       .foodName
+  //       .clear();
+  //   // print(widget.foodName);
+  //   Provider.of<NutritionData>(context,listen: false)
+  //       .foodName
+  //       .add(widget.foodName);
+  //   // Provider.of<NutritionData>(context, listen: false)
+  //   //     .foodCalories
+  //   //     .add(Provider.of<NutritionData>(context,listen: false).calories);
+  //   if(Provider.of<NutritionData>(context,listen: false).calories==null){
+  //     Provider.of<NutritionData>(context, listen: false)
+  //       .foodCalories
+  //       .add(RestClient.caloriesList[0]);
+  //   }
+  //   else{
+  //     Provider.of<NutritionData>(context, listen: false)
+  //       .foodCalories
+  //       .add(Provider.of<NutritionData>(context,listen: false).calories);
+  //   }
+  //   // Provider.of<NutritionData>(context, listen: false)
+  //   //     .foodCarbs
+  //   //     .add(Provider.of<NutritionData>(context,listen: false).carbs);
+  //   // Provider.of<NutritionData>(context, listen: false)
+  //   //     .foodProtein
+  //   //     .add(Provider.of<NutritionData>(context,listen: false).protein);
+  //   // Provider.of<NutritionData>(context, listen: false)
+  //   //     .foodFats
+  //   //     .add(Provider.of<NutritionData>(context,listen: false).fat);
+  //   print(Provider.of<NutritionData>(context, listen: false).foodName);
+
+  //   print(Provider.of<NutritionData>(context, listen: false).foodCalories);
+  //   print(Provider.of<NutritionData>(context, listen: false).foodCarbs);
+  //   print(Provider.of<NutritionData>(context, listen: false).foodProtein);
+  //   print(Provider.of<NutritionData>(context, listen: false).foodFats);
+  // }
+
   @override
   Widget build(BuildContext context) {
+    Provider.of<NutritionData>(context).name = widget.foodName;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -360,6 +630,21 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
           ),
         ),
         backgroundColor: Color(0xFF0F0F0F),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.check,
+              size: SizeConfig.heightMultiplier * 3,
+              color: Color(0xFFFD5739),
+            ),
+            onPressed: () {
+              // Provider.of<NutritionData>(context,listen: false).updateNutritionData();
+              // Provider.of<NutritionData>(context,listen: false).calories==null?Provider.of<NutritionData>(context,listen: false).calories=(double.parse(RestClient.caloriesList[0])*Provider.of<NutritionData>(context,listen: false).numberOfServings):Provider.of<NutritionData>(context,listen: false).calories=(Provider.of<NutritionData>(context,listen: false).calories*Provider.of<NutritionData>(context,listen: false).numberOfServings);
+              // print(Provider.of<NutritionData>(context,listen: false).calories);
+              // print(Provider.of<NutritionData>(context,listen: false).calories);
+            },
+          )
+        ],
       ),
       body: FutureBuilder(
         future: future,
@@ -376,7 +661,8 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                   snapshot.connectionState == ConnectionState.none)
                 return Center(child: new CircularProgressIndicator());
               else
-                // print(snapshot.data[6]);
+                // print(snapshot.data);
+// Provider.of<NutritionData>(context,listen: false).calories==null? Provider.of<NutritionData>(context,listen: false).calories=(double.parse(RestClient.caloriesList[0])* Provider.of<NutritionData>(context,listen: false).numberOfServings): Provider.of<NutritionData>(context,listen: false).calories= (Provider.of<NutritionData>(context,listen: false).calories* Provider.of<NutritionData>(context,listen: false).calories);
                 return ListView(
                   children: <Widget>[
                     ListTile(
@@ -400,6 +686,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                       onTap: () {
                         // servingPopUp(context);
                         showDialog(
+                          barrierDismissible: false,
                           context: context,
                           builder: (context) => servingPopUp(context),
                         );
@@ -436,6 +723,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                       onTap: () {
                         // servingPopUp(context);
                         showDialog(
+                          barrierDismissible: false,
                           context: context,
                           builder: (context) => servingPopUp(context),
                         );
@@ -508,33 +796,56 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                 //   Text(snapshot.data[1][].toString()),
                                 // Text('Cal')
                                 // }
-                                snapshot.data[1] != null
-                                    ? snapshot.data[1].length > 1
-                                        ? Text(
-                                            Provider.of<NutritionData>(context, listen: false).calories == null
-                                                ? ((double.parse((snapshot.data[1][0])) *
-                                                        (Provider.of<NutritionData>(context, listen: false)
-                                                            .numberOfServings))
-                                                    .toStringAsFixed(1))
-                                                : ((Provider.of<NutritionData>(context,
-                                                                listen: false)
-                                                            .calories) *
-                                                        (Provider.of<NutritionData>(
-                                                                context,
-                                                                listen: false)
-                                                            .numberOfServings))
-                                                    .toStringAsFixed(1),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: SizeConfig.textMultiplier * 2.5))
-                                        : Text(
-                                            Provider.of<NutritionData>(context, listen: false).calories == null
-                                                ? (double.parse((snapshot.data[1][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)
-                                                // .toString()
-                                                : ((Provider.of<NutritionData>(context, listen: false).calories) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1),
-                                            style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2.5))
-                                    : Container(),
+                                snapshot.data[1][0] != null
+                                    ? Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .calories ==
+                                                null
+                                            ? RestClient.caloriesList[0]
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .calories
+                                                .toStringAsFixed(1),
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2.5))
+                                    // ? snapshot.data[1].length > 1
+                                    // ? Text(
+                                    //     Provider.of<NutritionData>(context, listen: false).calories == null
+                                    //         ? ((double.parse((snapshot.data[1][0])) *
+                                    //                 (Provider.of<NutritionData>(context, listen: false)
+                                    //                     .numberOfServings))
+                                    //             .toStringAsFixed(1))
+                                    //         : ((Provider.of<NutritionData>(context,
+                                    //                         listen: false)
+                                    //                     .calories) *
+                                    //                 (Provider.of<NutritionData>(
+                                    //                         context,
+                                    //                         listen: false)
+                                    //                     .numberOfServings))
+                                    //             .toStringAsFixed(1),
+                                    //     style: TextStyle(
+                                    //         fontFamily: 'Roboto',
+                                    //         fontWeight: FontWeight.w300,
+                                    //         fontSize: SizeConfig.textMultiplier * 2.5))
+                                    // : Text(
+                                    //     Provider.of<NutritionData>(context, listen: false).calories == null
+                                    //         ? (double.parse((snapshot.data[1][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1)
+                                    //         // .toString()
+                                    //         : ((Provider.of<NutritionData>(context, listen: false).calories) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1),
+                                    //     style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2.5))
+                                    : Text('-',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2.5)),
                                 Text('Cal',
                                     style: TextStyle(
                                         fontFamily: 'Roboto',
@@ -549,28 +860,45 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                 //   Text(snapshot.data[1][].toString()),
                                 // Text('Cal')
                                 // }
-                                snapshot.data[2] != null
-                                    ? snapshot.data[2].length > 1
-                                        ? Text(Provider.of<NutritionData>(context, listen: false).carbs == null ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).carbs) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: SizeConfig.textMultiplier *
+                                snapshot.data[2][0] != null?
+                                Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .carbs ==
+                                                null
+                                            ? RestClient.carbsList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .carbs
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
                                                     2.5))
-                                        : Text(
-                                            Provider.of<NutritionData>(context, listen: false).carbs == null
-                                                ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
-                                                    'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).carbs) *
-                                                            (Provider.of<NutritionData>(context, listen: false)
-                                                                .numberOfServings))
-                                                        .toStringAsFixed(1) +
-                                                    'g'),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: SizeConfig.textMultiplier * 2.5))
-                                    : Container(),
+                                    // ? snapshot.data[2].length > 1
+                                    //     ? Text(Provider.of<NutritionData>(context, listen: false).carbs == null ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).carbs) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
+                                    //         style: TextStyle(
+                                    //             fontFamily: 'Roboto',
+                                    //             fontWeight: FontWeight.w300,
+                                    //             fontSize:
+                                    //                 SizeConfig.textMultiplier *
+                                    //                     2.5))
+                                    //     : Text(
+                                    //         Provider.of<NutritionData>(context, listen: false).carbs == null
+                                    //             ? ((double.parse((snapshot.data[2][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                    //                     .toStringAsFixed(1) +
+                                    //                 'g')
+                                    //             : (((Provider.of<NutritionData>(context, listen: false).carbs) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                    //                     .toStringAsFixed(1) +
+                                    //                 'g'),
+                                    //         style: TextStyle(
+                                    //             fontFamily: 'Roboto',
+                                    //             fontWeight: FontWeight.w300,
+                                    //             fontSize: SizeConfig.textMultiplier * 2.5))
+                                    : Text('-', style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2.5)),
                                 Text('Carbs',
                                     style: TextStyle(
                                         color: Color(0xFF03DAC5),
@@ -586,28 +914,45 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                 //   Text(snapshot.data[1][].toString()),
                                 // Text('Cal')
                                 // }
-                                snapshot.data[3] != null
-                                    ? snapshot.data[3].length > 1
-                                        ? Text(Provider.of<NutritionData>(context, listen: false).fat == null ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: SizeConfig.textMultiplier *
+                                snapshot.data[3][0] != null?
+                                 Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .fat ==
+                                                null
+                                            ? RestClient.fatsList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .fat
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
                                                     2.5))
-                                        : Text(
-                                            Provider.of<NutritionData>(context, listen: false).fat == null
-                                                ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
-                                                    'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).fat) *
-                                                            (Provider.of<NutritionData>(context, listen: false)
-                                                                .numberOfServings))
-                                                        .toStringAsFixed(1) +
-                                                    'g'),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: SizeConfig.textMultiplier * 2.5))
-                                    : Container(),
+                                    // ? snapshot.data[3].length > 1
+                                    //     ? Text(Provider.of<NutritionData>(context, listen: false).fat == null ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
+                                    //         style: TextStyle(
+                                    //             fontFamily: 'Roboto',
+                                    //             fontWeight: FontWeight.w300,
+                                    //             fontSize:
+                                    //                 SizeConfig.textMultiplier *
+                                    //                     2.5))
+                                    //     : Text(
+                                    //         Provider.of<NutritionData>(context, listen: false).fat == null
+                                    //             ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                    //                     .toStringAsFixed(1) +
+                                    //                 'g')
+                                    //             : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                    //                     .toStringAsFixed(1) +
+                                    //                 'g'),
+                                    //         style: TextStyle(
+                                    //             fontFamily: 'Roboto',
+                                    //             fontWeight: FontWeight.w300,
+                                    //             fontSize: SizeConfig.textMultiplier * 2.5))
+                                    : Text('-', style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2.5)),
                                 Text('Fat',
                                     style: TextStyle(
                                         color: Color(0xFFFAD96B),
@@ -623,28 +968,45 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                 //   Text(snapshot.data[1][].toString()),
                                 // Text('Cal')
                                 // }
-                                snapshot.data[4] != null
-                                    ? snapshot.data[4].length > 1
-                                        ? Text(Provider.of<NutritionData>(context, listen: false).protein == null ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).protein) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: SizeConfig.textMultiplier *
+                                snapshot.data[4] != null?
+                                Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .protein ==
+                                                null
+                                            ? RestClient.proteinsList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .protein
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
                                                     2.5))
-                                        : Text(
-                                            Provider.of<NutritionData>(context, listen: false).protein == null
-                                                ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
-                                                    'g')
-                                                : (((Provider.of<NutritionData>(context, listen: false).protein) *
-                                                            (Provider.of<NutritionData>(context, listen: false)
-                                                                .numberOfServings))
-                                                        .toStringAsFixed(1) +
-                                                    'g'),
-                                            style: TextStyle(
-                                                fontFamily: 'Roboto',
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: SizeConfig.textMultiplier * 2.5))
-                                    : Container(),
+                                    // ? snapshot.data[4].length > 1
+                                    //     ? Text(Provider.of<NutritionData>(context, listen: false).protein == null ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g') : (((Provider.of<NutritionData>(context, listen: false).protein) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
+                                    //         style: TextStyle(
+                                    //             fontFamily: 'Roboto',
+                                    //             fontWeight: FontWeight.w300,
+                                    //             fontSize:
+                                    //                 SizeConfig.textMultiplier *
+                                    //                     2.5))
+                                    //     : Text(
+                                    //         Provider.of<NutritionData>(context, listen: false).protein == null
+                                    //             ? ((double.parse((snapshot.data[4][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                    //                     .toStringAsFixed(1) +
+                                    //                 'g')
+                                    //             : (((Provider.of<NutritionData>(context, listen: false).protein) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                    //                     .toStringAsFixed(1) +
+                                    //                 'g'),
+                                    //         style: TextStyle(
+                                    //             fontFamily: 'Roboto',
+                                    //             fontWeight: FontWeight.w300,
+                                    //             fontSize: SizeConfig.textMultiplier * 2.5))
+                                    : Text('-', style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2.5)),
                                 Text('Protein',
                                     style: TextStyle(
                                         color: Color(0xFFEB1555),
@@ -679,26 +1041,23 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            Text(
-                                Provider.of<NutritionData>(context, listen: false)
-                                            .calories ==
-                                        null
-                                    ? (double.parse((snapshot.data[1][0])) *
-                                            (Provider.of<NutritionData>(context,
+                       Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .calories ==
+                                                null
+                                            ? RestClient.caloriesList[0]
+                                            : Provider.of<NutritionData>(
+                                                    context,
                                                     listen: false)
-                                                .numberOfServings))
-                                        .toStringAsFixed(1)
-                                    : ((Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .calories) *
-                                            (Provider.of<NutritionData>(context,
-                                                    listen: false)
-                                                .numberOfServings))
-                                        .toStringAsFixed(1),
-                                style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: SizeConfig.textMultiplier * 2)),
+                                                .calories
+                                                .toStringAsFixed(1),
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2)),
                           ],
                         ),
                       ),
@@ -724,27 +1083,44 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[3].length > 1
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false).fat == null
-                                        ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).fat) *
-                                                    (Provider.of<NutritionData>(context, listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
-                                : Text(
-                                    Provider.of<NutritionData>(context, listen: false).fat == null
-                                        ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
-                                    style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2))
+                                    Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .fat ==
+                                                null
+                                            ? RestClient.fatsList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .fat
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                            // snapshot.data[3].length > 1
+                            //     ? Text(
+                            //         Provider.of<NutritionData>(context, listen: false).fat == null
+                            //             ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                            //                     .toStringAsFixed(1) +
+                            //                 'g')
+                            //             : (((Provider.of<NutritionData>(context, listen: false).fat) *
+                            //                         (Provider.of<NutritionData>(context, listen: false)
+                            //                             .numberOfServings))
+                            //                     .toStringAsFixed(1) +
+                            //                 'g'),
+                            //         style: TextStyle(
+                            //             fontFamily: 'Roboto',
+                            //             fontWeight: FontWeight.w300,
+                            //             fontSize:
+                            //                 SizeConfig.textMultiplier * 2))
+                            //     : Text(
+                            //         Provider.of<NutritionData>(context, listen: false).fat == null
+                            //             ? ((double.parse((snapshot.data[3][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g')
+                            //             : (((Provider.of<NutritionData>(context, listen: false).fat) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) + 'g'),
+                            //         style: TextStyle(fontFamily: 'Roboto', fontWeight: FontWeight.w300, fontSize: SizeConfig.textMultiplier * 2))
                           ],
                         ),
                       ),
@@ -767,27 +1143,45 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Saturated',
                                 style: TextStyle(
-                                    color:Color(0xFF6F6F6F),
+                                    color: Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[5] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false).saturatedFats == null
-                                        ? ((double.parse((snapshot.data[5][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).saturatedFats) *
-                                                    (Provider.of<NutritionData>(context, listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        color: Color(0xFF6F6F6F),
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                            snapshot.data[5] != null?
+                             Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .saturatedFats ==
+                                                null
+                                            ? double.parse(RestClient.saturatedFatsList[0]).toStringAsFixed(1)+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .saturatedFats
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                          color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false).saturatedFats == null
+                                //         ? ((double.parse((snapshot.data[5][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g')
+                                //         : (((Provider.of<NutritionData>(context, listen: false).saturatedFats) *
+                                //                     (Provider.of<NutritionData>(context, listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g'),
+                                //     style: TextStyle(
+                                //         color: Color(0xFF6F6F6F),
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize:
+                                //             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         color: Color(0xFF6F6F6F),
@@ -816,30 +1210,48 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Polyunsaturated',
                                 style: TextStyle(
-                                    color:Color(0xFF6F6F6F),
+                                    color: Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[6][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats == null
-                                        ? ((double.parse((snapshot.data[6][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false)
-                                                        .polyUnsaturatedFats) *
-                                                    (Provider.of<NutritionData>(context, listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        color:Color(0xFF6F6F6F),
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                            snapshot.data[6][0] != null?
+                             Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .polyUnsaturatedFats ==
+                                                null
+                                            ? double.parse(RestClient.polyUnsaturatedFatsList[0]).toStringAsFixed(1)+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .polyUnsaturatedFats
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                          color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats == null
+                                //         ? ((double.parse((snapshot.data[6][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
+                                //             'g')
+                                //         : (((Provider.of<NutritionData>(context, listen: false)
+                                //                         .polyUnsaturatedFats) *
+                                //                     (Provider.of<NutritionData>(context, listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g'),
+                                //     style: TextStyle(
+                                //         color: Color(0xFF6F6F6F),
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize:
+                                //             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
-                                        color:Color(0xFF6F6F6F),
+                                        color: Color(0xFF6F6F6F),
                                         fontFamily: 'Roboto',
                                         fontWeight: FontWeight.w300,
                                         fontSize: SizeConfig.textMultiplier * 2))
@@ -865,27 +1277,45 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Monounsaturated',
                                 style: TextStyle(
-                                    color:Color(0xFF6F6F6F),
+                                    color: Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[7][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats == null
-                                        ? ((double.parse((snapshot.data[7][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false)
-                                                        .monoUnsaturatedFats) *
-                                                    (Provider.of<NutritionData>(context, listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        color:Color(0xFF6F6F6F),
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                            snapshot.data[7][0] != null?
+                             Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .monoUnsaturatedFats ==
+                                                null
+                                            ? double.parse(RestClient.monoUnsaturatedFatsList[0]).toStringAsFixed(1)+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .monoUnsaturatedFats
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                          color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false).polyUnsaturatedFats == null
+                                //         ? ((double.parse((snapshot.data[7][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings)).toStringAsFixed(1) +
+                                //             'g')
+                                //         : (((Provider.of<NutritionData>(context, listen: false)
+                                //                         .monoUnsaturatedFats) *
+                                //                     (Provider.of<NutritionData>(context, listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g'),
+                                //     style: TextStyle(
+                                //         color: Color(0xFF6F6F6F),
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize:
+                                //             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         color: Color(0xFF6F6F6F),
@@ -918,23 +1348,41 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[8][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false).transFat == null
-                                        ? ((double.parse((snapshot.data[8][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).transFat) *
-                                                    (Provider.of<NutritionData>(context, listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        color: Color(0xFF595959),
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                            snapshot.data[8][0] != null?
+                            Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .transFat ==
+                                                null
+                                            ? double.parse(RestClient.transFatList[0]).toStringAsFixed(1)+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .transFat
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                          color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false).transFat == null
+                                //         ? ((double.parse((snapshot.data[8][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g')
+                                //         : (((Provider.of<NutritionData>(context, listen: false).transFat) *
+                                //                     (Provider.of<NutritionData>(context, listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g'),
+                                //     style: TextStyle(
+                                //         color: Color(0xFF595959),
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w500,
+                                //         fontSize:
+                                //             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         color: Color(0xFF6F6F6F),
@@ -967,32 +1415,50 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[9][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .cholesterol ==
-                                            null
-                                        ? ((double.parse((snapshot.data[9][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'mg')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .cholesterol) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'mg'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                            snapshot.data[9][0] != null?
+                             Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .cholesterol ==
+                                                null
+                                            ? double.parse(RestClient.cholesterolList[0]).toStringAsFixed(1)+'mg'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .cholesterol
+                                                .toStringAsFixed(1)+'mg',
+                                        style: TextStyle(
+                                          // color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false)
+                                //                 .cholesterol ==
+                                //             null
+                                //         ? ((double.parse((snapshot.data[9][0])) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'mg')
+                                //         : (((Provider.of<NutritionData>(context,
+                                //                             listen: false)
+                                //                         .cholesterol) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'mg'),
+                                //     style: TextStyle(
+                                //         // color: Colors.grey[400],
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize: SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1025,32 +1491,50 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[10][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .sodium ==
-                                            null
-                                        ? ((double.parse((snapshot.data[10][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'mg')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .sodium) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'mg'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                            snapshot.data[10][0] != null?
+                             Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .sodium ==
+                                                null
+                                            ? double.parse(RestClient.sodiumList[0]).toStringAsFixed(1)+'mg'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .sodium
+                                                .toStringAsFixed(1)+'mg',
+                                        style: TextStyle(
+                                          // color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false)
+                                //                 .sodium ==
+                                //             null
+                                //         ? ((double.parse((snapshot.data[10][0])) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'mg')
+                                //         : (((Provider.of<NutritionData>(context,
+                                //                             listen: false)
+                                //                         .sodium) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'mg'),
+                                //     style: TextStyle(
+                                //         // color: Colors.grey[400],
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize: SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1083,32 +1567,50 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[11][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .potassium ==
-                                            null
-                                        ? ((double.parse((snapshot.data[11][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'mg')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .potassium) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'mg'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                            snapshot.data[11][0] != null?
+                              Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .potassium ==
+                                                null
+                                            ? double.parse(RestClient.potassiumList[0]).toStringAsFixed(1)+'mg'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .potassium
+                                                .toStringAsFixed(1)+'mg',
+                                        style: TextStyle(
+                                          // color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false)
+                                //                 .potassium ==
+                                //             null
+                                //         ? ((double.parse((snapshot.data[11][0])) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'mg')
+                                //         : (((Provider.of<NutritionData>(context,
+                                //                             listen: false)
+                                //                         .potassium) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'mg'),
+                                //     style: TextStyle(
+                                //         // color: Colors.grey[400],
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize: SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1142,31 +1644,23 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
                             snapshot.data[2][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .carbs ==
-                                            null
-                                        ? ((double.parse((snapshot.data[2][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .carbs) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                                ?    Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .carbs ==
+                                                null
+                                            ? RestClient.carbsList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .carbs
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1199,23 +1693,41 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[12][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false).carbs == null
-                                        ? ((double.parse((snapshot.data[12][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).fiber) *
-                                                    (Provider.of<NutritionData>(context, listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        color: Color(0xFF6F6F6F),
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                            snapshot.data[12][0] != null?
+                              Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .fiber ==
+                                                null
+                                            ? RestClient.fiberList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .fiber
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                          color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false).carbs == null
+                                //         ? ((double.parse((snapshot.data[12][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g')
+                                //         : (((Provider.of<NutritionData>(context, listen: false).fiber) *
+                                //                     (Provider.of<NutritionData>(context, listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g'),
+                                //     style: TextStyle(
+                                //         color: Color(0xFF6F6F6F),
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize:
+                                //             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         color: Color(0xFF6F6F6F),
@@ -1244,27 +1756,45 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                           children: <Widget>[
                             Text('Sugars',
                                 style: TextStyle(
-                                    color:Color(0xFF6F6F6F),
+                                    color: Color(0xFF6F6F6F),
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[13][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false).sugars == null
-                                        ? ((double.parse((snapshot.data[13][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context, listen: false).sugars) *
-                                                    (Provider.of<NutritionData>(context, listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        color: Color(0xFF6F6F6F),
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize:
-                                            SizeConfig.textMultiplier * 2))
+                            snapshot.data[13][0] != null?
+                             Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .sugars ==
+                                                null
+                                            ? RestClient.sugarsList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .sugars
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                          color: Color(0xFF6F6F6F),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false).sugars == null
+                                //         ? ((double.parse((snapshot.data[13][0])) * (Provider.of<NutritionData>(context, listen: false).numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g')
+                                //         : (((Provider.of<NutritionData>(context, listen: false).sugars) *
+                                //                     (Provider.of<NutritionData>(context, listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             'g'),
+                                //     style: TextStyle(
+                                //         color: Color(0xFF6F6F6F),
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize:
+                                //             SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         color: Color(0xFF6F6F6F),
@@ -1298,31 +1828,23 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
                             snapshot.data[4][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .protein ==
-                                            null
-                                        ? ((double.parse((snapshot.data[4][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .protein) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            'g'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                                ?   Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .protein ==
+                                                null
+                                            ? RestClient.proteinsList[0]+'g'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .protein
+                                                .toStringAsFixed(1)+'g',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1355,32 +1877,49 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[14][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .vitaminA ==
-                                            null
-                                        ? ((double.parse((snapshot.data[14][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .vitaminA) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                            snapshot.data[14][0] != null?
+                              Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .vitaminA ==
+                                                null
+                                            ? RestClient.vitaminAList[0]+'%'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .vitaminA
+                                                .toStringAsFixed(1)+'%',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false)
+                                //                 .vitaminA ==
+                                //             null
+                                //         ? ((double.parse((snapshot.data[14][0])) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%')
+                                //         : (((Provider.of<NutritionData>(context,
+                                //                             listen: false)
+                                //                         .vitaminA) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%'),
+                                //     style: TextStyle(
+                                //         // color: Colors.grey[400],
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize: SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1413,32 +1952,49 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[15][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .vitaminC ==
-                                            null
-                                        ? ((double.parse((snapshot.data[15][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .vitaminC) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                            snapshot.data[15][0] != null?
+                            Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .vitaminC ==
+                                                null
+                                            ? RestClient.vitaminCList[0]+'%'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .vitaminC
+                                                .toStringAsFixed(1)+'%',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false)
+                                //                 .vitaminC ==
+                                //             null
+                                //         ? ((double.parse((snapshot.data[15][0])) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%')
+                                //         : (((Provider.of<NutritionData>(context,
+                                //                             listen: false)
+                                //                         .vitaminC) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%'),
+                                //     style: TextStyle(
+                                //         // color: Colors.grey[400],
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize: SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1471,32 +2027,49 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[16][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .calcium ==
-                                            null
-                                        ? ((double.parse((snapshot.data[16][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .calcium) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                            snapshot.data[16][0] != null?
+                            Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .calcium ==
+                                                null
+                                            ? RestClient.calciumList[0]+'%'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .calcium
+                                                .toStringAsFixed(1)+'%',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false)
+                                //                 .calcium ==
+                                //             null
+                                //         ? ((double.parse((snapshot.data[16][0])) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%')
+                                //         : (((Provider.of<NutritionData>(context,
+                                //                             listen: false)
+                                //                         .calcium) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%'),
+                                //     style: TextStyle(
+                                //         // color: Colors.grey[400],
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize: SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],
@@ -1529,32 +2102,49 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                     fontFamily: 'Roboto',
                                     fontWeight: FontWeight.w300,
                                     fontSize: SizeConfig.textMultiplier * 2)),
-                            snapshot.data[17][0] != null
-                                ? Text(
-                                    Provider.of<NutritionData>(context, listen: false)
-                                                .iron ==
-                                            null
-                                        ? ((double.parse((snapshot.data[17][0])) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%')
-                                        : (((Provider.of<NutritionData>(context,
-                                                            listen: false)
-                                                        .iron) *
-                                                    (Provider.of<NutritionData>(
-                                                            context,
-                                                            listen: false)
-                                                        .numberOfServings))
-                                                .toStringAsFixed(1) +
-                                            '%'),
-                                    style: TextStyle(
-                                        // color: Colors.grey[400],
-                                        fontFamily: 'Roboto',
-                                        fontWeight: FontWeight.w300,
-                                        fontSize: SizeConfig.textMultiplier * 2))
+                            snapshot.data[17][0] != null?
+                             Text(
+                                        Provider.of<NutritionData>(context,
+                                                        listen: false)
+                                                    .iron ==
+                                                null
+                                            ? RestClient.ironList[0]+'%'
+                                            : Provider.of<NutritionData>(
+                                                    context,
+                                                    listen: false)
+                                                .iron
+                                                .toStringAsFixed(1)+'%',
+                                        style: TextStyle(
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier *
+                                                    2))
+                                // ? Text(
+                                //     Provider.of<NutritionData>(context, listen: false)
+                                //                 .iron ==
+                                //             null
+                                //         ? ((double.parse((snapshot.data[17][0])) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%')
+                                //         : (((Provider.of<NutritionData>(context,
+                                //                             listen: false)
+                                //                         .iron) *
+                                //                     (Provider.of<NutritionData>(
+                                //                             context,
+                                //                             listen: false)
+                                //                         .numberOfServings))
+                                //                 .toStringAsFixed(1) +
+                                //             '%'),
+                                //     style: TextStyle(
+                                //         // color: Colors.grey[400],
+                                //         fontFamily: 'Roboto',
+                                //         fontWeight: FontWeight.w300,
+                                //         fontSize: SizeConfig.textMultiplier * 2))
                                 : Text('-',
                                     style: TextStyle(
                                         // color: Colors.grey[400],

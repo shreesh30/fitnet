@@ -1,8 +1,10 @@
+import 'package:fitnet/models/nutrition_data.dart';
 import 'package:fitnet/screens/meal_tracker_food.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:provider/provider.dart';
 import '../size_config.dart';
 
 class MealTrackerRecipeSearch extends StatefulWidget {
@@ -165,6 +167,7 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                             //   'recipeName': _searchResultRecipeNames[index],
                             //   'recipeId': _searchResultRecipeId[index],
                             // });
+                            // Provider.of<NutritionData>(context,listen: false).foodName=_searchResultFoodNames[index];
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
@@ -178,6 +181,8 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                                 },
                               ),
                             );
+                          // Provider.of<NutritionData>(context,listen: false).name=_searchResultFoodNames[index];
+
                           },
                           child: ListTile(
                             title: Text(_searchResultFoodNames[index],
@@ -198,6 +203,7 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
+
                               Navigator.push(
                                 context,
                                 CupertinoPageRoute(
@@ -211,9 +217,11 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                                       // recipeName: _recentRecipesName.reversed
                                       //     .toList()[index],
                                     );
+
                                   },
                                 ),
                               );
+                              // Provider.of<NutritionData>(context,listen: false).name=_recentFoodNames[index];
 
                               // Navigator.pushNamed(context, Recipe.id,
                               //     arguments: {
