@@ -86,6 +86,7 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
             ),
             onPressed: () {
               Navigator.of(context).pop();
+              Provider.of<NutritionData>(context,listen: false).mealName=null;
             }),
         centerTitle: true,
         title: Text(

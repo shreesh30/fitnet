@@ -18,7 +18,7 @@ class TabItemData {
     TabItem.homePage: TabItemData(icon: Icons.home, title: 'Home'),
     TabItem.workoutList:
         TabItemData(icon: Icons.fitness_center, title: 'Workout'),
-    TabItem.mealTracker: TabItemData(icon: Icons.fastfood, title: 'Tracker'),
+    TabItem.mealTracker: TabItemData(icon: Icons.restaurant_menu, title: 'Tracker'),
     TabItem.mentalHealthList:
         TabItemData(icon: Icons.local_hospital, title: 'Mental Health'),
     TabItem.userProfile: TabItemData(icon: Icons.person, title: 'Profile'),
