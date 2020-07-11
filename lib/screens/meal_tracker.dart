@@ -22,7 +22,7 @@ class _MealTrackerState extends State<MealTracker> {
   //   super.initState();
 
   //     Provider.of<NutritionData>(context).finalFoodsLists();
-    
+
   // }
   @override
   Widget build(BuildContext context) {
@@ -177,6 +177,21 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData
                                             .removeBreakfastFood(index);
+                                            nutritionData.finalNutritionData();
+                                        // print(index);
+                                        // if (nutritionData
+                                        //         .breakfastFoodCalories.length >
+                                        //     0) {
+                                        //   nutritionData.totalBreakfastCalories =
+                                        //       nutritionData
+                                        //               .totalBreakfastCalories -
+                                        //           nutritionData
+                                        //                   .breakfastFoodCalories[
+                                        //               index];
+                                        // }
+
+                                        // print(nutritionData
+                                        //     .totalBreakfastCalories);
                                         // print(nutritionData.breakfastFoodName);
                                         // print(nutritionData.breakfastFoodCalories);
                                         // print(nutritionData.breakfastFoodCarbs);
@@ -307,7 +322,7 @@ class _MealTrackerState extends State<MealTracker> {
                                         fontSize: SizeConfig.textMultiplier * 2,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                        trailing: PopupMenuButton(
+                                  trailing: PopupMenuButton(
                                     icon: Icon(
                                       Icons.more_vert,
                                       color: Color(0xFFFD5739),
@@ -317,6 +332,7 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData
                                             .removeMorningSnackFood(index);
+                                            nutritionData.finalNutritionData();
                                         // print(nutritionData.breakfastFoodName);
                                         // print(nutritionData.breakfastFoodCalories);
                                         // print(nutritionData.breakfastFoodCarbs);
@@ -394,7 +410,7 @@ class _MealTrackerState extends State<MealTracker> {
                                         fontSize: SizeConfig.textMultiplier * 2,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                         trailing: PopupMenuButton(
+                                  trailing: PopupMenuButton(
                                     icon: Icon(
                                       Icons.more_vert,
                                       color: Color(0xFFFD5739),
@@ -402,8 +418,8 @@ class _MealTrackerState extends State<MealTracker> {
                                     ),
                                     onSelected: (value) {
                                       if (value == 1) {
-                                        nutritionData
-                                            .removeLunchFood(index);
+                                        nutritionData.removeLunchFood(index);
+                                        nutritionData.finalNutritionData();
                                         // print(nutritionData.breakfastFoodName);
                                         // print(nutritionData.breakfastFoodCalories);
                                         // print(nutritionData.breakfastFoodCarbs);
@@ -483,7 +499,7 @@ class _MealTrackerState extends State<MealTracker> {
                                         fontSize: SizeConfig.textMultiplier * 2,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                        trailing: PopupMenuButton(
+                                  trailing: PopupMenuButton(
                                     icon: Icon(
                                       Icons.more_vert,
                                       color: Color(0xFFFD5739),
@@ -493,11 +509,17 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData
                                             .removeEveningSnackFood(index);
-                                        print(nutritionData.eveningSnackFoodName);
-                                        print(nutritionData.eveningSnackFoodCalories);
-                                        print(nutritionData.eveningSnackFoodCarbs);
-                                        print(nutritionData.eveningSnackFoodFats);
-                                        print(nutritionData.eveningSnackFoodFats);
+                                            nutritionData.finalNutritionData();
+                                        // print(
+                                        //     nutritionData.eveningSnackFoodName);
+                                        // print(nutritionData
+                                        //     .eveningSnackFoodCalories);
+                                        // print(nutritionData
+                                        //     .eveningSnackFoodCarbs);
+                                        // print(
+                                        //     nutritionData.eveningSnackFoodFats);
+                                        // print(
+                                        //     nutritionData.eveningSnackFoodFats);
                                       }
                                     },
                                     itemBuilder: (context) {
@@ -573,7 +595,7 @@ class _MealTrackerState extends State<MealTracker> {
                                         fontSize: SizeConfig.textMultiplier * 2,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                         trailing: PopupMenuButton(
+                                  trailing: PopupMenuButton(
                                     icon: Icon(
                                       Icons.more_vert,
                                       color: Color(0xFFFD5739),
@@ -581,8 +603,8 @@ class _MealTrackerState extends State<MealTracker> {
                                     ),
                                     onSelected: (value) {
                                       if (value == 1) {
-                                        nutritionData
-                                            .removeDinnerFood(index);
+                                        nutritionData.removeDinnerFood(index);
+                                        nutritionData.finalNutritionData();
                                         // print(nutritionData.breakfastFoodName);
                                         // print(nutritionData.breakfastFoodCalories);
                                         // print(nutritionData.breakfastFoodCarbs);
@@ -869,4 +891,3 @@ class MyIngredientProgress2 extends StatelessWidget {
     );
   }
 }
-

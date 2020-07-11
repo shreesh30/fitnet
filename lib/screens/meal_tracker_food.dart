@@ -661,6 +661,12 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                 // Provider.of<NutritionData>(context,listen:false).fat==null?Provider.of<NutritionData>(context,listen: false).breakfastFoodFats.add(double.parse(RestClient.fatsList[0])):Provider.of<NutritionData>(context,listen: false).breakfastFoodFats.add(Provider.of<NutritionData>(context,listen: false).fat);
                 // Provider.of<NutritionData>(context,listen:false).protein==null?Provider.of<NutritionData>(context,listen: false).breakfastFoodProtein.add(double.parse(RestClient.proteinsList[0])):Provider.of<NutritionData>(context,listen: false).breakfastFoodProtein.add(Provider.of<NutritionData>(context,listen: false).protein);
                 nutritionData.addBreakfast();
+                nutritionData.addBreakfastInfo();
+                nutritionData.finalNutritionData();
+                // print(object)
+                // nutritionData.calories == null
+        // ? nutritionData.totalBreakfastCalories!=double.parse(RestClient.caloriesList[0])
+        // : n nutritionData.calories;
                 }
                 else if(nutritionData.mealName=='morning_snack'){
                 nutritionData.morningSnackFoodName.add(widget.foodName);
@@ -669,6 +675,8 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                 // Provider.of<NutritionData>(context,listen:false).fat==null?Provider.of<NutritionData>(context,listen: false).morningSnackFoodFats.add(double.parse(RestClient.fatsList[0])):Provider.of<NutritionData>(context,listen: false).morningSnackFoodFats.add(Provider.of<NutritionData>(context,listen: false).fat);
                 // Provider.of<NutritionData>(context,listen:false).protein==null?Provider.of<NutritionData>(context,listen: false).morningSnackFoodProtein.add(double.parse(RestClient.proteinsList[0])):Provider.of<NutritionData>(context,listen: false).morningSnackFoodProtein.add(Provider.of<NutritionData>(context,listen: false).protein);
                 nutritionData.addMorningSnack();
+                nutritionData.addMorningSnackInfo();
+                nutritionData.finalNutritionData();
                 }
                 else if(nutritionData.mealName=='lunch'){
                 nutritionData.lunchFoodName.add(widget.foodName);
@@ -677,6 +685,8 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                 // Provider.of<NutritionData>(context,listen:false).fat==null?Provider.of<NutritionData>(context,listen: false).lunchFoodFats.add(double.parse(RestClient.fatsList[0])):Provider.of<NutritionData>(context,listen: false).lunchFoodFats.add(Provider.of<NutritionData>(context,listen: false).fat);
                 // Provider.of<NutritionData>(context,listen:false).protein==null?Provider.of<NutritionData>(context,listen: false).lunchFoodProtein.add(double.parse(RestClient.proteinsList[0])):Provider.of<NutritionData>(context,listen: false).lunchFoodProtein.add(Provider.of<NutritionData>(context,listen: false).protein);
                 nutritionData.addLunch();
+                nutritionData.addLunchInfo();
+                nutritionData.finalNutritionData();
                 }
                   else if(nutritionData.mealName=='evening_snack'){
                 nutritionData.eveningSnackFoodName.add(widget.foodName);
@@ -685,6 +695,8 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                 // Provider.of<NutritionData>(context,listen:false).fat==null?Provider.of<NutritionData>(context,listen: false).eveningSnackFoodFats.add(double.parse(RestClient.fatsList[0])):Provider.of<NutritionData>(context,listen: false).eveningSnackFoodFats.add(Provider.of<NutritionData>(context,listen: false).fat);
                 // Provider.of<NutritionData>(context,listen:false).protein==null?Provider.of<NutritionData>(context,listen: false).eveningSnackFoodProtein.add(double.parse(RestClient.proteinsList[0])):Provider.of<NutritionData>(context,listen: false).eveningSnackFoodProtein.add(Provider.of<NutritionData>(context,listen: false).protein);
                nutritionData.addEveningSnack();
+               nutritionData.addEveningSnackInfo();
+               nutritionData.finalNutritionData();
                 }
                   else if(nutritionData.mealName=='dinner'){
                 nutritionData.dinnerFoodName.add(widget.foodName);
@@ -693,10 +705,13 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                 // Provider.of<NutritionData>(context,listen:false).fat==null?Provider.of<NutritionData>(context,listen: false).dinnerFoodFats.add(double.parse(RestClient.fatsList[0])):Provider.of<NutritionData>(context,listen: false).dinnerFoodFats.add(Provider.of<NutritionData>(context,listen: false).fat);
                 // Provider.of<NutritionData>(context,listen:false).protein==null?Provider.of<NutritionData>(context,listen: false).dinnerFoodProtein.add(double.parse(RestClient.proteinsList[0])):Provider.of<NutritionData>(context,listen: false).dinnerFoodProtein.add(Provider.of<NutritionData>(context,listen: false).protein);
                nutritionData.addDinner();
+               nutritionData.addDinnerInfo();
+               nutritionData.finalNutritionData();
                 }
 
                 // Navigator.popUntil(context,ModalRoute.withName(MealTracker.id));
                 // Navigator.c.popUntil(context, (route) => false)
+                // nutritionData.finalNutritionData();
                 Navigator.popUntil(context, (route) => popCount++==2);
                 // nutritionData.finalFoodsLists();
 
@@ -1216,7 +1231,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
                                                           listen: false)
                                                       .saturatedFats ==
                                                   null
-                                              ? double.parse(RestClient.saturatedFatsList[0]).toStringAsFixed(1)+'g'
+                                              ? RestClient.saturatedFatsList[0]!=null?double.parse(RestClient.saturatedFatsList[0]).toStringAsFixed(1)+'g':'-'
                                               : Provider.of<NutritionData>(
                                                       context,
                                                       listen: false)

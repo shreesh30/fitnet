@@ -53,8 +53,27 @@ class NutritionData extends ChangeNotifier {
   double totalLunchCalories = 0;
   double totalEveningSnackCalories = 0;
   double totalDinnerCalories = 0;
-  double totalCalories = 0.0;
-  double breakfastCal=0.0;
+  // double totalCalories = 0.0;
+  double totalBreakfastProtein = 0.0;
+  double totalMorningSnackProtein = 0.0;
+  double totalLunchProtein = 0.0;
+  double totalEveningSnackProtein = 0.0;
+  double totalDinnerProtein = 0.0;
+  double totalBreakfastFat = 0.0;
+  double totalMorningSnackFat = 0.0;
+  double totalLunchFat = 0.0;
+  double totalEveningSnackFat = 0.0;
+  double totalDinnerFat = 0.0;
+  double totalBreakfastCarb = 0.0;
+  double totalMorningSnackCarb = 0.0;
+  double totalLunchCarb = 0.0;
+  double totalEveningSnackCarb = 0.0;
+  double totalDinnerCarb = 0.0;
+  double finalCalorieCount=0.0;
+  double finalProteinCount=0.0;
+  double finalFatsCount=0.0;
+  double finalCarbsCount=0.0;
+  // double breakfastCal=0.0;
   // List finalCalories = [];
   // List finalCarbs;
   // List finalProteins;
@@ -170,16 +189,28 @@ class NutritionData extends ChangeNotifier {
   }
 
   void removeBreakfastFood(int i) {
-    breakfastFoodName.remove(breakfastFoodName[i]);
+    totalBreakfastCalories = totalBreakfastCalories - breakfastFoodCalories[i];
+    totalBreakfastProtein = totalBreakfastProtein - breakfastFoodProtein[i];
+    totalBreakfastFat = totalBreakfastFat - breakfastFoodFats[i];
+    totalBreakfastCarb = totalBreakfastCarb - breakfastFoodCarbs[i];
+    breakfastFoodName.removeAt(i);
     breakfastFoodCalories.removeAt(i);
     breakfastFoodCarbs.removeAt(i);
     breakfastFoodFats.removeAt(i);
     breakfastFoodProtein.removeAt(i);
+    // if(totalBreakfastCalories>0 && breakfastFoodCalories.length>0){
+    // totalBreakfastCalories=breakfastFoodCalories.length>1?totalBreakfastCalories-breakfastFoodCalories[i-1]:totalBreakfastCalories-breakfastFoodCalories[i];
+
+    // }
     notifyListeners();
   }
 
   void removeMorningSnackFood(int i) {
-    morningSnackFoodName.remove(morningSnackFoodName[i]);
+    totalMorningSnackCalories=totalMorningSnackCalories-morningSnackFoodCalories[i];
+    totalMorningSnackProtein=totalMorningSnackProtein-morningSnackFoodProtein[i];
+    totalMorningSnackFat=totalMorningSnackFat-morningSnackFoodFats[i];
+    totalMorningSnackCarb=totalMorningSnackCarb-morningSnackFoodCarbs[i];
+    morningSnackFoodName.removeAt(i);
     morningSnackFoodCalories.removeAt(i);
     morningSnackFoodCarbs.removeAt(i);
     morningSnackFoodFats.removeAt(i);
@@ -188,7 +219,11 @@ class NutritionData extends ChangeNotifier {
   }
 
   void removeLunchFood(int i) {
-    lunchFoodName.remove(lunchFoodName[i]);
+    totalLunchCalories=totalLunchCalories-lunchFoodCalories[i];
+    totalLunchProtein=totalLunchProtein-lunchFoodProtein[i];
+    totalLunchFat=totalLunchFat-lunchFoodFats[i];
+    totalLunchCarb=totalLunchCarb-lunchFoodCarbs[i];
+    lunchFoodName.removeAt(i);
     lunchFoodCalories.removeAt(i);
     lunchFoodCarbs.removeAt(i);
     lunchFoodFats.removeAt(i);
@@ -197,7 +232,11 @@ class NutritionData extends ChangeNotifier {
   }
 
   void removeEveningSnackFood(int i) {
-    eveningSnackFoodName.remove(eveningSnackFoodName[i]);
+    totalEveningSnackCalories=totalEveningSnackCalories-eveningSnackFoodCalories[i];
+    totalEveningSnackProtein=totalEveningSnackProtein-eveningSnackFoodProtein[i];
+    totalEveningSnackFat=totalEveningSnackFat-eveningSnackFoodFats[i];
+    totalEveningSnackCarb=totalEveningSnackCarb-eveningSnackFoodCarbs[i];
+    eveningSnackFoodName.removeAt(i);
     eveningSnackFoodCalories.removeAt(i);
     eveningSnackFoodCarbs.removeAt(i);
     eveningSnackFoodFats.removeAt(i);
@@ -206,7 +245,11 @@ class NutritionData extends ChangeNotifier {
   }
 
   void removeDinnerFood(int i) {
-    dinnerFoodName.remove(dinnerFoodName[i]);
+    totalDinnerCalories=totalDinnerCalories-dinnerFoodCalories[i];
+    totalDinnerProtein=totalDinnerProtein-dinnerFoodProtein[i];
+    totalDinnerFat=totalDinnerFat-dinnerFoodFats[i];
+    totalDinnerCarb=totalDinnerCarb-dinnerFoodCarbs[i];
+    dinnerFoodName.removeAt(i);
     dinnerFoodCalories.removeAt(i);
     dinnerFoodCarbs.removeAt(i);
     dinnerFoodFats.removeAt(i);
@@ -258,7 +301,6 @@ class NutritionData extends ChangeNotifier {
     // print(breakfastFoodCalories);
     // print(finalCalories);
 
-
     // if (mealName == 'breakfast') {
     //   if (breakfastFoodCalories.length != 0) {
     //     breakfastFoodCalories.forEach((element) {
@@ -297,7 +339,7 @@ class NutritionData extends ChangeNotifier {
     //   }
     // }
 
-  // totalBreakfastCalories+=calories;
+    // totalBreakfastCalories+=calories;
 
     // totalCalories = totalBreakfastCalories +
     //     totalDinnerCalories +
@@ -305,6 +347,156 @@ class NutritionData extends ChangeNotifier {
     //     totalLunchCalories +
     //     totalMorningSnackCalories;
     // print(totalCalories);
+  }
+
+  void addBreakfastInfo() {
+    calories == null
+        ? totalBreakfastCalories =
+            totalBreakfastCalories + double.parse(RestClient.caloriesList[0])
+        : totalBreakfastCalories = totalBreakfastCalories + calories;
+
+    protein == null
+        ? totalBreakfastProtein =
+            totalBreakfastProtein + double.parse(RestClient.proteinsList[0])
+        : totalBreakfastProtein = totalBreakfastProtein + protein;
+
+    fat == null
+        ? totalBreakfastFat =
+            totalBreakfastFat + double.parse(RestClient.fatsList[0])
+        : totalBreakfastFat = totalBreakfastFat + fat;
+
+    carbs == null
+        ? totalBreakfastCarb =
+            totalBreakfastCarb + double.parse(RestClient.carbsList[0])
+        : totalBreakfastCarb = totalBreakfastCarb + carbs;
+
+    // print(totalBreakfastCalories);
+    // print(totalBreakfastProtein);
+    // print(totalBreakfastFat);
+    // print(totalBreakfastCarb);
+    notifyListeners();
+  }
+
+  void addMorningSnackInfo() {
+    calories == null
+        ? totalMorningSnackCalories =
+            totalMorningSnackCalories + double.parse(RestClient.caloriesList[0])
+        : totalMorningSnackCalories = totalMorningSnackCalories + calories;
+
+    protein == null
+        ? totalMorningSnackProtein =
+            totalMorningSnackProtein + double.parse(RestClient.proteinsList[0])
+        : totalMorningSnackProtein = totalMorningSnackProtein + protein;
+
+    fat == null
+        ? totalMorningSnackFat =
+            totalMorningSnackFat + double.parse(RestClient.fatsList[0])
+        : totalMorningSnackFat = totalMorningSnackFat + fat;
+
+    carbs == null
+        ? totalMorningSnackCarb =
+            totalMorningSnackCarb + double.parse(RestClient.carbsList[0])
+        : totalMorningSnackCarb = totalMorningSnackCarb + carbs;
+
+    // print(totalBreakfastCalories);
+    // print(totalBreakfastProtein);
+    // print(totalBreakfastFat);
+    // print(totalBreakfastCarb);
+    notifyListeners();
+  }
+
+  void addLunchInfo() {
+    calories == null
+        ? totalLunchCalories =
+            totalLunchCalories + double.parse(RestClient.caloriesList[0])
+        : totalLunchCalories = totalLunchCalories + calories;
+
+    protein == null
+        ? totalLunchProtein =
+            totalLunchProtein + double.parse(RestClient.proteinsList[0])
+        : totalLunchProtein = totalLunchProtein + protein;
+
+    fat == null
+        ? totalLunchFat = totalLunchFat + double.parse(RestClient.fatsList[0])
+        : totalLunchFat = totalLunchFat + fat;
+
+    carbs == null
+        ? totalLunchCarb =
+            totalLunchCarb + double.parse(RestClient.carbsList[0])
+        : totalLunchCarb = totalLunchCarb + carbs;
+
+    // print(totalBreakfastCalories);
+    // print(totalBreakfastProtein);
+    // print(totalBreakfastFat);
+    // print(totalBreakfastCarb);
+    notifyListeners();
+  }
+
+  void addEveningSnackInfo() {
+    calories == null
+        ? totalEveningSnackCalories =
+            totalEveningSnackCalories + double.parse(RestClient.caloriesList[0])
+        : totalEveningSnackCalories = totalEveningSnackCalories + calories;
+
+    protein == null
+        ? totalEveningSnackProtein =
+            totalEveningSnackProtein + double.parse(RestClient.proteinsList[0])
+        : totalEveningSnackProtein = totalEveningSnackProtein + protein;
+
+    fat == null
+        ? totalEveningSnackFat =
+            totalEveningSnackFat + double.parse(RestClient.fatsList[0])
+        : totalEveningSnackFat = totalEveningSnackFat + fat;
+
+    carbs == null
+        ? totalEveningSnackCarb =
+            totalEveningSnackCarb + double.parse(RestClient.carbsList[0])
+        : totalEveningSnackCarb = totalEveningSnackCarb + carbs;
+
+    // print(totalBreakfastCalories);
+    // print(totalBreakfastProtein);
+    // print(totalBreakfastFat);
+    // print(totalBreakfastCarb);
+    notifyListeners();
+  }
+
+  void addDinnerInfo() {
+    calories == null
+        ? totalDinnerCalories =
+            totalDinnerCalories + double.parse(RestClient.caloriesList[0])
+        : totalDinnerCalories = totalDinnerCalories + calories;
+
+    protein == null
+        ? totalDinnerProtein =
+            totalDinnerProtein + double.parse(RestClient.proteinsList[0])
+        : totalDinnerProtein = totalDinnerProtein + protein;
+
+    fat == null
+        ? totalDinnerFat = totalDinnerFat + double.parse(RestClient.fatsList[0])
+        : totalDinnerFat = totalDinnerFat + fat;
+
+    carbs == null
+        ? totalDinnerCarb =
+            totalDinnerCarb + double.parse(RestClient.carbsList[0])
+        : totalDinnerCarb = totalDinnerCarb + carbs;
+
+    // print(totalBreakfastCalories);
+    // print(totalBreakfastProtein);
+    // print(totalBreakfastFat);
+    // print(totalBreakfastCarb);
+    notifyListeners();
+  }
+
+  void finalNutritionData(){
+      finalCalorieCount=totalBreakfastCalories+totalEveningSnackCalories+totalMorningSnackCalories+totalLunchCalories+totalDinnerCalories;
+      finalProteinCount=totalBreakfastProtein+totalMorningSnackProtein+totalLunchProtein+totalEveningSnackProtein+totalDinnerProtein;
+      finalFatsCount=totalBreakfastFat+totalMorningSnackFat+totalLunchFat+totalEveningSnackFat+totalDinnerFat;
+      finalCarbsCount=totalBreakfastCarb+totalMorningSnackCarb+totalLunchCarb+totalEveningSnackCarb+totalDinnerCarb;
+
+      // print(finalCalorieCount);
+      // print(finalProteinCount);
+      // print(finalFatsCount);
+      // print(finalCarbsCount);
   }
 
   // void foodInfo(){
