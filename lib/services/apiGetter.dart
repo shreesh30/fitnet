@@ -64,6 +64,8 @@ class RestClient {
         .catchError((err) {
           print(err);
         });
+    // print(result.runtimeType.toString());
+    // print(result);
 
     // Create a POJO class and parse it
     if (result == null) {
@@ -73,10 +75,15 @@ class RestClient {
       recipeIdList.clear();
       recipeNameList.clear();
       recipeNameFinalList.clear();
-      await result.forEach((element) {
-        recipeNameList.add(element);
-        recipeIdList.add(element);
-      });
+      if (result.runtimeType.toString() == 'List<dynamic>') {
+        await result.forEach((element) {
+          recipeNameList.add(element);
+          recipeIdList.add(element);
+        });
+      } else {
+        recipeNameList.add(await result['recipe_name']);
+        recipeIdList.add(await result['recipe_id']);
+      }
 
       if (recipeNameFinalList.isNotEmpty && recipeIdFinalList.isNotEmpty) {
         recipeNameList.forEach((element) {
@@ -90,12 +97,22 @@ class RestClient {
           }
         });
       } else {
-        recipeNameList.forEach((element) {
-          recipeNameFinalList.add(element['recipe_name']);
-        });
-        recipeIdList.forEach((element) {
-          recipeIdFinalList.add(element['recipe_id']);
-        });
+        if (recipeNameList.length > 1 && recipeIdList.length > 1) {
+          recipeNameList.forEach((element) {
+            recipeNameFinalList.add(element['recipe_name']);
+          });
+          recipeIdList.forEach((element) {
+            recipeIdFinalList.add(element['recipe_id']);
+          });
+        }
+        else{
+          recipeNameList.forEach((element){
+            recipeNameFinalList.add(element);
+          });
+          recipeIdList.forEach((element){
+            recipeIdFinalList.add(element);
+          });
+        }
       }
     }
   }
@@ -120,6 +137,7 @@ class RestClient {
         .catchError((err) {
           print(err);
         });
+    // print(recipeId);
     // print(result);
     // print(result['directions']['direction']);
     //  print(result['serving_sizes']['serving']['fat']);
@@ -630,7 +648,6 @@ class RestClient {
         });
         finalFoodResults.add(calciumList);
       }
-
 
       if (await ironResult == null) {
         ironResult.add(null);

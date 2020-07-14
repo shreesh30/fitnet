@@ -113,7 +113,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
             style: TextStyle(
                 fontFamily: 'CopperPlate',
                 fontSize: SizeConfig.textMultiplier * 3,
-                fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.w400),
             textAlign: TextAlign.center,
           ),
         ),

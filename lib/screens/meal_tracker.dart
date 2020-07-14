@@ -49,7 +49,7 @@ class _MealTrackerState extends State<MealTracker> {
                 style: TextStyle(
                     fontFamily: 'CopperPlate',
                     fontSize: SizeConfig.textMultiplier * 3,
-                    fontWeight: FontWeight.bold),
+                    fontWeight: FontWeight.w400),
                 textAlign: TextAlign.center,
               ),
               backgroundColor: Color(0xFF0F0F0F),
@@ -77,9 +77,9 @@ class _MealTrackerState extends State<MealTracker> {
                         color: Color(0xFF171717),
                       ),
                       child: MyIngredientProgress2(
-                        proteinEatenAmount: 20,
-                        carbsEatenAmount: 20,
-                        fatsEatenAmount: 20,
+                        proteinEatenAmount: nutritionData.finalProteinCount,
+                        carbsEatenAmount: nutritionData.finalCarbsCount,
+                        fatsEatenAmount: nutritionData.finalFatsCount,
                         proteinProgressColor: Color(0xFFEB1555),
                         carbsProgressColor: Color(0xFF03DAC5),
                         fatsProgressColor: Color(0xFFFACB2E),
@@ -780,7 +780,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                     Stack(children: <Widget>[
                       Container(
                         height: SizeConfig.heightMultiplier * 1.2,
-                        width: SizeConfig.widthMultiplier * 65,
+                        width: SizeConfig.widthMultiplier * 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(
                             Radius.circular(5),
@@ -803,7 +803,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                       width: SizeConfig.widthMultiplier,
                     ),
                     Text(
-                      '${proteinEatenAmount}g',
+                      proteinEatenAmount.toStringAsFixed(1)+'g',
                       style:
                           TextStyle(fontSize: SizeConfig.textMultiplier * 1.5),
                     ),
@@ -817,7 +817,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                     Stack(children: <Widget>[
                       Container(
                         height: SizeConfig.heightMultiplier * 1.2,
-                        width: SizeConfig.widthMultiplier * 65,
+                        width: SizeConfig.widthMultiplier * 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(
                             Radius.circular(5),
@@ -840,7 +840,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                       width: SizeConfig.widthMultiplier,
                     ),
                     Text(
-                      '${carbsEatenAmount}g',
+                      carbsEatenAmount.toStringAsFixed(1)+'g',
                       style:
                           TextStyle(fontSize: SizeConfig.textMultiplier * 1.5),
                     ),
@@ -854,7 +854,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                     Stack(children: <Widget>[
                       Container(
                         height: SizeConfig.heightMultiplier * 1.2,
-                        width: SizeConfig.widthMultiplier * 65,
+                        width: SizeConfig.widthMultiplier * 60,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(
                             Radius.circular(5),
@@ -877,7 +877,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                       width: SizeConfig.widthMultiplier,
                     ),
                     Text(
-                      '${fatsEatenAmount}g',
+                      fatsEatenAmount.toStringAsFixed(1)+'g',
                       style:
                           TextStyle(fontSize: SizeConfig.textMultiplier * 1.5),
                     )

@@ -18,6 +18,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   String name;
   String email;
   String password;
+  List names;
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
   FirebaseUser newLoggedUser;
@@ -122,7 +123,23 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: TextField(
                     style: TextStyle(fontSize: SizeConfig.textMultiplier * 2),
                     onChanged: (value) {
-                      name = value;
+                      if (!value.contains(" ")) {
+                        name=value[0].toUpperCase() + value.substring(1);
+                      }
+                      // else
+                      //   names=s.split(' ');
+                      // print(name);
+                      // List names=s.split(" ");
+                      // print(names);
+                      // return null;
+                      // names.forEach((element) { element[0].toUpperCase()+s.substring(1);});
+                      else
+                        names = value.split(' ');
+                      for (int i = 0; i < names.length; i++) {
+                        names[i] =
+                            names[i][0].toUpperCase() + names[i].substring(1);
+                      }
+                      name=names.join(' ');
                     },
                     decoration:
                         kTextFieldInputDecoration.copyWith(hintText: 'Name'),
@@ -173,8 +190,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             await _auth.createUserWithEmailAndPassword(
                                 email: email, password: password);
                         if (newUser != null) {
-                          Navigator.push(context, CupertinoPageRoute(builder: (context){
-                            return NewUser(name: name,);
+                          Navigator.push(context,
+                              CupertinoPageRoute(builder: (context) {
+                            return NewUser(
+                              name: name,
+                            );
                           }));
                         }
                         setState(() {
@@ -194,5 +214,3 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 }
-
-

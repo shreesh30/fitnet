@@ -65,11 +65,28 @@ class _RootPageState extends State<RootPage> {
     //       signOut: onSignout,
     //       auth: FirebaseAuth.instance,
     //     );
-    if (Provider.of<AuthStatusData>(context).authStatus ==
-        AuthStatus.signedIn) {
-      return TabScreenHomePage();
-    } else
-      return LandingPage();
+    return Consumer<AuthStatusData>(
+      builder: (BuildContext context, AuthStatusData value, Widget child) {
+      //   if (value.authStatus ==
+      //       AuthStatus.signedIn) {
+      //     return TabScreenHomePage();
+      //   } else
+      //     return LandingPage();
+      switch(value.authStatus){
+        case AuthStatus.notSignedIn:
+          return LandingPage();
+        case AuthStatus.signedIn:
+          return TabScreenHomePage();
+        default:
+          return LandingPage();
+      }
+      },
+    );
+    // if (Provider.of<AuthStatusData>(context).authStatus ==
+    //     AuthStatus.signedIn) {
+    //   return TabScreenHomePage();
+    // } else
+    //   return LandingPage();
     // switch (authStatus) {
     //   case AuthStatus.notSignedIn:
     //     return LandingPage(

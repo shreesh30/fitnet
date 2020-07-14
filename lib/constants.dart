@@ -43,3 +43,8 @@ var kRecipeSearchDecoration = InputDecoration(
       ),
       borderSide: BorderSide.none),
 );
+
+var kLabelTextStyle = TextStyle(
+  fontSize:SizeConfig.textMultiplier*2 ,
+  color: Color(0xFF8D8E98),
+);

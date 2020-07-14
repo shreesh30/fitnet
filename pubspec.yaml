@@ -62,7 +62,13 @@ flutter:
   assets:
     - images/logo.png
     - images/backgroundimg.jpg
-
+    - images/peachy_salad.jpg
+    - images/Banana_Oatmeal_Cookies.jpg
+    - images/broccoli_cheesy_bread.jpg
+    - images/flourless-chocolate-cake.jpg
+    - images/jeremyBuendia.png
+    - images/flexWheeler.jpg
+    - images/sergiConstance.jpg
   
   fonts:
 

@@ -1,6 +1,7 @@
 import 'package:fitnet/home/tab_screen_home_page.dart';
 import 'package:fitnet/models/auth_status_data.dart';
 import 'package:fitnet/models/nutrition_data.dart';
+import 'package:fitnet/models/user_data.dart';
 import 'package:fitnet/screens/audio_screen.dart';
 import 'package:fitnet/screens/days_list.dart';
 import 'package:fitnet/screens/meal_tracker.dart';
@@ -142,6 +143,9 @@ class MyApp extends StatelessWidget {
             ),
             ChangeNotifierProvider<NutritionData>(
               create: (context) => NutritionData(),
+            ),
+            ChangeNotifierProvider<UserData>(
+              create: (context) => UserData(),
             )
           ],
           child: MaterialApp(
