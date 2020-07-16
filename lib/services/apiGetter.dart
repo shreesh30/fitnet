@@ -435,7 +435,7 @@ class RestClient {
           servingDescriptionDropdownItems.add(DropdownMenuItem(
               value: element,
               child: Text(
-                element,
+                element,style: TextStyle(fontFamily: 'Roboto',fontSize: SizeConfig.textMultiplier*2,fontWeight: FontWeight.w300),
               )));
         });
         finalFoodResults.add(servingDescriptionDropdownItems);

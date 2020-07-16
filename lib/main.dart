@@ -10,6 +10,7 @@ import 'package:fitnet/screens/meal_tracker_food_search.dart';
 import 'package:fitnet/screens/mental_health_list.dart';
 import 'package:fitnet/screens/mental_health_selected_option.dart';
 import 'package:fitnet/screens/new_user.dart';
+import 'package:fitnet/screens/new_user2.dart';
 import 'package:fitnet/screens/recipe.dart';
 import 'package:fitnet/screens/recipe_search.dart';
 import 'package:fitnet/screens/root_page.dart';
@@ -149,6 +150,7 @@ class MyApp extends StatelessWidget {
             )
           ],
           child: MaterialApp(
+            // debugShowCheckedModeBanner: false,
             theme: ThemeData.dark().copyWith(
               scaffoldBackgroundColor: Color(0xff0f0f0f),
             ),
@@ -166,7 +168,7 @@ class MyApp extends StatelessWidget {
 
             // home: MyApp.isLoggedin==false?LandingPage():TabsScreen(),
             home: RootPage(),
-
+            debugShowCheckedModeBanner: false,
             routes: {
               SplashScreen.id: (context) => SplashScreen(),
               LandingPage.id: (context) => LandingPage(),
@@ -193,7 +195,8 @@ class MyApp extends StatelessWidget {
               RootPage.id: (context) => RootPage(),
               MealTrackerRecipeSearch.id: (context) =>
                   MealTrackerRecipeSearch(),
-              MealTrackerFood.id: (context) => MealTrackerFood()
+              MealTrackerFood.id: (context) => MealTrackerFood(),
+              NewUser2.id:(context)=>NewUser2()
             },
           ),
         );

@@ -34,7 +34,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       final user = await _auth.currentUser();
       if (user != null) {
         newLoggedUser = user;
-        print(newLoggedUser.uid);
+        // print(newLoggedUser.uid);
       }
     } catch (e) {
       print(e);

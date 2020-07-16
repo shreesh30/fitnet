@@ -1,6 +1,9 @@
 // import 'package:fitnet/components/icon_content.dart';
 import 'package:fitnet/components/reusable_card.dart';
+import 'package:fitnet/components/rounded_button.dart';
 import 'package:fitnet/models/user_data.dart';
+import 'package:fitnet/screens/new_user2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -31,8 +34,15 @@ class _NewUserState extends State<NewUser> {
   @override
   void initState() {
     super.initState();
-    getUserInfo();
+    // getUserInfo();
     future = getUserInfo();
+    Provider.of<UserData>(context, listen: false).selectedGender = Gender.male;
+    Provider.of<UserData>(context, listen: false).userNumber = null;
+    Provider.of<UserData>(context, listen: false).userAge = null;
+    Provider.of<UserData>(context, listen: false).userHeight = null;
+    Provider.of<UserData>(context, listen: false).userWeight = null;
+    Provider.of<UserData>(context, listen: false).userActivity = null;
+    Provider.of<UserData>(context, listen: false).userGender = 'male';
   }
 
   Future getUserInfo() async {
@@ -50,12 +60,28 @@ class _NewUserState extends State<NewUser> {
       Future userName =
           _firestore.collection('users').document(firebaseUser.uid).get();
       return userName.then((value) async {
-        final String name = await value.data['userName'];
+        // final String name = await value.data['userName'];
         final String email = await value.data['email'];
-        return [name, email];
+        return [email];
       });
     }
     return null;
+  }
+
+  Future setUserInfo() async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final uid = user.uid;
+    Firestore.instance.collection('users').document(uid).setData({
+      'userId': uid,
+      'userName': widget.name,
+      'email': user.email,
+      'gender': Provider.of<UserData>(context, listen: false).userGender,
+      'age': Provider.of<UserData>(context, listen: false).userAge,
+      'mobileNumber': Provider.of<UserData>(context, listen: false).userNumber,
+      'height': Provider.of<UserData>(context, listen: false).userHeight,
+      'weight': Provider.of<UserData>(context, listen: false).userWeight,
+      'activity': Provider.of<UserData>(context, listen: false).userActivity
+    });
   }
 
   //   Future<String> getUserInfo() async {
@@ -90,6 +116,124 @@ class _NewUserState extends State<NewUser> {
       names[i] = names[i][0].toUpperCase() + names[i].substring(1);
     }
     return names.join(' ');
+  }
+
+  Widget servingPopUp(BuildContext context) {
+    return Consumer<UserData>(
+      builder: (BuildContext context, UserData userData, Widget child) {
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height:SizeConfig.widthMultiplier<8?SizeConfig.heightMultiplier>=8?SizeConfig.heightMultiplier * 45:SizeConfig.heightMultiplier*50:SizeConfig.heightMultiplier*40,
+            child: Padding(
+              padding: SizeConfig.widthMultiplier < 8
+                  ? EdgeInsets.symmetric(
+                      vertical: SizeConfig.heightMultiplier * 4.5,
+                      horizontal: SizeConfig.widthMultiplier * 7)
+                  : EdgeInsets.only(
+                      top: SizeConfig.heightMultiplier * 5,
+                      left: SizeConfig.widthMultiplier * 5,
+                      right: SizeConfig.widthMultiplier * 5),
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      'Sedentary',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    subtitle: Text(
+                      'Little or no exercise',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.changeUserActivityTo1();
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    height:SizeConfig.widthMultiplier<8? SizeConfig.heightMultiplier:SizeConfig.heightMultiplier*2.5,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Lightly Active',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    subtitle: Text(
+                      'Light exercise / Sports 1-3 days a week',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.changeUserActivityTo2();
+                      Navigator.pop(context);
+                    },
+                  ),
+                 SizedBox(
+                    height:SizeConfig.widthMultiplier<8? SizeConfig.heightMultiplier:SizeConfig.heightMultiplier*2.5,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Moderately Active',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    subtitle: Text(
+                      'Moderate exercise / Sports 3-5 days a week',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.changeUserActivityTo3();
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    height:SizeConfig.widthMultiplier<8? SizeConfig.heightMultiplier:SizeConfig.heightMultiplier*2.5,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Very Active',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    subtitle: Text(
+                      'Hard exercise / Sports 6-7 days a week',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.changeUserActivityTo4();
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+            ),
+            // child:Column(children: <Widget>[],)
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -187,7 +331,7 @@ class _NewUserState extends State<NewUser> {
                                         width: SizeConfig.widthMultiplier,
                                       ),
                                 Text(
-                                  '${capitalize(snapshot.data[0])}',
+                                  '${capitalize(widget.name)}',
                                   style: TextStyle(
                                       fontFamily: 'Roboto',
                                       fontSize: SizeConfig.textMultiplier * 2.5,
@@ -198,7 +342,7 @@ class _NewUserState extends State<NewUser> {
                           ),
                           SizedBox(
                             height: SizeConfig.widthMultiplier < 8
-                                ? SizeConfig.heightMultiplier
+                                ? SizeConfig.heightMultiplier * 2
                                 : SizeConfig.heightMultiplier * 3,
                           ),
                           ListTile(
@@ -219,10 +363,10 @@ class _NewUserState extends State<NewUser> {
                                         width: 0,
                                       )
                                     : SizedBox(
-                                        width: SizeConfig.widthMultiplier*2,
+                                        width: SizeConfig.widthMultiplier * 2,
                                       ),
                                 Text(
-                                  '${snapshot.data[1]}',
+                                  '${snapshot.data[0]}',
                                   style: TextStyle(
                                       fontFamily: 'Roboto',
                                       fontSize: SizeConfig.textMultiplier * 2.5,
@@ -233,7 +377,7 @@ class _NewUserState extends State<NewUser> {
                           ),
                           SizedBox(
                             height: SizeConfig.widthMultiplier < 8
-                                ? SizeConfig.heightMultiplier
+                                ? SizeConfig.heightMultiplier * 2
                                 : SizeConfig.heightMultiplier * 2.5,
                           ),
                           ListTile(
@@ -287,7 +431,7 @@ class _NewUserState extends State<NewUser> {
                           ),
                           SizedBox(
                             height: SizeConfig.widthMultiplier < 8
-                                ? SizeConfig.heightMultiplier
+                                ? SizeConfig.heightMultiplier * 2
                                 : SizeConfig.heightMultiplier * 2,
                           ),
                           ListTile(
@@ -297,7 +441,7 @@ class _NewUserState extends State<NewUser> {
                               size: SizeConfig.heightMultiplier * 3,
                             ),
                             title: TextField(
-                               style: TextStyle(
+                              style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: SizeConfig.textMultiplier * 2,
                                   fontWeight: FontWeight.w300),
@@ -324,7 +468,7 @@ class _NewUserState extends State<NewUser> {
                           // SizedBox(height: SizeConfig.heightMultiplier*2,),
                           SizedBox(
                             height: SizeConfig.widthMultiplier < 8
-                                ? SizeConfig.heightMultiplier * 2
+                                ? SizeConfig.heightMultiplier * 3
                                 : SizeConfig.heightMultiplier * 3.5,
                           ),
                           ListTile(
@@ -336,7 +480,9 @@ class _NewUserState extends State<NewUser> {
                             title: Container(
                               child: Row(
                                 children: <Widget>[
-                                 SizedBox(width: SizeConfig.widthMultiplier*2,),
+                                  SizedBox(
+                                    width: SizeConfig.widthMultiplier * 2,
+                                  ),
                                   ReusableCard(
                                     onPress: userData.changeGenderToMale,
                                     colour:
@@ -378,7 +524,7 @@ class _NewUserState extends State<NewUser> {
                           ),
                           SizedBox(
                             height: SizeConfig.widthMultiplier < 8
-                                ? SizeConfig.heightMultiplier * 2
+                                ? SizeConfig.heightMultiplier * 3
                                 : SizeConfig.heightMultiplier * 3.5,
                           ),
                           ListTile(
@@ -395,12 +541,12 @@ class _NewUserState extends State<NewUser> {
                               size: SizeConfig.heightMultiplier * 2.7,
                             ),
                             title: TextField(
-                               style: TextStyle(
+                              style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: SizeConfig.textMultiplier * 2,
                                   fontWeight: FontWeight.w300),
                               inputFormatters: [
-                                LengthLimitingTextInputFormatter(3),
+                                LengthLimitingTextInputFormatter(4),
                               ],
                               keyboardType: TextInputType.number,
                               controller: weightController,
@@ -421,7 +567,7 @@ class _NewUserState extends State<NewUser> {
                           ),
                           SizedBox(
                             height: SizeConfig.widthMultiplier < 8
-                                ? SizeConfig.heightMultiplier
+                                ? SizeConfig.heightMultiplier * 2
                                 : SizeConfig.heightMultiplier * 2.5,
                           ),
                           ListTile(
@@ -438,12 +584,12 @@ class _NewUserState extends State<NewUser> {
                               size: SizeConfig.heightMultiplier * 2.7,
                             ),
                             title: TextField(
-                               style: TextStyle(
+                              style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: SizeConfig.textMultiplier * 2,
                                   fontWeight: FontWeight.w300),
                               inputFormatters: [
-                                LengthLimitingTextInputFormatter(3),
+                                LengthLimitingTextInputFormatter(4),
                               ],
                               keyboardType: TextInputType.number,
                               controller: heightController,
@@ -464,7 +610,7 @@ class _NewUserState extends State<NewUser> {
                           ),
                           SizedBox(
                             height: SizeConfig.widthMultiplier < 8
-                                ? SizeConfig.heightMultiplier
+                                ? SizeConfig.heightMultiplier * 2
                                 : SizeConfig.heightMultiplier * 2.5,
                           ),
                           ListTile(
@@ -497,8 +643,76 @@ class _NewUserState extends State<NewUser> {
                             //     userData.userHeight = double.parse(value);
                             //   },
                             // ),
-                            title: DropdownButton(items: [], onChanged: null),
+                            // title: DropdownButton(items: [
+                            //   DropdownMenuItem(child: ListTile(title: Text('Sedentary'),))
+                            // ], onChanged: (value) {
+
+                            // },),
+                            title: Row(
+                              children: <Widget>[
+                                SizedBox(
+                                  width: SizeConfig.widthMultiplier * 2,
+                                ),
+                                // Text(
+                                //   userData.userActivity == null
+                                //       ? 'Daily Activity'
+                                //       : userData.userActivity,
+                                //   style: TextStyle(
+                                //       color: userData.userActivity == null
+                                //           ? Color(0xFF8B8A8D)
+                                //           : Colors.white,
+                                //       fontFamily: 'Roboto',
+                                //       fontWeight: FontWeight.w300,
+                                //       fontSize: SizeConfig.textMultiplier * 2),
+                                // ),
+                                Provider.of<UserData>(context).userActivity == null
+                                    ? Text(
+                                        'Daily Activity',
+                                        style: TextStyle(
+                                            color: Color(0xFF8B8A8D),
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier * 2),
+                                      )
+                                    : Text(
+                                        Provider.of<UserData>(context).userActivity ,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'Roboto',
+                                            fontWeight: FontWeight.w300,
+                                            fontSize:
+                                                SizeConfig.textMultiplier * 2),
+                                      )
+                              ],
+                            ),
+                            onTap: () {
+                              showDialog(
+                                // barrierDismissible: false,
+                                context: context,
+                                builder: (context) => servingPopUp(context),
+                              );
+                            },
                           ),
+                          SizedBox(
+                            height: SizeConfig.widthMultiplier < 8
+                                ? SizeConfig.heightMultiplier > 8
+                                    ? SizeConfig.heightMultiplier * 10
+                                    : SizeConfig.heightMultiplier * 2
+                                : SizeConfig.heightMultiplier * 18,
+                          ),
+                          RoundButton(
+                            title: 'Next',
+                            onPressed: () {
+                              setUserInfo();
+                              userData.calculateBMI();
+                              Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) => NewUser2(),
+                                  ));
+                            },
+                          )
                         ],
                       ),
                     );

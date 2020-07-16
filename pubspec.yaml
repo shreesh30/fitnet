@@ -43,6 +43,7 @@ dependencies:
   chewie_audio: ^1.0.0+1
   crypto: 
   provider:
+  flutter_svg: ^0.17.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,6 +70,8 @@ flutter:
     - images/jeremyBuendia.png
     - images/flexWheeler.jpg
     - images/sergiConstance.jpg
+    - images/tall-2.svg
+    - images/weight.svg
   
   fonts:
 
