@@ -1,4 +1,3 @@
-import 'package:fitnet/screens/workout_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnet/size_config.dart';

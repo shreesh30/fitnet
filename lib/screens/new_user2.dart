@@ -1,4 +1,7 @@
+import 'package:fitnet/components/rounded_button.dart';
 import 'package:fitnet/models/user_data.dart';
+import 'package:fitnet/screens/new_user3.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -140,103 +143,7 @@ class _NewUser2State extends State<NewUser2> {
       );
   }
 
-  // Widget userIdealWeight() {
-  //   if (Provider.of<UserData>(context).userAge >= 18) {
-  //     if ((Provider.of<UserData>(context).userHeight >= 147 &&
-  //             Provider.of<UserData>(context).userHeight <= 149) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('40-52 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 149 &&
-  //             Provider.of<UserData>(context).userHeight <= 152) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('42-54 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 152 &&
-  //             Provider.of<UserData>(context).userHeight <= 155) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('43-56 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 155 &&
-  //             Provider.of<UserData>(context).userHeight <= 157) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('45-58 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 157 &&
-  //             Provider.of<UserData>(context).userHeight <= 160) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('47-60 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 160 &&
-  //             Provider.of<UserData>(context).userHeight <= 163) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('49-61 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 163 &&
-  //             Provider.of<UserData>(context).userHeight <= 165) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('50-64 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 165 &&
-  //             Provider.of<UserData>(context).userHeight <= 168) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('52-65 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 168 &&
-  //             Provider.of<UserData>(context).userHeight <= 170) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('54-67 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 170 &&
-  //             Provider.of<UserData>(context).userHeight <= 172) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('55-69 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 172 &&
-  //             Provider.of<UserData>(context).userHeight <= 175) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('57-72 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 175 &&
-  //             Provider.of<UserData>(context).userHeight <= 177) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('58-74 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 177 &&
-  //             Provider.of<UserData>(context).userHeight <= 180) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('60-76 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 180 &&
-  //             Provider.of<UserData>(context).userHeight <= 183) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('62-78 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 183 &&
-  //             Provider.of<UserData>(context).userHeight <= 185) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('64-80 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 185 &&
-  //             Provider.of<UserData>(context).userHeight <= 188) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('65-83 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 188 &&
-  //             Provider.of<UserData>(context).userHeight <= 190) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('67-84 kg');
-  //     } else if ((Provider.of<UserData>(context).userHeight >= 190) &&
-  //         (Provider.of<UserData>(context).userBmi >= 19 &&
-  //             Provider.of<UserData>(context).userBmi <= 24)) {
-  //       return Text('69-87 kg');
-  //     }
-  //   }
-  //   // else
-  //     return Text('-');
-  // }
-
+  
   Widget userIdealWeight() {
     if (Provider.of<UserData>(context).userAge > 18) {
       if (Provider.of<UserData>(context).userHeight >= 147 &&
@@ -789,16 +696,147 @@ class _NewUser2State extends State<NewUser2> {
     );
   }
 
+  Widget servingPopUp(BuildContext context) {
+    return Consumer<UserData>(
+      builder: (BuildContext context, UserData userData, Widget child) {
+        return Dialog(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+          child: Container(
+            height: SizeConfig.widthMultiplier < 8
+                ? SizeConfig.heightMultiplier >= 8
+                    ? SizeConfig.heightMultiplier * 40
+                    : SizeConfig.heightMultiplier > 7
+                        ? SizeConfig.heightMultiplier * 45
+                        : SizeConfig.heightMultiplier * 47
+                : SizeConfig.heightMultiplier * 35,
+            child: Padding(
+              padding: SizeConfig.widthMultiplier < 8
+                  ? EdgeInsets.symmetric(
+                      vertical: SizeConfig.heightMultiplier * 4.5,
+                      horizontal: SizeConfig.widthMultiplier * 7)
+                  : EdgeInsets.only(
+                      top: SizeConfig.heightMultiplier * 5,
+                      left: SizeConfig.widthMultiplier * 5,
+                      right: SizeConfig.widthMultiplier * 5),
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      'Easy',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    trailing: Text(
+                      '0.25 kg per week',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.weightAlteringIntensityEasy();
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    height: SizeConfig.widthMultiplier < 8
+                        ? SizeConfig.heightMultiplier
+                        : SizeConfig.heightMultiplier * 2.5,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Medium',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    trailing: Text(
+                      '0.50 kg per weel',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.weightAlteringIntensityMedium();
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    height: SizeConfig.widthMultiplier < 8
+                        ? SizeConfig.heightMultiplier
+                        : SizeConfig.heightMultiplier * 2.5,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Hard',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    trailing: Text(
+                      '0.75 kg per week',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.weightAlteringIntensityHard();
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(
+                    height: SizeConfig.widthMultiplier < 8
+                        ? SizeConfig.heightMultiplier
+                        : SizeConfig.heightMultiplier * 2.5,
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Very Hard',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w500,
+                          fontSize: SizeConfig.textMultiplier * 2.3),
+                    ),
+                    trailing: Text(
+                      '1.00 kg per week',
+                      style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontWeight: FontWeight.w300,
+                          fontSize: SizeConfig.textMultiplier * 1.8),
+                    ),
+                    onTap: () {
+                      userData.weightAlteringIntensityVeryHard();
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<UserData>(context, listen: false).targetWeight = 0;
+    Provider.of<UserData>(context, listen: false).weightAlteringSpeed = null;
+    Provider.of<UserData>(context, listen: false).goalReachingTime = null;
+    Provider.of<UserData>(context, listen: false).userBmr = null;
+    Provider.of<UserData>(context, listen: false).userMaintenanceCal = null;
   }
 
   @override
   Widget build(BuildContext context) {
-    // TextEditingController controller = TextEditingController(text: Provider.of<UserData>(context).targetWeight.toStringAsFixed(1));
     return Consumer<UserData>(
       builder: (BuildContext context, UserData userData, Widget child) {
         return Scaffold(
@@ -814,23 +852,20 @@ class _NewUser2State extends State<NewUser2> {
                 onPressed: () {
                   Navigator.of(context).pop();
                 }),
-            // centerTitle: true,
             title: Text(
               'Weight Summary',
               style: TextStyle(
                   fontFamily: 'CopperPlate',
                   fontSize: SizeConfig.textMultiplier * 3,
                   fontWeight: FontWeight.w400),
-              // textAlign: TextAlign.center,
             ),
             backgroundColor: Color(0xFF0F0F0F),
-            // actions: <Widget>[Icon(FontAwesomeIcons.signOutAlt)],
           ),
           body: ListView(
             children: <Widget>[
               Container(
                 padding: EdgeInsets.symmetric(
-                    vertical: SizeConfig.heightMultiplier * 2,
+                    vertical: SizeConfig.heightMultiplier * 5,
                     horizontal: SizeConfig.widthMultiplier < 8
                         ? SizeConfig.widthMultiplier * 10
                         : SizeConfig.widthMultiplier * 17),
@@ -875,7 +910,7 @@ class _NewUser2State extends State<NewUser2> {
               ),
               Divider(color: Color(0xFF8B8A8D)),
               SizedBox(
-                height: SizeConfig.heightMultiplier * 2,
+                height: SizeConfig.heightMultiplier * 5,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -884,12 +919,12 @@ class _NewUser2State extends State<NewUser2> {
                     'Set Target Weight',
                     style: TextStyle(
                         fontFamily: 'Roboto',
-                        fontSize: SizeConfig.textMultiplier * 2,
+                        fontSize: SizeConfig.textMultiplier * 2.25,
                         fontWeight: FontWeight.w300),
                   ),
                   SizedBox(
                     height: SizeConfig.widthMultiplier < 8
-                        ? SizeConfig.heightMultiplier * 2
+                        ? SizeConfig.heightMultiplier * 3.5
                         : SizeConfig.heightMultiplier * 4,
                   ),
                   Container(
@@ -898,6 +933,7 @@ class _NewUser2State extends State<NewUser2> {
                             ? SizeConfig.widthMultiplier * 7
                             : SizeConfig.widthMultiplier * 15),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         IconButton(
                           icon: Icon(
@@ -909,13 +945,16 @@ class _NewUser2State extends State<NewUser2> {
                             userData.targetWeightDecrement();
                             controller.text =
                                 userData.targetWeight.toStringAsFixed(1);
+                            // userData.al
                             userData.weightDifference();
+                            userData.weightAlteringSpeed = null;
+                            userData.goalReachingTime = null;
                           },
                         ),
                         SizedBox(
                           width: SizeConfig.widthMultiplier < 8
-                              ? SizeConfig.widthMultiplier * 5
-                              : SizeConfig.widthMultiplier * 10,
+                              ? SizeConfig.widthMultiplier * 12
+                              : SizeConfig.widthMultiplier * 17,
                         ),
                         Expanded(
                           flex: 1,
@@ -925,8 +964,6 @@ class _NewUser2State extends State<NewUser2> {
                               fontWeight: FontWeight.w300,
                               fontSize: SizeConfig.textMultiplier * 2.5,
                             ),
-                            // initialValue: Provider.of<UserData>(context).targetWeight.toStringAsFixed(1),
-                            // controller: TextEditingController(text: userData.targetWeight.toStringAsFixed(1)),
                             controller: controller,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
@@ -938,10 +975,9 @@ class _NewUser2State extends State<NewUser2> {
                             ),
                             onChanged: (value) {
                               userData.targetWeight = double.parse(value);
-                              // print(userData.targetWeight);
-                              // controller.text=value;
                               userData.weightDifference();
-                              // userData.weightDifference();
+                              userData.weightAlteringSpeed = null;
+                              userData.goalReachingTime = null;
                             },
                           ),
                         ),
@@ -971,38 +1007,206 @@ class _NewUser2State extends State<NewUser2> {
                             controller.text =
                                 userData.targetWeight.toStringAsFixed(1);
                             userData.weightDifference();
+                            userData.weightAlteringSpeed = null;
+                            userData.goalReachingTime = null;
                           },
                         )
                       ],
                     ),
                   ),
                   SizedBox(
-                    height: SizeConfig.heightMultiplier * 3,
+                    height: SizeConfig.heightMultiplier * 5,
                   ),
-                  // weightAlteringQuestion()
                   userData.userWeight > userData.targetWeight
                       ? userData.targetWeight == 0
                           ? Text('')
                           : Text(
-                              'How quickly do you want to lose ${userData.differenceWeight} kg ?',
+                              'How quickly do you want to lose ${userData.differenceWeight.toStringAsFixed(1)} kg ?',
                               style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: SizeConfig.textMultiplier * 2,
                                   fontWeight: FontWeight.w300),
                             )
                       : userData.userWeight == userData.targetWeight
-                          ? Text('For how long you want to maintain ?',
+                          ? Text(
+                              'For how long you want to maintain ?',
                               style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: SizeConfig.textMultiplier * 2,
-                                  fontWeight: FontWeight.w300))
+                                  fontWeight: FontWeight.w300),
+                            )
                           : Text(
-                              'How quickly do you want to gain ${userData.differenceWeight} kg ?',
+                              'How quickly do you want to gain ${userData.differenceWeight.toStringAsFixed(1)} kg ?',
                               style: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: SizeConfig.textMultiplier * 2,
-                                  fontWeight: FontWeight.w300))
+                                  fontWeight: FontWeight.w300),
+                            ),
+                  SizedBox(
+                    height: SizeConfig.heightMultiplier > 8
+                        ? SizeConfig.heightMultiplier * 2
+                        : 0,
+                  ),
+                  userData.userWeight > userData.targetWeight
+                      ? userData.targetWeight == 0
+                          ? Container(
+                              height: SizeConfig.heightMultiplier > 8
+                                  ? SizeConfig.heightMultiplier * 12
+                                  : SizeConfig.heightMultiplier * 12.5,
+                            )
+                          : Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: SizeConfig.widthMultiplier * 30,
+                                  vertical: SizeConfig.widthMultiplier > 8
+                                      ? SizeConfig.heightMultiplier * 0.9
+                                      : userData.weightAlteringSpeed == null
+                                          ? 0
+                                          : SizeConfig.heightMultiplier * 0.5),
+                              child: ListTile(
+                                title: Text(
+                                  userData.weightAlteringSpeed == 0.25
+                                      ? 'Easy'
+                                      : userData.weightAlteringSpeed == 0.50
+                                          ? 'Medium'
+                                          : userData.weightAlteringSpeed == 0.75
+                                              ? 'Hard'
+                                              : userData.weightAlteringSpeed ==
+                                                      1.00
+                                                  ? 'Very Hard'
+                                                  : 'Select',
+                                  style: TextStyle(
+                                      fontFamily: 'Roboto',
+                                      fontWeight: FontWeight.w300,
+                                      fontSize: SizeConfig.textMultiplier * 2),
+                                ),
+                                trailing: Icon(Icons.arrow_drop_down,
+                                    color: Color(0xFFFD5739)),
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => servingPopUp(context),
+                                  );
+                                },
+                              ),
+                            )
+                      : userData.userWeight == userData.targetWeight
+                          ? Container(
+                              height: SizeConfig.heightMultiplier < 8
+                                  ? SizeConfig.heightMultiplier * 15
+                                  : SizeConfig.widthMultiplier < 8
+                                      ? SizeConfig.heightMultiplier * 12
+                                      : SizeConfig.heightMultiplier * 10,
+                            )
+                          : Padding(
+                             
+                              padding: EdgeInsets.only(
+                                  left: SizeConfig.widthMultiplier * 30,
+                                  right: SizeConfig.widthMultiplier * 30,
+                                  bottom: SizeConfig.heightMultiplier > 8
+                                      ? userData.weightAlteringSpeed == null
+                                          ? SizeConfig.heightMultiplier * 4.5
+                                          : SizeConfig.heightMultiplier * 1
+                                      : userData.weightAlteringSpeed == null
+                                          ? SizeConfig.heightMultiplier * 6
+                                          : SizeConfig.heightMultiplier * 1),
+                              child: ListTile(
+                                title: Text(
+                                    userData.weightAlteringSpeed == 0.25
+                                        ? 'Easy'
+                                        : userData.weightAlteringSpeed == 0.50
+                                            ? 'Medium'
+                                            : userData.weightAlteringSpeed ==
+                                                    0.75
+                                                ? 'Hard'
+                                                : userData.weightAlteringSpeed ==
+                                                        1.00
+                                                    ? 'Very Hard'
+                                                    : 'Select',
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize:
+                                            SizeConfig.textMultiplier * 2)),
+                                trailing: Icon(Icons.arrow_drop_down,
+                                    color: Color(0xFFFD5739)),
+                                onTap: () {
+                                  showDialog(
+                                    barrierDismissible: false,
+                                    context: context,
+                                    builder: (context) => servingPopUp(context),
+                                  );
+                                },
+                              ),
+                            ),
+              
+                  SizedBox(
+                    height: SizeConfig.heightMultiplier < 8
+                        ? SizeConfig.heightMultiplier * 7
+                        : SizeConfig.heightMultiplier * 5,
+                  ),
+                  userData.userWeight > userData.targetWeight
+                      ? userData.targetWeight == 0
+                          ? Container()
+                          : userData.goalReachingTime != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: SizeConfig.widthMultiplier * 5),
+                                  child: Text(
+                                    'You will reach your goal before ' +
+                                        userData.goalReachingTime
+                                            .toStringAsFixed(1) +
+                                        ' months',
+                                    style: TextStyle(
+                                        fontFamily: 'Roboto',
+                                        fontWeight: FontWeight.w300,
+                                        fontSize:
+                                            SizeConfig.textMultiplier * 2),
+                                  ),
+                                )
+                              : Container(
+                                  height: SizeConfig.heightMultiplier > 8
+                                      ? SizeConfig.heightMultiplier * 5
+                                      : SizeConfig.heightMultiplier * 8,
+                                )
+                      : userData.userWeight == userData.targetWeight
+                          ? Container()
+                          : userData.goalReachingTime != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(
+                                      bottom: SizeConfig.widthMultiplier * 5),
+                                  child: Text(
+                                      'You will reach your goal before ' +
+                                          userData.goalReachingTime
+                                              .toStringAsFixed(1) +
+                                          ' months',
+                                      style: TextStyle(
+                                          fontFamily: 'Roboto',
+                                          fontWeight: FontWeight.w300,
+                                          fontSize:
+                                              SizeConfig.textMultiplier * 2)),
+                                )
+                              : Container(),
+                  SizedBox(
+                    height: SizeConfig.widthMultiplier < 8
+                        ? SizeConfig.heightMultiplier > 8
+                            ? SizeConfig.heightMultiplier * 10
+                            : SizeConfig.heightMultiplier * 4.1
+                        : SizeConfig.heightMultiplier * 18,
+                  ),
                 ],
+              ),
+              RoundButton(
+                title: 'Set My Goal',
+                onPressed: () {
+                  // print(userData.userHeight);
+                  userData.userMaintenanceCalorieCalculator();
+                  userData.finalUserMaintenanceCalorieCalculator();
+                  Navigator.push(context, CupertinoPageRoute(
+                    builder: (context) {
+                      return NewUser3();
+                    },
+                  ));
+                },
               )
             ],
           ),

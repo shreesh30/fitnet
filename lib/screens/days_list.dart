@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fitnet/widgets/days_list_items.dart';
-import 'package:fitnet/screens/workout.dart';
+
 import 'package:fitnet/size_config.dart';
 
 class DaysList extends StatefulWidget {
@@ -57,12 +57,7 @@ class _DaysListState extends State<DaysList> {
 
   @override
   Widget build(BuildContext context) {
-    // return CommonScaffold(
-    //   appbar: true,
-    //   automaticallyImplyLeading: true,
-    //   text: widget.weekNumber,
-    //   body: DaysListItems(future: _future, widget: widget),
-    // );
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

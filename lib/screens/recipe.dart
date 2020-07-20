@@ -2,7 +2,6 @@ import 'package:fitnet/services/apiGetter.dart';
 import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 
-// import 'dart:convert';
 
 class Recipe extends StatefulWidget {
   Recipe({this.recipeId, this.recipeName});
@@ -19,7 +18,6 @@ class _RecipeState extends State<Recipe> {
   RestClient object = RestClient();
   List<ListTile> directions = [];
   Future future;
-  // Map data = {};
   @override
   void initState() {
     super.initState();
@@ -35,21 +33,9 @@ class _RecipeState extends State<Recipe> {
     RestClient.ingredientListTile.clear();
     return object.getRecipeInfo(widget.recipeId);
   }
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   RestClient.directionList.clear();
-  //   RestClient.finalResults.clear();
-  //   RestClient.directionListTile.clear();
-  //   RestClient.ingredientList.clear();
-  //   RestClient.ingredientListTile.clear();
-
-  // }
 
   @override
   Widget build(BuildContext context) {
-    // data=ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -80,19 +66,7 @@ class _RecipeState extends State<Recipe> {
       body: FutureBuilder(
         future: future,
         builder: (context, snapshot) {
-          // String finalImageUrl=snapshot.data;
-          // if(snapshot.hasError){
-          //   print(snapshot.error);
-          //   return Text('Failed to get response from the server');
-          // }else if(snapshot.hasData){
-          //   return Center(
-          //     child: ListView(
-          //       children: <Widget>[
-          //         Image.network(finalImageUrl)
-          //       ],
-          //     ),
-          //   );
-          // }
+         
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
               return Center(child: CircularProgressIndicator());
@@ -124,7 +98,6 @@ class _RecipeState extends State<Recipe> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Column(
-                            // mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               Text(
@@ -146,7 +119,6 @@ class _RecipeState extends State<Recipe> {
                                               SizeConfig.textMultiplier * 2,
                                           fontFamily: 'Roboto',
                                           fontWeight: FontWeight.w300),
-                                      // textAlign: TextAlign.left,
                                     ),
                               snapshot.data[3] == null
                                   ? Container()
@@ -254,36 +226,17 @@ class _RecipeState extends State<Recipe> {
                         : null,
                     snapshot.data[2] == null || snapshot.data[2] == []
                         ? Container()
-                        // : ListView.builder(
-                        //   scrollDirection: Axis.vertical,
-                        //     shrinkWrap: true,
-                        //     itemCount: snapshot.data[2].length,
-                        //     itemBuilder: (context, index2) {
-                        //       // print(snapshot.data[2]);
-                        //       return ListTile(
-                        //         title: Text(
-                        //           '${index2 + 1} . ${snapshot.data[2][index2]}',
-                        //           style: TextStyle(
-                        //               fontFamily: 'Roboto',
-                        //               fontWeight: FontWeight.w300,
-                        //               fontSize:
-                        //                   SizeConfig.textMultiplier * 2),
-                        //         ),
-                        //       );
-                        //     },
-                        //   )
+         
                         : Column(
                             children: <Widget>[
                               SizedBox(
                                 height: SizeConfig.heightMultiplier,
                               ),
-                              // Container(
-                              //   padding: EdgeInsets.symmetric(horizontal: SizeConfig.widthMultiplier),
+                          
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: RestClient.directionListTile,
                               ),
-                              // ),
                             ],
                           )
                   ],

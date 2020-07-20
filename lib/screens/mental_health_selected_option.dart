@@ -109,66 +109,7 @@ class _MentalHealthSelectedOptionState
         ),
         backgroundColor: Color(0xFF0F0F0F),
       ),
-      // body: Padding(
-      //   padding: EdgeInsets.only(top: SizeConfig.heightMultiplier * 2),
-      //   child: ListView.separated(
-      //     separatorBuilder: (context, index) => Padding(
-      //       padding: EdgeInsets.symmetric(
-      //           vertical: 0, horizontal: SizeConfig.widthMultiplier * 4),
-      //       child: Divider(color: Color(0xff8B8A8D)),
-      //     ),
-      //     itemCount: finalOptionsList != null ? finalOptionsList.length : 0,
-      //     itemBuilder: (context, index) {
-      //       if (finalOptionsList != null) {
-      //         return Padding(
-      //             padding: EdgeInsets.fromLTRB(
-      //                 SizeConfig.widthMultiplier * 4,
-      //                 SizeConfig.heightMultiplier,
-      //                 SizeConfig.widthMultiplier * 4,
-      //                 SizeConfig.widthMultiplier * 2),
-      //             child: Card(
-      //               color: Color(0xff0f0f0f),
-      //               child: Row(
-      //                 children: <Widget>[
-      //                   IconButton(
-      //                     onPressed: () {
-      //                       setState(() {
-      //                         url = finalUrlList[index];
-      //                       });
-      //                       Navigator.push(
-      //                         context,
-      //                         MaterialPageRoute(
-      //                           builder: (context) {
-      //                             return AudioScreen(
-      //                               url: url,
-      //                             );
-      //                           },
-      //                         ),
-      //                       );
-      //                       print(finalUrlList[index]);
-      //                     },
-      //                     icon: Icon(Icons.play_circle_outline),
-      //                     color: Color(0xFFFD5739),
-      //                     iconSize: SizeConfig.heightMultiplier * 4,
-      //                   ),
-      //                   SizedBox(
-      //                     width: SizeConfig.widthMultiplier * 5,
-      //                   ),
-      //                   Text(finalOptionsList[index],
-      //                       style: TextStyle(
-      //                           color: Colors.white,
-      //                           fontWeight: FontWeight.w300,
-      //                           fontFamily: 'Roboto',
-      //                           fontSize: SizeConfig.textMultiplier * 3))
-      //                 ],
-      //               ),
-      //             ));
-      //       } else {
-      //         return Text('Loading');
-      //       }
-      //     },
-      //   ),
-      // ),
+     
       body: FutureBuilder(
         future: _future,
         builder: (context, snapshot) {

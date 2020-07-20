@@ -137,10 +137,7 @@ class RestClient {
         .catchError((err) {
           print(err);
         });
-    // print(recipeId);
-    // print(result);
-    // print(result['directions']['direction']);
-    //  print(result['serving_sizes']['serving']['fat']);
+  
     if (result != null) {
       var directionResult = await result['directions']['direction'];
       var cookingTimeResult = await result['cooking_time_min'];
@@ -267,11 +264,7 @@ class RestClient {
       "",
       "",
     );
-    // finalResults.clear();
-    // directionList.clear();
-    // ingredientList.clear();
-    // ingredientListTile.clear();
-    // directionListTile.clear();
+  
     var result = await foodItem
         .request({
           "format": 'json',
@@ -284,8 +277,7 @@ class RestClient {
           print(err);
         });
     if (result != null) {
-      // print(result.runtimeType);
-      // print(result);
+
       if (result.runtimeType.toString() ==
           '_InternalLinkedHashMap<String, dynamic>') {
         result['foods']['food'].forEach((foodItem) {
@@ -296,16 +288,13 @@ class RestClient {
         });
       }
     }
-    // print(foodNameList);
   }
 
   Future getFood(foodId) async {
     servingDescriptionList.clear();
     finalFoodResults.clear();
     servingDescriptionDropdownItems.clear();
-    // servingDescriptionList.clear();
-    // servingDescriptionList.clear();
-    // finalFoodResults.clear();
+  
     caloriesList.clear();
     carbsList.clear();
     proteinsList.clear();
@@ -337,43 +326,10 @@ class RestClient {
         .catchError((err) {
           print(err);
         });
-    // print(result['food']['servings']['serving']['serving_description']);
-    // print(result['food']['servings']['serving'][4]['metric_serving_amount']); // List<dynamic>
-
-    // print(result['food']['servings']['serving']); // List<dynamic>
-    // List testList=[];
-    // result['food']['servings']['serving'].forEach((foodItems){testList.add(foodItems['measurement_description']);});
-    // print(result['food']['servings']['serving'][1]);
-
-    //     List testList = [];
-    // result['food']['servings']['serving'].forEach((foodItems) {
-    //   testList.add(foodItems['measurement_description']); //[cup (8 fl oz), fl oz, oz, g, ml]
-    // });
-    //  List testList2 = [];
-    // result['food']['servings']['serving'].forEach((foodItems) {
-    //   testList2.add(foodItems['serving_description']);//[1 cup (8 fl oz), 1 fl oz, 1 oz, 100 g, 100 ml]
-    // });
-    //     List testList3 = [];
-    // result['food']['servings']['serving'].forEach((foodItems) {
-    //   testList3.add(foodItems['metric_serving_unit']);//[g, g, g, g, g]
-    // });
-    //     List testList4 = [];
-    // result['food']['servings']['serving'].forEach((foodItems) {
-    //   testList4.add(foodItems['metric_serving_amount']);//[237.000, 29.600, 28.350, 100.000, 100.090]
-
-    // });
-    // print(result['food']['servings']['serving'][0]['serving_description']);
+  
 
     if (result != null) {
-      // print(result['food']['servings']['serving'].runtimeType); //List<dynamic>
 
-      // print(result['food']['servings']['serving'][0]['calories']); //List<dynamic>
-      // print(result['food']['servings']['serving']['calories']);
-      // print(result['food']['servings']['serving']);//_InternalLinkedHashMap<String, dynamic>
-
-      // print(result['food']['servings']['serving']['carbohydrate']);
-      // print(result['food']['servings']['serving']['fat']);
-      // print(result['food']['servings']['serving']['protein']);
 
       var servingDescription = await result['food']['servings']['serving'];
       var caloriesResult = await result['food']['servings']['serving'];
@@ -419,9 +375,7 @@ class RestClient {
         finalFoodResults.add(null);
       } else if (servingDescription.runtimeType.toString() ==
           '_InternalLinkedHashMap<String, dynamic>') {
-        // servingDescription['serving_description'].forEach((value){servingDescriptionDropdownItems.add(value)});
-        // servingDescriptionList.add(await servingDescription['serving_description']);
-        // print(servingDescription);
+    
         servingDescriptionList
             .add(await servingDescription['serving_description']);
         servingDescriptionDropdownItems.add(DropdownMenuItem(
@@ -663,58 +617,12 @@ class RestClient {
         finalFoodResults.add(ironList);
       }
 
-      // print(finalFoodResults[13]);
-
-      // print(cholesterolList);
-      // print(await result['food']['servings']['serving']['cholestrol']);
-      // print(monoUnsaturatedFatsResult['monounsaturated_fat']);
-      //       print(polyUnsaturatedFatsResult);
-
-      // print(monoUnsaturatedFatsList);
-      // print(finalFoodResults[6]);
-      // print(finalFoodResults[1]);
-      // print(testList);
-      // print(testList2);
-      // print(testList3);
-      // print(testList4);
-      // print(carbsResult);
+   
 
     }
 
     return finalFoodResults;
   }
-  //  Future getFood(int foodId) async {
-  //    FatSecretApi foodItem = FatSecretApi(
-  //      this.consumerKey,
-  //      this.consumerKeySecret,
-  //      "",
-  //      "",
-  //    );
 
-  //    var result = await foodItem
-  //        .request({"recipe_id": foodId.toString(), "method": "recipe.get"})
-  //        .then((res) => res.body)
-  //        .then(json.decode)
-  //        .then((json) => json["recipe"])
-  //        .catchError((err) {
-  //          print(err);
-  //        });
-
-  //    print(result);
-  //  }
 
 }
-//
-//void main(List<String> args) {
-//  RestClient object = RestClient();
-//  //  object.getFood(33691);
-//  //    object.getRecipeId('Brown Lentil Dal');
-//  // object.recipeList(99);
-//  //    object.getRecipeName('Brown Lentil Dal');
-//  // object.getRecipeImageUrl('27');
-//  //   object.getRecipeNameAndId('chicken');
-//  //   object.getRecipeNameAndId('dal');
-//  //   object.getRecipeNameAndId('chicken');
-////  object.getRecipeInfo('27');
-//object.getFoodInfo('dal');
-//}

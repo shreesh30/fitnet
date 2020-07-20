@@ -78,6 +78,7 @@ class NutritionData extends ChangeNotifier {
   // List finalCarbs;
   // List finalProteins;
   // List finalFats;
+  // doubel userMai
 
   var servingDescription;
 

@@ -72,6 +72,8 @@ flutter:
     - images/sergiConstance.jpg
     - images/tall-2.svg
     - images/weight.svg
+    - images/male_user.svg
+    - images/female_user.svg
   
   fonts:
 

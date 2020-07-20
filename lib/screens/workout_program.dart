@@ -2,7 +2,6 @@ import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:fitnet/widgets/workout_program_items.dart';
-import 'package:fitnet/screens/weeks_list.dart';
 
 class WorkoutProgram extends StatefulWidget {
   WorkoutProgram({this.workoutProgramName});

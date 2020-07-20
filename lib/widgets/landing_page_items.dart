@@ -7,11 +7,7 @@ import 'package:fitnet/screens/registration_screen.dart';
 import 'package:fitnet/screens/login_screen.dart';
 
 class LandingPageItems extends StatefulWidget {
-  // final VoidCallback onSignedIn;
-  // final VoidCallback onSignedOut;
 
-  // const LandingPageItems({Key key, this.onSignedIn, this.onSignedOut})
-  //     : super(key: key);
 
   @override
   _LandingPageItemsState createState() => _LandingPageItemsState();
@@ -90,7 +86,6 @@ class _LandingPageItemsState extends State<LandingPageItems> {
         RoundButton(
           title: 'Create an account',
           onPressed: () {
-            // Navigator.pushNamed(context, RegistrationPage.id);
             Navigator.push(context,
                 CupertinoPageRoute(builder: (context) => RegistrationPage()));
           },

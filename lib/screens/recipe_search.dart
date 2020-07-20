@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-// import 'package:html/dom.dart';
 
 class RecipeSearch extends StatefulWidget {
   static const String id = 'recipe_search';
@@ -51,18 +50,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
         setState(() {
           _searchResultRecipeNames.add(recipeNameFinalListElement);
         });
-        // if (!_searchResultRecipeNames.contains(recipeNameFinalListElement)) {
-        //   if (recipeNameFinalListElement
-        //           .toLowerCase()
-        //           .contains(searchedRecipeName.toLowerCase()) ||
-        //       recipeNameFinalListElement
-        //           .toUpperCase()
-        //           .contains(searchedRecipeName.toUpperCase())) {
-        //     setState(() {
-        //       _searchResultRecipeNames.add(recipeNameFinalListElement);
-        //     });
-        //   }
-        // }
+
       });
       setState(() {});
     }
@@ -72,11 +60,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
       return;
     } else {
       recipeIdFinalListReference.forEach((recipeIdFinalListElement) {
-        // if (!_searchResultRecipeId.contains(recipeIdFinalListElement)) {
-        //   setState(() {
-        //     _searchResultRecipeId.add(recipeIdFinalListElement);
-        //   });
-        // }
+     
         setState(() {
           _searchResultRecipeId.add(recipeIdFinalListElement);
         });
@@ -86,8 +70,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
     setState(() {
       showSpinner = false;
     });
-    // print(_searchResultRecipeId);
-    // print(_searchResultRecipeNames);
+ 
   }
 
   @override
@@ -95,16 +78,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        // leading: IconButton(
-        //   padding: EdgeInsets.only(left: SizeConfig.widthMultiplier * 2),
-        //   icon: Icon(
-        //     Icons.arrow_back_ios,
-        //     size: SizeConfig.heightMultiplier * 3,
-        //     color: Color(0xFFFD5739),
-        //   ),
-        //   onPressed: () {
-        //     Navigator.of(context).pop();
-        //   }),
+
         centerTitle: true,
         title: FittedBox(
           fit: BoxFit.scaleDown,
@@ -184,10 +158,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
                               _recentRecipesId
                                   .add(_searchResultRecipeId[index]);
                             });
-                            // Navigator.pushNamed(context, Recipe.id, arguments: {
-                            //   'recipeName': _searchResultRecipeNames[index],
-                            //   'recipeId': _searchResultRecipeId[index],
-                            // });
+                          
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
@@ -232,11 +203,7 @@ class _RecipeSearchState extends State<RecipeSearch> {
                                   },
                                 ),
                               );
-                              // Navigator.pushNamed(context, Recipe.id,
-                              //     arguments: {
-                              //       'recipeName': _recentRecipesName[index],
-                              //       'recipeId': _recentRecipesId[index],
-                              //     });
+                         
                             },
                             child: ListTile(
                               contentPadding: EdgeInsets.only(

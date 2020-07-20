@@ -67,9 +67,7 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
     setState(() {
       showSpinner = false;
     });
-    // print(_searchResultFoodId);
-    // print(searchedFoodName);
-    // print(_searchResultFoodNames);
+
   }
 
   @override
@@ -164,11 +162,7 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                             setState(() {
                               _recentFoodId.add(_searchResultFoodId[index]);
                             });
-                            // Navigator.pushNamed(context, Recipe.id, arguments: {
-                            //   'recipeName': _searchResultRecipeNames[index],
-                            //   'recipeId': _searchResultRecipeId[index],
-                            // });
-                            // Provider.of<NutritionData>(context,listen: false).foodName=_searchResultFoodNames[index];
+                           
                             Navigator.push(
                               context,
                               CupertinoPageRoute(
@@ -176,13 +170,11 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                                   return MealTrackerFood(
                                     foodName: _searchResultFoodNames[index],
                                     foodId: _searchResultFoodId[index],
-                                    // recipeId: _searchResultRecipeId[index],
-                                    // recipeName: _searchResultRecipeNames[index],
+                           
                                   );
                                 },
                               ),
                             );
-                          // Provider.of<NutritionData>(context,listen: false).name=_searchResultFoodNames[index];
 
                           },
                           child: ListTile(
@@ -213,22 +205,13 @@ class _MealTrackerRecipeSearchState extends State<MealTrackerRecipeSearch> {
                                       foodName: _recentFoodNames.reversed
                                           .toList()[index],
                                       foodId: _recentFoodId[index],
-                                      // recipeId: _recentRecipesId.reversed
-                                      //     .toList()[index],
-                                      // recipeName: _recentRecipesName.reversed
-                                      //     .toList()[index],
+                                   
                                     );
 
                                   },
                                 ),
                               );
-                              // Provider.of<NutritionData>(context,listen: false).name=_recentFoodNames[index];
-
-                              // Navigator.pushNamed(context, Recipe.id,
-                              //     arguments: {
-                              //       'recipeName': _recentRecipesName[index],
-                              //       'recipeId': _recentRecipesId[index],
-                              //     });
+                      
                             },
                             child: ListTile(
                               contentPadding: EdgeInsets.only(

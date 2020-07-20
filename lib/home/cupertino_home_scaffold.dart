@@ -1,9 +1,5 @@
 import 'package:fitnet/home/tab_item.dart';
-import 'package:fitnet/screens/home.dart';
-import 'package:fitnet/screens/meal_tracker.dart';
-import 'package:fitnet/screens/mental_health_list.dart';
-import 'package:fitnet/screens/user_profile.dart';
-import 'package:fitnet/screens/workout_list.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

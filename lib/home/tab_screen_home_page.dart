@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:fitnet/home/cupertino_home_scaffold.dart';
 import 'package:fitnet/home/tab_item.dart';
 import 'package:fitnet/screens/home.dart';

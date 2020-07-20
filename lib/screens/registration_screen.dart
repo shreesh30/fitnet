@@ -34,7 +34,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
       final user = await _auth.currentUser();
       if (user != null) {
         newLoggedUser = user;
-        // print(newLoggedUser.uid);
       }
     } catch (e) {
       print(e);
@@ -126,13 +125,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       if (!value.contains(" ")) {
                         name=value[0].toUpperCase() + value.substring(1);
                       }
-                      // else
-                      //   names=s.split(' ');
-                      // print(name);
-                      // List names=s.split(" ");
-                      // print(names);
-                      // return null;
-                      // names.forEach((element) { element[0].toUpperCase()+s.substring(1);});
+                     
                       else
                         names = value.split(' ');
                       for (int i = 0; i < names.length; i++) {

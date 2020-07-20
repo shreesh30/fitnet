@@ -16,33 +16,13 @@ class MealTracker extends StatefulWidget {
 class _MealTrackerState extends State<MealTracker> {
   RestClient object = RestClient();
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-
-  //     Provider.of<NutritionData>(context).finalFoodsLists();
-
-  // }
   @override
   Widget build(BuildContext context) {
-    // Provider.of<NutritionData>(context).finalFoodsLists();
     return Consumer<NutritionData>(
       builder: (BuildContext context, nutritionData, Widget child) {
-        // nutritionData.finalFoodsLists();
         return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
-              // leading: IconButton(
-              //   padding: EdgeInsets.only(left: SizeConfig.widthMultiplier * 2),
-              //   icon: Icon(
-              //     Icons.arrow_back_ios,
-              //     size: SizeConfig.heightMultiplier * 3,
-              //     color: Color(0xFFFD5739),
-              //   ),
-              //   onPressed: () {
-              //     Navigator.of(context).pop();
-              //   }),
               centerTitle: true,
               title: Text(
                 'Today',
@@ -55,8 +35,6 @@ class _MealTrackerState extends State<MealTracker> {
               backgroundColor: Color(0xFF0F0F0F),
             ),
             body: ListView(
-              // controller: ScrollControlle,
-              // physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.fromLTRB(
@@ -76,7 +54,7 @@ class _MealTrackerState extends State<MealTracker> {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                         color: Color(0xFF171717),
                       ),
-                      child: MyIngredientProgress2(
+                      child: MyIngredientProgress(
                         proteinEatenAmount: nutritionData.finalProteinCount,
                         carbsEatenAmount: nutritionData.finalCarbsCount,
                         fatsEatenAmount: nutritionData.finalFatsCount,
@@ -86,7 +64,6 @@ class _MealTrackerState extends State<MealTracker> {
                         proteinProgress: 30,
                         carbsProgress: 20,
                         fatsProgress: 10,
-                        // size: ,
                       )),
                 ),
                 Container(
@@ -96,7 +73,6 @@ class _MealTrackerState extends State<MealTracker> {
                   child: ListView(
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       ListTile(
                         contentPadding: EdgeInsets.only(
@@ -153,20 +129,6 @@ class _MealTrackerState extends State<MealTracker> {
                                         fontSize: SizeConfig.textMultiplier * 2,
                                         fontWeight: FontWeight.w300),
                                   ),
-                                  // trailing: IconButton(
-                                  // icon: Icon(
-                                  //   Icons.more_vert,
-                                  //   color: Color(0xFFFD5739),
-                                  //   size: SizeConfig.heightMultiplier * 2.5,
-                                  // ),
-                                  //   onPressed: () {
-                                  //     return PopupMenuButton(itemBuilder: (context) {
-                                  //       return [
-                                  //         PopupMenuItem(child: Text('data'))
-                                  //       ];
-                                  //     },);
-                                  //   },
-                                  // ),
                                   trailing: PopupMenuButton(
                                     icon: Icon(
                                       Icons.more_vert,
@@ -177,26 +139,7 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData
                                             .removeBreakfastFood(index);
-                                            nutritionData.finalNutritionData();
-                                        // print(index);
-                                        // if (nutritionData
-                                        //         .breakfastFoodCalories.length >
-                                        //     0) {
-                                        //   nutritionData.totalBreakfastCalories =
-                                        //       nutritionData
-                                        //               .totalBreakfastCalories -
-                                        //           nutritionData
-                                        //                   .breakfastFoodCalories[
-                                        //               index];
-                                        // }
-
-                                        // print(nutritionData
-                                        //     .totalBreakfastCalories);
-                                        // print(nutritionData.breakfastFoodName);
-                                        // print(nutritionData.breakfastFoodCalories);
-                                        // print(nutritionData.breakfastFoodCarbs);
-                                        // print(nutritionData.breakfastFoodFats);
-                                        // print(nutritionData.breakfastFoodProtein);
+                                        nutritionData.finalNutritionData();
                                       }
                                     },
                                     itemBuilder: (context) {
@@ -212,61 +155,8 @@ class _MealTrackerState extends State<MealTracker> {
                               },
                             )
                           : Container(),
-                      // Card(
-                      //   margin: EdgeInsets.symmetric(
-                      //       vertical: SizeConfig.heightMultiplier * 2,
-                      //       horizontal: SizeConfig.widthMultiplier * 2),
-                      //   color: Color(0xff0f0f0f),
-                      //   child: Column(
-                      //     children: <Widget>[
-                      //       Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: <Widget>[
-                      //           Text(
-                      //             'Breakfast',
-                      // style: TextStyle(
-                      //     fontFamily: 'Roboto',
-                      //     fontSize: SizeConfig.textMultiplier * 2.5,
-                      //     fontWeight: FontWeight.w300),
-                      //           ),
-                      //           IconButton(
-                      //             onPressed: () {
-                      //               // object.getFoodInfo('butter coffee');
-                      //               // showSearch(
-                      //               //     context: context, delegate: DataSearch());
-                      //               Navigator.push(
-                      //                   context,
-                      //                   CupertinoPageRoute(
-                      //                     builder: (context) =>
-                      //                         MealTrackerRecipeSearch(),
-                      //                   ));
-                      //             },
-                      //             icon: Icon(
-                      //               Icons.add_circle_outline,
-                      // color: Color(0xFFFD5739),
-                      // size: SizeConfig.heightMultiplier * 3,
-                      //             ),
-                      //           )
-                      //         ],
-                      //       ),
-                      //       //  Provider.of<NutritionData>(context,listen: false).foodName.length>0?
-                      //       // ListView.builder(itemCount: Provider.of<NutritionData>(context,listen: false).foodName.length,itemBuilder: (context, index) {
-                      //       //   return Card(
-                      //       //     child: Row(
-                      //       //       children: <Widget>[
-                      //       //         Text( Provider.of<NutritionData>(context,listen: false).foodName[index])
-                      //       //       ],
-                      //       //     ),
-                      //       //   );
-                      //       // },):Container()
-                      //       // ListTile(subtitle: Row(children: <Widget>[Text('inside')],),)
-                      //     ],
-                      //   ),
-                      // ),
                       Divider(
                         color: Colors.white,
-                        // indent: SizeConfig.widthMultiplier,
-                        // endIndent: SizeConfig.widthMultiplier * 3,
                       ),
                       ListTile(
                         contentPadding: EdgeInsets.only(
@@ -332,12 +222,7 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData
                                             .removeMorningSnackFood(index);
-                                            nutritionData.finalNutritionData();
-                                        // print(nutritionData.breakfastFoodName);
-                                        // print(nutritionData.breakfastFoodCalories);
-                                        // print(nutritionData.breakfastFoodCarbs);
-                                        // print(nutritionData.breakfastFoodFats);
-                                        // print(nutritionData.breakfastFoodProtein);
+                                        nutritionData.finalNutritionData();
                                       }
                                     },
                                     itemBuilder: (context) {
@@ -355,8 +240,6 @@ class _MealTrackerState extends State<MealTracker> {
                           : Container(),
                       Divider(
                         color: Colors.white,
-                        // indent: SizeConfig.widthMultiplier,
-                        // endIndent: SizeConfig.widthMultiplier * 3,
                       ),
                       ListTile(
                         contentPadding: EdgeInsets.only(
@@ -420,11 +303,6 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData.removeLunchFood(index);
                                         nutritionData.finalNutritionData();
-                                        // print(nutritionData.breakfastFoodName);
-                                        // print(nutritionData.breakfastFoodCalories);
-                                        // print(nutritionData.breakfastFoodCarbs);
-                                        // print(nutritionData.breakfastFoodFats);
-                                        // print(nutritionData.breakfastFoodProtein);
                                       }
                                     },
                                     itemBuilder: (context) {
@@ -442,8 +320,6 @@ class _MealTrackerState extends State<MealTracker> {
                           : Container(),
                       Divider(
                         color: Colors.white,
-                        // indent: SizeConfig.widthMultiplier,
-                        // endIndent: SizeConfig.widthMultiplier * 3,
                       ),
                       ListTile(
                         contentPadding: EdgeInsets.only(
@@ -509,17 +385,7 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData
                                             .removeEveningSnackFood(index);
-                                            nutritionData.finalNutritionData();
-                                        // print(
-                                        //     nutritionData.eveningSnackFoodName);
-                                        // print(nutritionData
-                                        //     .eveningSnackFoodCalories);
-                                        // print(nutritionData
-                                        //     .eveningSnackFoodCarbs);
-                                        // print(
-                                        //     nutritionData.eveningSnackFoodFats);
-                                        // print(
-                                        //     nutritionData.eveningSnackFoodFats);
+                                        nutritionData.finalNutritionData();
                                       }
                                     },
                                     itemBuilder: (context) {
@@ -537,8 +403,6 @@ class _MealTrackerState extends State<MealTracker> {
                           : Container(),
                       Divider(
                         color: Colors.white,
-                        // indent: SizeConfig.widthMultiplier,
-                        // endIndent: SizeConfig.widthMultiplier * 3,
                       ),
                       ListTile(
                         contentPadding: EdgeInsets.only(
@@ -605,11 +469,6 @@ class _MealTrackerState extends State<MealTracker> {
                                       if (value == 1) {
                                         nutritionData.removeDinnerFood(index);
                                         nutritionData.finalNutritionData();
-                                        // print(nutritionData.breakfastFoodName);
-                                        // print(nutritionData.breakfastFoodCalories);
-                                        // print(nutritionData.breakfastFoodCarbs);
-                                        // print(nutritionData.breakfastFoodFats);
-                                        // print(nutritionData.breakfastFoodProtein);
                                       }
                                     },
                                     itemBuilder: (context) {
@@ -625,7 +484,6 @@ class _MealTrackerState extends State<MealTracker> {
                               },
                             )
                           : Container(),
-                      // Divider(color: Colors.white,indent: SizeConfig.widthMultiplier,endIndent: SizeConfig.widthMultiplier*3,)
                     ],
                   ),
                 ),
@@ -636,76 +494,9 @@ class _MealTrackerState extends State<MealTracker> {
   }
 }
 
-// class MyIngredientProgress extends StatelessWidget {
-//   final String ingredient;
-//   final double eatenAmount;
-//   final double progress, width;
-//   final Color progressColor;
-//   final double size;
 
-//   const MyIngredientProgress(
-//       {Key key,
-//       this.ingredient,
-//       this.eatenAmount,
-//       this.progress,
-//       this.progressColor,
-//       this.width,
-//       this.size})
-//       : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceAround,
-//       children: <Widget>[
-//         Container(
-//             child: Text(
-//           ingredient,
-//           style: TextStyle(
-//               fontSize: SizeConfig.textMultiplier * 2.2, fontFamily: 'Roboto'),
-//         )),
-//         // SizedBox(
-//         //   width: size,
-//         // ),
-//         Container(
-//           child: Row(
-//             // mainAxisAlignment: MainAxisAlignment.end,
-//             children: <Widget>[
-//               Stack(children: <Widget>[
-//                 Container(
-//                   height: SizeConfig.heightMultiplier * 1.2,
-//                   width: SizeConfig.widthMultiplier * 65,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.all(
-//                       Radius.circular(5),
-//                     ),
-//                     color: Color(0xFF595959),
-//                   ),
-//                 ),
-//                 Container(
-//                   height: SizeConfig.heightMultiplier * 1.2,
-//                   width: SizeConfig.widthMultiplier * progress,
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.all(
-//                       Radius.circular(5),
-//                     ),
-//                     color: progressColor,
-//                   ),
-//                 ),
-//               ]),
-//               // SizedBox(
-//               //   width: SizeConfig.widthMultiplier,
-//               // ),
-//               Text('${eatenAmount}g')
-//             ],
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }
-
-class MyIngredientProgress2 extends StatelessWidget {
+class MyIngredientProgress extends StatelessWidget {
   final String ingredient;
   final double width;
   final double size;
@@ -719,7 +510,7 @@ class MyIngredientProgress2 extends StatelessWidget {
   final Color carbsProgressColor;
   final Color fatsProgressColor;
 
-  const MyIngredientProgress2(
+  const MyIngredientProgress(
       {Key key,
       this.ingredient,
       this.width,
@@ -803,7 +594,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                       width: SizeConfig.widthMultiplier,
                     ),
                     Text(
-                      proteinEatenAmount.toStringAsFixed(1)+'g',
+                      proteinEatenAmount.toStringAsFixed(1) + 'g',
                       style:
                           TextStyle(fontSize: SizeConfig.textMultiplier * 1.5),
                     ),
@@ -840,7 +631,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                       width: SizeConfig.widthMultiplier,
                     ),
                     Text(
-                      carbsEatenAmount.toStringAsFixed(1)+'g',
+                      carbsEatenAmount.toStringAsFixed(1) + 'g',
                       style:
                           TextStyle(fontSize: SizeConfig.textMultiplier * 1.5),
                     ),
@@ -877,7 +668,7 @@ class MyIngredientProgress2 extends StatelessWidget {
                       width: SizeConfig.widthMultiplier,
                     ),
                     Text(
-                      fatsEatenAmount.toStringAsFixed(1)+'g',
+                      fatsEatenAmount.toStringAsFixed(1) + 'g',
                       style:
                           TextStyle(fontSize: SizeConfig.textMultiplier * 1.5),
                     )
