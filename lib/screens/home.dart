@@ -59,8 +59,6 @@ class _HomePageState extends State<HomePage> {
     return null;
   }
 
-  
-
   @override
   void initState() {
     super.initState();
@@ -73,9 +71,9 @@ class _HomePageState extends State<HomePage> {
 
     String formattedDate = DateFormat('EEEE ,d MMMM').format(now);
 
-    return Consumer<NutritionData>(
-      builder:
-          (BuildContext context, NutritionData nutritionData, Widget child) {
+    return Consumer2<NutritionData, UserData>(
+      builder: (BuildContext context, NutritionData nutritionData,
+          UserData userData, Widget child) {
         return Scaffold(
           body: SafeArea(
             child: FutureBuilder(
@@ -91,7 +89,6 @@ class _HomePageState extends State<HomePage> {
                         snapshot.connectionState == ConnectionState.none)
                       return Center(child: new CircularProgressIndicator());
                     else
-                 
                       return ListView(
                         children: <Widget>[
                           ClipRRect(
@@ -115,7 +112,6 @@ class _HomePageState extends State<HomePage> {
                                   color: Color(0xFF171717),
                                 ),
                                 child: Column(
-                              
                                   children: <Widget>[
                                     SizedBox(
                                       height: SizeConfig.heightMultiplier * 2,
@@ -148,11 +144,9 @@ class _HomePageState extends State<HomePage> {
                                       height: SizeConfig.heightMultiplier * 2,
                                     ),
                                     Row(
-                           
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: <Widget>[
-                           
                                         SizedBox(
                                           width: SizeConfig.widthMultiplier,
                                         ),
@@ -177,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                                       23,
                                               progress: ((nutritionData
                                                       .finalCalorieCount /
-                                                  Provider.of<UserData>(context)
+                                                  userData
                                                       .finalUserMaintenanceCal)),
                                               color: Color(0xFF51D9FD),
                                             ),
@@ -187,7 +181,6 @@ class _HomePageState extends State<HomePage> {
                                           width:
                                               SizeConfig.widthMultiplier * 0.5,
                                         ),
-
                                         MyIngredientProgress(
                                           proteinEatenAmount:
                                               nutritionData.finalProteinCount,
@@ -217,8 +210,6 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(
                             height: SizeConfig.heightMultiplier * 2,
                           ),
-
-                        
                           Container(
                               padding: EdgeInsets.fromLTRB(
                                   SizeConfig.widthMultiplier * 4.5,
@@ -294,7 +285,6 @@ class _HomePageState extends State<HomePage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
-                                               
                                                 ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.all(
@@ -397,7 +387,6 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ),
                                         ),
-                                        
                                         GestureDetector(
                                           onTap: () {
                                             Navigator.push(context,
@@ -523,7 +512,6 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ),
-                                
                                   SizedBox(
                                     height: SizeConfig.heightMultiplier * 3.5,
                                   ),
@@ -594,7 +582,6 @@ class _HomePageState extends State<HomePage> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.center,
                                               children: <Widget>[
-                                             
                                                 ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.all(
@@ -697,7 +684,6 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ),
                                         ),
-                                       
                                         GestureDetector(
                                           onTap: () {
                                             Navigator.push(context,
@@ -878,8 +864,6 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-
-
 class MyRadialProgess extends StatelessWidget {
   final double height, width, progress;
   final Color color;
@@ -936,7 +920,6 @@ class MyRadialPainter extends CustomPainter {
   MyRadialPainter({this.progress, this.color});
   @override
   void paint(Canvas canvas, Size size) {
-    
     Paint paint = Paint()
       ..strokeWidth = 10
       ..color = color
@@ -944,7 +927,7 @@ class MyRadialPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round;
 
     Offset center = Offset(size.width / 2, size.height / 2);
-    
+
     double relativeProgress = 360 * progress;
     canvas.drawArc(Rect.fromCircle(center: center, radius: size.width / 2.2),
         math.radians(-90), math.radians(relativeProgress), false, paint);
@@ -993,7 +976,6 @@ class MyIngredientProgress extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-    
             Row(
               children: <Widget>[
                 Text('Protein',
@@ -1002,7 +984,6 @@ class MyIngredientProgress extends StatelessWidget {
                         fontFamily: 'Roboto')),
               ],
             ),
-      
             Row(
               children: <Widget>[
                 Stack(children: <Widget>[
@@ -1045,7 +1026,6 @@ class MyIngredientProgress extends StatelessWidget {
                 style: TextStyle(
                     fontSize: SizeConfig.textMultiplier * 2.2,
                     fontFamily: 'Roboto')),
-    
             Row(
               children: <Widget>[
                 Stack(children: <Widget>[
@@ -1084,7 +1064,6 @@ class MyIngredientProgress extends StatelessWidget {
             SizedBox(
               height: SizeConfig.heightMultiplier * 3,
             ),
-
             Text('Fats',
                 style: TextStyle(
                     fontSize: SizeConfig.textMultiplier * 2.2,

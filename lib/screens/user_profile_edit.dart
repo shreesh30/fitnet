@@ -23,6 +23,7 @@ class _UserProfileEditState extends State<UserProfileEdit> {
   List names;
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
+  TextEditingController ageController = TextEditingController();
 
   Future getUserInfo() async {
     if (await FirebaseAuth.instance.currentUser() != null) {
@@ -47,6 +48,8 @@ class _UserProfileEditState extends State<UserProfileEdit> {
         Provider.of<UserData>(context, listen: false).userHeight = height;
         final String activity = await value.data['activity'];
         Provider.of<UserData>(context, listen: false).userActivity = activity;
+        final double maintenanceCal= await value.data['maintenanceCal'];
+        Provider.of<UserData>(context,listen: false).finalUserMaintenanceCal=maintenanceCal;
   
         return [
           name,
@@ -217,7 +220,8 @@ class _UserProfileEditState extends State<UserProfileEdit> {
       'mobileNumber': Provider.of<UserData>(context, listen: false).userNumber,
       'height': Provider.of<UserData>(context, listen: false).userHeight,
       'weight': Provider.of<UserData>(context, listen: false).userWeight,
-      'activity': Provider.of<UserData>(context, listen: false).userActivity
+      'activity': Provider.of<UserData>(context, listen: false).userActivity,
+      'maintenanceCal':Provider.of<UserData>(context, listen: false).finalUserMaintenanceCal,
     });
   }
 
@@ -423,14 +427,41 @@ class _UserProfileEditState extends State<UserProfileEdit> {
                                                         FontWeight.w300))
                                           ],
                                         ),
-                                        title: Text(
-                                          snapshot.data[1].toString(),
+                                        title: TextField(
                                           style: TextStyle(
                                               fontFamily: 'Roboto',
                                               fontSize:
                                                   SizeConfig.textMultiplier *
                                                       2.5,
                                               fontWeight: FontWeight.w300),
+                                          inputFormatters: [
+                                            LengthLimitingTextInputFormatter(4),
+                                          ],
+                                          keyboardType: TextInputType.number,
+                                         
+                                          controller: ageController
+                                            ..text = userData.userAge == null
+                                                ? snapshot.data[1].toString()
+                                                : userData.userAge
+                                                    .toString(),
+                                          decoration: InputDecoration(
+                                             
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      vertical: SizeConfig
+                                                              .heightMultiplier *
+                                                          1.5,
+                                                      horizontal: SizeConfig
+                                                              .widthMultiplier *
+                                                          2),
+                                              hintStyle: TextStyle(
+                                                  fontSize: SizeConfig
+                                                          .textMultiplier *
+                                                      2)),
+                                          onChanged: (value) {
+                                            userData.userAge =
+                                                int.parse(value);
+                                          },
                                         ),
                                       )
                                     : Container(),
