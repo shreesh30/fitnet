@@ -21,7 +21,7 @@ class CupertinoHomeScaffold extends StatelessWidget {
               _buildItem(TabItem.homePage),
               _buildItem(TabItem.workoutList),
               _buildItem(TabItem.mealTracker),
-              _buildItem(TabItem.mentalHealthList),
+              // _buildItem(TabItem.mentalHealthList),
               _buildItem(TabItem.userProfile),
             ]),
         tabBuilder: (context, index){

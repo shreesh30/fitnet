@@ -1,4 +1,5 @@
 import 'package:fitnet/models/nutrition_data.dart';
+import 'package:fitnet/models/user_data.dart';
 import 'package:fitnet/screens/meal_tracker_food_search.dart';
 import 'package:fitnet/services/apiGetter.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,8 +19,9 @@ class _MealTrackerState extends State<MealTracker> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<NutritionData>(
-      builder: (BuildContext context, nutritionData, Widget child) {
+    return Consumer2<NutritionData, UserData>(
+      builder: (BuildContext context, nutritionData, UserData userData,
+          Widget child) {
         return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -61,9 +63,49 @@ class _MealTrackerState extends State<MealTracker> {
                         proteinProgressColor: Color(0xFFEB1555),
                         carbsProgressColor: Color(0xFF03DAC5),
                         fatsProgressColor: Color(0xFFFACB2E),
-                        proteinProgress: 30,
-                        carbsProgress: 20,
-                        fatsProgress: 10,
+                        // proteinProgress: (((1.5*2.205*userData.userWeight)-(nutritionData.finalProteinCount))/(1.5*2.205*userData.userWeight))*60,
+                        proteinProgress: nutritionData.finalProteinCount == 0
+                            ? 0
+                            : nutritionData.finalProteinCount <=
+                                    (userData.userWeight * 1.5 * 2.205)
+                                ? (nutritionData.finalProteinCount /
+                                        (userData.userWeight * 1.4 * 2.205)) *
+                                    60
+                                : 60,
+                        // carbsProgress: 20,
+                        carbsProgress: nutritionData.finalCarbsCount == 0
+                            ? 0
+                            : nutritionData.finalCarbsCount <=
+                                    ((userData.finalUserMaintenanceCal -
+                                            ((nutritionData.finalProteinCount *
+                                                    4) +
+                                                (nutritionData.finalFatsCount *
+                                                    9))) /
+                                        4)
+                                ? ((nutritionData.finalCarbsCount /
+                                        ((userData.finalUserMaintenanceCal -
+                                                ((nutritionData
+                                                            .finalProteinCount *
+                                                        4) +
+                                                    (nutritionData
+                                                            .finalFatsCount *
+                                                        9))) /
+                                            4)) *
+                                    60)
+                                : 60,
+                        // fatsProgress: 10,
+                        fatsProgress: nutritionData.finalFatsCount == 0
+                            ? 0
+                            : nutritionData.finalFatsCount <=
+                                    ((userData.finalUserMaintenanceCal *
+                                            0.725) /
+                                        9)
+                                ? (nutritionData.finalFatsCount /
+                                        ((userData.finalUserMaintenanceCal *
+                                                0.725) /
+                                            9)) *
+                                    60
+                                : 60,
                       )),
                 ),
                 Container(
@@ -493,8 +535,6 @@ class _MealTrackerState extends State<MealTracker> {
     );
   }
 }
-
-
 
 class MyIngredientProgress extends StatelessWidget {
   final String ingredient;

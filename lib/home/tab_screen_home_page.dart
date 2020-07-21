@@ -27,7 +27,7 @@ class _TabScreenHomePageState extends State<TabScreenHomePage> {
     TabItem.homePage: GlobalKey<NavigatorState>(),
     TabItem.workoutList: GlobalKey<NavigatorState>(),
     TabItem.mealTracker: GlobalKey<NavigatorState>(),
-    TabItem.mentalHealthList: GlobalKey<NavigatorState>(),
+    // TabItem.mentalHealthList: GlobalKey<NavigatorState>(),
     TabItem.userProfile: GlobalKey<NavigatorState>(),
   };
   Map<TabItem, WidgetBuilder> get widgetBuilder {
@@ -35,7 +35,7 @@ class _TabScreenHomePageState extends State<TabScreenHomePage> {
       TabItem.homePage: (_) => HomePage(),
       TabItem.workoutList: (_) => WorkoutList(),
       TabItem.mealTracker: (_) => MealTracker(),
-      TabItem.mentalHealthList: (_) => MentalHealthList(),
+      // TabItem.mentalHealthList: (_) => MentalHealthList(),
       TabItem.userProfile: (_) => UserProfile(
             // auth: widget.auth,
             // onSignOut: widget.signOut,

@@ -53,6 +53,8 @@ class _HomePageState extends State<HomePage> {
         final double finalMaintenanceCal = await value.data['maintenanceCal'];
         Provider.of<UserData>(context, listen: false).finalUserMaintenanceCal =
             finalMaintenanceCal;
+        final double userWeight = await value.data['weight'];
+        Provider.of<UserData>(context, listen: false).userWeight = userWeight;
         return name;
       });
     }
@@ -192,9 +194,57 @@ class _HomePageState extends State<HomePage> {
                                               Color(0xFFEB1555),
                                           carbsProgressColor: Color(0xFF03DAC5),
                                           fatsProgressColor: Color(0xFFFACB2E),
-                                          proteinProgress: 25,
-                                          carbsProgress: 10,
-                                          fatsProgress: 15,
+                                          proteinProgress: nutritionData
+                                                      .finalProteinCount ==
+                                                  0
+                                              ? 0
+                                              : nutritionData
+                                                          .finalProteinCount <=
+                                                      (userData.userWeight *
+                                                          1.5 *
+                                                          2.205)
+                                                  ? (nutritionData
+                                                              .finalProteinCount /
+                                                          (userData.userWeight *
+                                                              1.4 *
+                                                              2.205)) *
+                                                      25
+                                                  : 25,
+                                          carbsProgress:  nutritionData.finalCarbsCount == 0
+                            ? 0
+                            : nutritionData.finalCarbsCount <=
+                                    ((userData.finalUserMaintenanceCal -
+                                            ((nutritionData.finalProteinCount *
+                                                    4) +
+                                                (nutritionData.finalFatsCount *
+                                                    9))) /
+                                        4)
+                                ? ((nutritionData.finalCarbsCount /
+                                        ((userData.finalUserMaintenanceCal -
+                                                ((nutritionData
+                                                            .finalProteinCount *
+                                                        4) +
+                                                    (nutritionData
+                                                            .finalFatsCount *
+                                                        9))) /
+                                            4)) *
+                                    25)
+                                : 25,
+                                          fatsProgress: nutritionData
+                                                      .finalFatsCount ==
+                                                  0
+                                              ? 0
+                                              : nutritionData.finalFatsCount <=
+                                                      ((userData.finalUserMaintenanceCal *
+                                                              0.725) /
+                                                          9)
+                                                  ? (nutritionData
+                                                              .finalFatsCount /
+                                                          ((userData.finalUserMaintenanceCal *
+                                                                  0.725) /
+                                                              9)) *
+                                                      25
+                                                  : 25,
                                           // size: ,
                                         ),
                                         SizedBox(
@@ -745,111 +795,111 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ),
                                         ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(context,
-                                                CupertinoPageRoute(
-                                              builder: (context) {
-                                                return Recipe(
-                                                  recipeId: '440385',
-                                                  recipeName:
-                                                      'Flourless Chocolate Cake',
-                                                );
-                                              },
-                                            ));
-                                          },
-                                          child: Container(
-                                            margin: EdgeInsets.only(
-                                              right: SizeConfig
-                                                          .widthMultiplier <
-                                                      8
-                                                  ? SizeConfig.widthMultiplier *
-                                                      2
-                                                  : SizeConfig.widthMultiplier,
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: <Widget>[
-                                                ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                    child: Image.asset(
-                                                      'images/flourless-chocolate-cake.jpg',
-                                                      height: SizeConfig
-                                                              .heightMultiplier *
-                                                          30,
-                                                      width: SizeConfig.widthMultiplier <
-                                                              8
-                                                          ? SizeConfig
-                                                                  .widthMultiplier *
-                                                              45
-                                                          : SizeConfig
-                                                                  .widthMultiplier *
-                                                              27,
-                                                    )),
-                                                SizedBox(
-                                                  height: SizeConfig
-                                                      .heightMultiplier,
-                                                ),
-                                                Text(
-                                                  'Flourless Chocolate Cake',
-                                                  style: TextStyle(
-                                                      fontFamily: 'Roboto',
-                                                      fontSize: SizeConfig
-                                                              .heightMultiplier *
-                                                          2),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
+                                        // GestureDetector(
+                                        //   onTap: () {
+                                        //     Navigator.push(context,
+                                        //         CupertinoPageRoute(
+                                        //       builder: (context) {
+                                        //         return Recipe(
+                                        //           recipeId: '440385',
+                                        //           recipeName:
+                                        //               'Flourless Chocolate Cake',
+                                        //         );
+                                        //       },
+                                        //     ));
+                                        //   },
+                                        //   child: Container(
+                                        //     margin: EdgeInsets.only(
+                                        //       right: SizeConfig
+                                        //                   .widthMultiplier <
+                                        //               8
+                                        //           ? SizeConfig.widthMultiplier *
+                                        //               2
+                                        //           : SizeConfig.widthMultiplier,
+                                        //     ),
+                                        //     child: Column(
+                                        //       crossAxisAlignment:
+                                        //           CrossAxisAlignment.center,
+                                        //       children: <Widget>[
+                                        //         ClipRRect(
+                                        //             borderRadius:
+                                        //                 BorderRadius.all(
+                                        //                     Radius.circular(
+                                        //                         10)),
+                                        //             child: Image.asset(
+                                        //               'images/flourless-chocolate-cake.jpg',
+                                        //               height: SizeConfig
+                                        //                       .heightMultiplier *
+                                        //                   30,
+                                        //               width: SizeConfig.widthMultiplier <
+                                        //                       8
+                                        //                   ? SizeConfig
+                                        //                           .widthMultiplier *
+                                        //                       45
+                                        //                   : SizeConfig
+                                        //                           .widthMultiplier *
+                                        //                       27,
+                                        //             )),
+                                        //         SizedBox(
+                                        //           height: SizeConfig
+                                        //               .heightMultiplier,
+                                        //         ),
+                                        //         Text(
+                                        //           'Flourless Chocolate Cake',
+                                        //           style: TextStyle(
+                                        //               fontFamily: 'Roboto',
+                                        //               fontSize: SizeConfig
+                                        //                       .heightMultiplier *
+                                        //                   2),
+                                        //         )
+                                        //       ],
+                                        //     ),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),
                                   SizedBox(
                                     height: SizeConfig.heightMultiplier * 3.5,
                                   ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Text(
-                                        'Mental Health',
-                                        style: TextStyle(
-                                            fontFamily: 'CopperPlate',
-                                            fontSize:
-                                                SizeConfig.textMultiplier * 2.5,
-                                            fontWeight: FontWeight.w400),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(context,
-                                              CupertinoPageRoute(
-                                            builder: (context) {
-                                              return MentalHealthList();
-                                            },
-                                          ));
-                                        },
-                                        child: Text(
-                                          'Show More',
-                                          style: TextStyle(
-                                              color: Color(0xFF8B8A8D),
-                                              fontSize:
-                                                  SizeConfig.textMultiplier *
-                                                      1.8),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    height: SizeConfig.heightMultiplier * 20,
-                                  ),
-                                  SizedBox(
-                                    height: SizeConfig.heightMultiplier * 3.5,
-                                  ),
+                                  // Row(
+                                  //   mainAxisAlignment:
+                                  //       MainAxisAlignment.spaceBetween,
+                                  //   children: <Widget>[
+                                  //     Text(
+                                  //       'Mental Health',
+                                  //       style: TextStyle(
+                                  //           fontFamily: 'CopperPlate',
+                                  //           fontSize:
+                                  //               SizeConfig.textMultiplier * 2.5,
+                                  //           fontWeight: FontWeight.w400),
+                                  //     ),
+                                  //     GestureDetector(
+                                  //       onTap: () {
+                                  //         Navigator.push(context,
+                                  //             CupertinoPageRoute(
+                                  //           builder: (context) {
+                                  //             return MentalHealthList();
+                                  //           },
+                                  //         ));
+                                  //       },
+                                  //       child: Text(
+                                  //         'Show More',
+                                  //         style: TextStyle(
+                                  //             color: Color(0xFF8B8A8D),
+                                  //             fontSize:
+                                  //                 SizeConfig.textMultiplier *
+                                  //                     1.8),
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
+                                  // Container(
+                                  //   height: SizeConfig.heightMultiplier * 20,
+                                  // ),
+                                  // SizedBox(
+                                  //   height: SizeConfig.heightMultiplier * 3.5,
+                                  // ),
                                 ],
                               )),
                         ],
