@@ -61,7 +61,7 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
       child: Container(
         
         height: SizeConfig.heightMultiplier*30,
-        child: Padding(padding:SizeConfig.widthMultiplier<8?EdgeInsets.symmetric(vertical: SizeConfig.heightMultiplier*4.5,horizontal: SizeConfig.widthMultiplier*7):EdgeInsets.only(top: SizeConfig.heightMultiplier*5,left: SizeConfig.widthMultiplier*5,right: SizeConfig.widthMultiplier*5),child:  Column(
+        child: Padding(padding:SizeConfig.widthMultiplier<8?EdgeInsets.symmetric(vertical:SizeConfig.heightMultiplier>8? SizeConfig.heightMultiplier*4.5:SizeConfig.heightMultiplier*2.5,horizontal: SizeConfig.widthMultiplier*7):EdgeInsets.only(top: SizeConfig.heightMultiplier*5,left: SizeConfig.widthMultiplier*5,right: SizeConfig.widthMultiplier*5),child:  Column(
           crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text('How Much?',style: TextStyle(fontFamily: 'Roboto',fontSize: SizeConfig.textMultiplier*3,fontWeight: FontWeight.bold),),
@@ -550,52 +550,67 @@ class _MealTrackerFoodState extends State<MealTrackerFood> {
             ),
             backgroundColor: Color(0xFF0F0F0F),
             actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.check,
-                  size: SizeConfig.heightMultiplier * 3,
-                  color: Color(0xFFFD5739),
-                ),
-                onPressed: () {
-                  var popCount = 0;
-                  if (nutritionData.mealName == 'breakfast') {
-                    nutritionData.breakfastFoodName.add(widget.foodName);
-                
-                    nutritionData.addBreakfast();
-                    nutritionData.addBreakfastInfo();
-                    nutritionData.finalNutritionData();
-                   
-                  } else if (nutritionData.mealName == 'morning_snack') {
-                    nutritionData.morningSnackFoodName.add(widget.foodName);
+              FutureBuilder(
+                future: future,
+                              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) { 
+                                switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return Container();
+                default:
+                  if (snapshot.hasError ||
+                      !snapshot.hasData ||
+                      snapshot.connectionState == ConnectionState.none)
+                    return Container();
+                  else
+                      return         IconButton(
+                  icon: Icon(
+                    Icons.check,
+                    size: SizeConfig.heightMultiplier * 3,
+                    color: Color(0xFFFD5739),
+                  ),
+                  onPressed: () {
+                    var popCount = 0;
+                    if (nutritionData.mealName == 'breakfast') {
+                      nutritionData.breakfastFoodName.add(widget.foodName);
                   
-                    nutritionData.addMorningSnack();
-                    nutritionData.addMorningSnackInfo();
-                    nutritionData.finalNutritionData();
-                  } else if (nutritionData.mealName == 'lunch') {
-                    nutritionData.lunchFoodName.add(widget.foodName);
-                   
-                    nutritionData.addLunch();
-                    nutritionData.addLunchInfo();
-                    nutritionData.finalNutritionData();
-                  } else if (nutritionData.mealName == 'evening_snack') {
-                    nutritionData.eveningSnackFoodName.add(widget.foodName);
-                   
-                    nutritionData.addEveningSnack();
-                    nutritionData.addEveningSnackInfo();
-                    nutritionData.finalNutritionData();
-                  } else if (nutritionData.mealName == 'dinner') {
-                    nutritionData.dinnerFoodName.add(widget.foodName);
+                      nutritionData.addBreakfast();
+                      nutritionData.addBreakfastInfo();
+                      nutritionData.finalNutritionData();
+                     
+                    } else if (nutritionData.mealName == 'morning_snack') {
+                      nutritionData.morningSnackFoodName.add(widget.foodName);
                     
-                    nutritionData.addDinner();
-                    nutritionData.addDinnerInfo();
-                    nutritionData.finalNutritionData();
-                  }
+                      nutritionData.addMorningSnack();
+                      nutritionData.addMorningSnackInfo();
+                      nutritionData.finalNutritionData();
+                    } else if (nutritionData.mealName == 'lunch') {
+                      nutritionData.lunchFoodName.add(widget.foodName);
+                     
+                      nutritionData.addLunch();
+                      nutritionData.addLunchInfo();
+                      nutritionData.finalNutritionData();
+                    } else if (nutritionData.mealName == 'evening_snack') {
+                      nutritionData.eveningSnackFoodName.add(widget.foodName);
+                     
+                      nutritionData.addEveningSnack();
+                      nutritionData.addEveningSnackInfo();
+                      nutritionData.finalNutritionData();
+                    } else if (nutritionData.mealName == 'dinner') {
+                      nutritionData.dinnerFoodName.add(widget.foodName);
+                      
+                      nutritionData.addDinner();
+                      nutritionData.addDinnerInfo();
+                      nutritionData.finalNutritionData();
+                    }
 
-                  
-                  Navigator.popUntil(context, (route) => popCount++ == 2);
-                  
-                },
-              )
+                    
+                    Navigator.popUntil(context, (route) => popCount++ == 2);
+                    
+                  },
+                );
+                               }
+                       
+                              })
             ],
           ),
           body: FutureBuilder(

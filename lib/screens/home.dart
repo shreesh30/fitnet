@@ -306,6 +306,7 @@ class _HomePageState extends State<HomePage> {
                                   SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
+                                        mainAxisSize: MainAxisSize.min,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       children: <Widget>[
@@ -323,6 +324,7 @@ class _HomePageState extends State<HomePage> {
                                             ));
                                           },
                                           child: Container(
+                                            
                                             margin: EdgeInsets.only(
                                               right: SizeConfig
                                                           .widthMultiplier <

@@ -88,7 +88,19 @@ class _UserProfileState extends State<UserProfile> {
         return Scaffold(
           appBar: AppBar(
             actions: <Widget>[
-              IconButton(
+
+              FutureBuilder(future: future,builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return Container();
+
+                default:
+                  if (snapshot.hasError ||
+                      !snapshot.hasData ||
+                      snapshot.connectionState == ConnectionState.none)
+                    return Container();
+                  else
+                  return  IconButton(
                 icon: Icon(
                   Icons.exit_to_app,
                   color: Color(0xFFFD5739),
@@ -102,7 +114,9 @@ class _UserProfileState extends State<UserProfile> {
                     print(e);
                   }
                 },
-              )
+              );
+              }}),
+             
             ],
             centerTitle: true,
             automaticallyImplyLeading: false,

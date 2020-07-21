@@ -1,9 +1,13 @@
+import 'package:fitnet/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'package:chewie/chewie.dart';
 
 class VideoItem extends StatefulWidget {
-  VideoItem({@required this.videoPlayerController, this.looping});
+  VideoItem({
+    @required this.videoPlayerController,
+    this.looping,
+  });
 
   final VideoPlayerController videoPlayerController;
   final bool looping;
@@ -19,6 +23,9 @@ class _VideoItemState extends State<VideoItem> {
   void initState() {
     super.initState();
     _chewieController = ChewieController(
+      // fullScreenByDefault: true,
+      // showControlsOnInitialize: false,
+      // showControls: widget.url==null?false:true,
       videoPlayerController: widget.videoPlayerController,
       aspectRatio: 16 / 9,
       autoInitialize: true,
@@ -40,11 +47,19 @@ class _VideoItemState extends State<VideoItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(8),
-      child: Chewie(
-        controller: _chewieController,
+    return Scaffold(
+          body: Padding(
+        padding: EdgeInsets.all(0),
+        child: Chewie(
+          controller: _chewieController,
+        ),
       ),
     );
+    // return  Padding(
+    //     padding: EdgeInsets.all(0),
+    //     child: Chewie(
+    //       controller: _chewieController,
+    //     ),
+    //   );
   }
 }
