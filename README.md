@@ -35,4 +35,4 @@ The Tech stack that has been used for this project is:
 
 <!-- ![](github_images/1.jpg) -->
 
-<img src="github_images/1.jpg" width='100'>
+<img src="github_images/1.jpg" width='200'>
