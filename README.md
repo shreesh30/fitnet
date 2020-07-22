@@ -35,5 +35,23 @@ The Tech stack that has been used for this project is:
 
 <!-- ![](github_images/1.jpg) -->
 
-1.Landing Page                                                                          2.Registration Page
-<img src="github_images/1.jpg" width='200'>                                             <img src="github_images/2.jpg" width='200'> 
+1. Landing Page                                                                          
+<img src="github_images/1.jpg" width='200'>
+
+2. Registration Page
+<img src="github_images/2.jpg" width='200'> 
+
+3. Sign In Page
+<img src="github_images/3.jpg" width='200'> 
+
+4. Entering user details after registration
+<img src="github_images/4.jpg" width='200'> 
+
+5. User details 
+<img src="github_images/5.jpg" width='200'> 
+
+6. Set target Weight after registration
+<img src="github_images/6.jpg" width='200'> 
+
+7. Setting the intensity of the weight loss
+<img src="github_images/7.jpg" width='200'> 
