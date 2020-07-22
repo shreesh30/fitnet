@@ -53,5 +53,64 @@ The Tech stack that has been used for this project is:
 6. Set target Weight after registration
 <img src="github_images/6.jpg" width='200'> 
 
-7. Setting the intensity of the weight loss
+7. Setting the intensity of the respective weight goal
 <img src="github_images/7.jpg" width='200'> 
+
+8.  Weight goal set
+<img src="github_images/8.jpg" width='200'> 
+
+9. Maintenance calories calculated
+<img src="github_images/9.jpg" width='200'> 
+
+10. Home page
+<img src="github_images/10.jpg" width='200'> 
+<img src="github_images/11.jpg" width='200'> 
+<img src="github_images/12.jpg" width='200'> 
+
+11. Body Goals
+<img src="github_images/13.jpg" width='200'> 
+
+12. Workout Programs
+<img src="github_images/14.jpg" width='200'> 
+
+13. Weeks List
+<img src="github_images/15.jpg" width='200'> 
+
+
+14. Workout
+<img src="github_images/16.jpg" width='200'> 
+
+15. Workout Video
+<img src="github_images/17.jpg" width='200'> 
+
+16. Calorie Tracker
+<img src="github_images/18.jpg" width='200'> 
+
+17. Calorie Tracker Search
+<img src="github_images/19.jpg" width='200'> 
+
+18. Calorie Tracker Food
+<img src="github_images/20.jpg" width='200'> 
+
+19. Calorie Tracker after adding food
+<img src="github_images/21.jpg" width='200'> 
+<img src="github_images/23.jpg" width='200'> 
+
+20. Calorie Tracker Food removing functionality
+<img src="github_images/22.jpg" width='200'> 
+
+21. Home page after adding food
+<img src="github_images/24.jpg" width='200'> 
+
+22. Recipe Search 
+<img src="github_images/25.jpg" width='200'> 
+
+23. Recipe
+<img src="github_images/26.jpg" width='200'> 
+
+24. User Profile
+<img src="github_images/27.jpg" width='200'> 
+<img src="github_images/28.jpg" width='200'> 
+
+25. User Profile Edit
+<img src="github_images/29.jpg" width='200'> 
