@@ -15,7 +15,7 @@ For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
-# fitnet
+# About fitnet
 Fitnet is a fitness app with the following features:
 
 1. You get a bunch of workouts to choose from according to your fitness goals.
