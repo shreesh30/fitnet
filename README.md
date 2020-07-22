@@ -33,7 +33,8 @@ The Tech stack that has been used for this project is:
 4. Firebase authentication
 5. Firebase storage
 
-<!-- ![](github_images/1.jpg) -->
+
+# How the app looks
 
 1. Landing Page                                                                          
 <img src="github_images/1.jpg" width='200'>
