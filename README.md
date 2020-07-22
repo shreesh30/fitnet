@@ -35,4 +35,5 @@ The Tech stack that has been used for this project is:
 
 <!-- ![](github_images/1.jpg) -->
 
-<img src="github_images/1.jpg" width='200'>
+1.Landing Page                                                                          2.Registration Page
+<img src="github_images/1.jpg" width='200'>                                             <img src="github_images/2.jpg" width='200'> 
