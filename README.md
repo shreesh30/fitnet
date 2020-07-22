@@ -21,3 +21,6 @@ Fitnet is a fitness app with the following features:
 1. You get a bunch of workouts to choose from according to your fitness goals.
 2. You get the sets,reps and the description of how to do your worokout.
 3. You also get an in app tutorial of how to do the workout
+4. You can also track the amount of calories that you have consumed.
+5. You can specifically keep track of the amount of proteins,carbs and proteins that you have consumed throughout the day.
+6. You also have the option to select your favourite recipe(both health and unhealthy) from the bunch of recipes that you want to cook for your cheat meal.
