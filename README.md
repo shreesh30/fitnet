@@ -32,3 +32,5 @@ The Tech stack that has been used for this project is:
 3. Firestore
 4. Firebase authentication
 5. Firebase storage
+
+![](github_images/1.jpg)
